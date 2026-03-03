@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TLFTA Admin</title>
+    <style>
+      :root {
+        --bg: #f7f4ef;
+        --panel: #ffffff;
+        --ink: #222222;
+        --muted: #6c6c6c;
+        --brand: #4a1040;
+        --accent: #ef6c11;
+        --border: #ddd6cf;
+        --success: #1f7a3b;
+        --danger: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "DM Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top right, #fce8d5 0%, var(--bg) 40%);
+      }
+
+      .wrap {
+        width: min(1060px, 94vw);
+        margin: 2rem auto;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--brand);
+      }
+
+      .home-link {
+        color: var(--brand);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .home-link:hover {
+        text-decoration: underline;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 10px 24px rgba(40, 22, 9, 0.08);
+      }
+
+      .login {
+        max-width: 430px;
+        margin: 2rem auto;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 0.7rem;
+        color: var(--brand);
+      }
+
+      p {
+        margin: 0 0 0.9rem;
+        color: var(--muted);
+      }
+
+      .field {
+        display: grid;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+      }
+
+      input {
+        border: 1px solid #cec6bf;
+        border-radius: 10px;
+        padding: 0.65rem 0.7rem;
+        font: inherit;
+      }
+
+      .btn-row {
+        display: flex;
+        gap: 0.55rem;
+        flex-wrap: wrap;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.58rem 1rem;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .btn-muted {
+        background: #ece8e3;
+        color: #433a34;
+      }
+
+      .msg {
+        margin-top: 0.65rem;
+        font-size: 0.9rem;
+        min-height: 1.25rem;
+      }
+
+      .msg.error {
+        color: var(--danger);
+      }
+
+      .msg.success {
+        color: var(--success);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.7rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        font-size: 0.9rem;
+      }
+
+      th {
+        background: #faf8f6;
+        color: #4e433d;
+      }
+
+      .empty {
+        color: var(--muted);
+        text-align: center;
+        padding: 1.2rem;
+      }
+
+      .credentials {
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 700px) {
+        .top,
+        .dashboard-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">TalampasLaw Admin</div>
+        <a class="home-link" href="index.html">Back to Website</a>
+      </div>
+
+      <section id="login-view" class="panel login">
+        <h1>Admin Login</h1>
+        <p class="credentials">MVP credentials: username <strong>admin</strong>, password <strong>admin</strong>.</p>
+        <form id="admin-login-form">
+          <label class="field">
+            Username
+            <input type="text" name="username" autocomplete="username" required />
+          </label>
+          <label class="field">
+            Password
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <div class="btn-row">
+            <button class="btn-primary" type="submit">Log In</button>
+          </div>
+        </form>
+        <div id="login-message" class="msg" aria-live="polite"></div>
+      </section>
+
+      <section id="dashboard-view" class="panel hidden">
+        <div class="dashboard-header">
+          <div>
+            <h2>Inquiry Inbox</h2>
+            <div id="inquiry-count" class="meta">0 inquiries</div>
+          </div>
+          <div class="btn-row">
+            <button id="refresh-btn" class="btn-muted" type="button">Refresh</button>
+            <button id="logout-btn" class="btn-muted" type="button">Log Out</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-label="Submitted inquiries">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody id="inquiry-rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        const USERNAME = "admin";
+        const PASSWORD = "admin";
+        const AUTH_KEY = "tlfta_admin_session";
+        const INQUIRIES_KEY = "tlfta_inquiries";
+
+        const loginView = document.getElementById("login-view");
+        const dashboardView = document.getElementById("dashboard-view");
+        const loginForm = document.getElementById("admin-login-form");
+        const loginMessage = document.getElementById("login-message");
+        const inquiryRows = document.getElementById("inquiry-rows");
+        const inquiryCount = document.getElementById("inquiry-count");
+        const refreshBtn = document.getElementById("refresh-btn");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        const setLoginMessage = (text, type = "") => {
+          loginMessage.textContent = text;
+          loginMessage.className = `msg ${type}`.trim();
+        };
+
+        const formatDate = (value) => {
+          const date = new Date(value);
+          if (Number.isNaN(date.getTime())) return "Unknown";
+          return date.toLocaleString();
+        };
+
+        const escapeHtml = (value) =>
+          String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+
+        const getInquiries = () => {
+          try {
+            const raw = localStorage.getItem(INQUIRIES_KEY);
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data : [];
+          } catch (error) {
+            return [];
+          }
+        };
+
+        const renderInquiries = () => {
+          const inquiries = getInquiries();
+          inquiryCount.textContent = `${inquiries.length} ${inquiries.length === 1 ? "inquiry" : "inquiries"}`;
+
+          if (!inquiries.length) {
+            inquiryRows.innerHTML = `<tr><td class="empty" colspan="5">No inquiries yet.</td></tr>`;
+            return;
+          }
+
+          inquiryRows.innerHTML = inquiries
+            .map(
+              (inquiry) => `
+                <tr>
+                  <td>${escapeHtml(formatDate(inquiry.createdAt))}</td>
+                  <td>${escapeHtml(inquiry.name)}</td>
+                  <td>${escapeHtml(inquiry.email)}</td>
+                  <td>${escapeHtml(inquiry.phone)}</td>
+                  <td>${escapeHtml(inquiry.message)}</td>
+                </tr>
+              `
+            )
+            .join("");
+        };
+
+        const showDashboard = () => {
+          loginView.classList.add("hidden");
+          dashboardView.classList.remove("hidden");
+          renderInquiries();
+        };
+
+        const showLogin = () => {
+          dashboardView.classList.add("hidden");
+          loginView.classList.remove("hidden");
+        };
+
+        const isLoggedIn = () => sessionStorage.getItem(AUTH_KEY) === "1";
+
+        loginForm?.addEventListener("submit", (event) => {
+          event.preventDefault();
+          setLoginMessage("");
+
+          const formData = new FormData(loginForm);
+          const username = String(formData.get("username") || "").trim();
+          const password = String(formData.get("password") || "").trim();
+
+          if (username === USERNAME && password === PASSWORD) {
+            sessionStorage.setItem(AUTH_KEY, "1");
+            setLoginMessage("Login successful.", "success");
+            showDashboard();
+            return;
+          }
+
+          setLoginMessage("Invalid username or password.", "error");
+        });
+
+        refreshBtn?.addEventListener("click", renderInquiries);
+
+        logoutBtn?.addEventListener("click", () => {
+          sessionStorage.removeItem(AUTH_KEY);
+          showLogin();
+          setLoginMessage("");
+          loginForm?.reset();
+        });
+
+        if (isLoggedIn()) {
+          showDashboard();
+        } else {
+          showLogin();
+        }
+      })();
+    </script>
+  </body>
+</html>

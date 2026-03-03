@@ -1084,6 +1084,20 @@
         cursor: pointer;
       }
 
+      .form-message {
+        margin: 0.8rem 0 0;
+        min-height: 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .form-message.success {
+        color: #1f7a3b;
+      }
+
+      .form-message.error {
+        color: #b42318;
+      }
+
       footer {
         background: linear-gradient(145deg, #2f0d28, #47113c 52%, #8b1e63);
         color: rgba(255, 255, 255, 0.95);
@@ -1775,25 +1789,26 @@
 
             <article class="form-panel">
               <h3>Send an Inquiry</h3>
-              <form>
+              <form id="inquiry-form">
                 <label class="field">
                   Full Name
-                  <input type="text" name="name" placeholder="Juan Dela Cruz" />
+                  <input type="text" name="name" placeholder="Juan Dela Cruz" required />
                 </label>
                 <label class="field">
                   Email Address
-                  <input type="email" name="email" placeholder="name@example.com" />
+                  <input type="email" name="email" placeholder="name@example.com" required />
                 </label>
                 <label class="field">
                   Phone Number
-                  <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" />
+                  <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" required />
                 </label>
                 <label class="field">
                   Message
-                  <textarea name="message" placeholder="Tell us briefly about your legal concern."></textarea>
+                  <textarea name="message" placeholder="Tell us briefly about your legal concern." required></textarea>
                 </label>
                 <button class="btn btn-primary submit" type="submit">Submit Inquiry</button>
               </form>
+              <p id="inquiry-form-message" class="form-message" aria-live="polite"></p>
             </article>
           </div>
         </div>
@@ -1841,6 +1856,7 @@
           <a href="tel:+639171234567">+63 917 123 4567</a>
           <a href="mailto:consult@talampaslaw.ph">consult@talampaslaw.ph</a>
           <a href="#contact">Get a consultation</a>
+          <a href="admin.html">Admin Login</a>
         </section>
         <div class="footer-bottom">
           <p>&copy; 2026 The Law Firm of Talampas &amp; Associates. All rights reserved.</p>
@@ -1915,6 +1931,57 @@
         );
 
         observer.observe(hero);
+      })();
+    </script>
+    <script>
+      (() => {
+        const form = document.getElementById("inquiry-form");
+        const messageEl = document.getElementById("inquiry-form-message");
+        if (!form || !messageEl) return;
+
+        const STORAGE_KEY = "tlfta_inquiries";
+
+        const setMessage = (message, type) => {
+          messageEl.textContent = message;
+          messageEl.className = `form-message ${type}`;
+        };
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          setMessage("", "");
+
+          const formData = new FormData(form);
+          const name = String(formData.get("name") || "").trim();
+          const email = String(formData.get("email") || "").trim();
+          const phone = String(formData.get("phone") || "").trim();
+          const message = String(formData.get("message") || "").trim();
+
+          if (!name || !email || !phone || !message) {
+            setMessage("Please complete all fields before submitting.", "error");
+            return;
+          }
+
+          const inquiry = {
+            id: `inq_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+            createdAt: new Date().toISOString(),
+            name,
+            email,
+            phone,
+            message
+          };
+
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const inquiries = raw ? JSON.parse(raw) : [];
+            const nextInquiries = Array.isArray(inquiries) ? [inquiry, ...inquiries] : [inquiry];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(nextInquiries));
+
+            form.reset();
+            setMessage("Inquiry submitted successfully. Our team will contact you soon.", "success");
+          } catch (error) {
+            setMessage("Unable to submit right now. Please try again.", "error");
+          }
+        });
       })();
     </script>
   </body>
