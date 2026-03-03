@@ -1,0 +1,1920 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Law Firm of Talampas & Associates</title>
+    <meta
+      name="description"
+      content="The Law Firm of Talampas & Associates is a Philippine-based law firm providing principled, modern legal representation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Neuton:wght@400;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;1,400&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+      :root {
+        --bg-primary: #4a1040;
+        --bg-primary-deep: #350b2d;
+        --accent: #c9a84c;
+        --text-light: #f8f8f8;
+        --text-muted: #d9d9d9;
+        --surface: #faf8f5;
+        --surface-card: #ffffff;
+        --border: #e3e3e3;
+        --max-width: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-snap-type: y proximity;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        color: #262626;
+        background: var(--surface);
+        line-height: 1.6;
+        scroll-snap-type: y proximity;
+        overflow-anchor: none;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.2;
+        font-family: "Domine", serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto;
+      }
+
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-image {
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        object-fit: contain;
+        padding: 0;
+      }
+
+      .logo-text {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .logo-text strong {
+        color: var(--bg-primary);
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .logo-text span {
+        color: var(--text-muted);
+        font-size: 0.74rem;
+        letter-spacing: 0.12em;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        width: 100%;
+        background: rgba(250, 248, 245, 0.92);
+        border-bottom: none;
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.3s ease;
+      }
+
+      header.nav-hidden {
+        opacity: 0;
+        transform: translateY(-100%);
+        pointer-events: none;
+      }
+
+      header .container {
+        width: 100%;
+        max-width: none;
+        padding: 0 24px;
+      }
+
+      .nav {
+        min-height: 96px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.8rem;
+        width: 100%;
+      }
+
+      .nav > .logo-wrap {
+        flex: 0 0 auto;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+        white-space: nowrap;
+      }
+
+      .nav-links {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bg-primary);
+        gap: 1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 1.125rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .nav-links a {
+        display: inline-block;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        opacity: 0.9;
+      }
+
+      .nav-links a:not(:last-child)::after {
+        content: "·";
+        margin-left: 1rem;
+        color: rgba(74, 16, 64, 0.42);
+      }
+
+      .nav-links a:hover {
+        color: var(--bg-primary-deep);
+        opacity: 1;
+      }
+
+      .nav-action {
+        flex: 0 0 auto;
+        margin-left: 1rem;
+      }
+
+      .nav-consult-btn {
+        display: inline-block;
+        white-space: nowrap;
+        background: #ef6c11;
+        color: #ffffff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.5rem 1.9rem;
+        font-size: 0.96875rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transition: all 0.25s ease;
+      }
+
+      .nav-consult-btn:hover {
+        background: #ffffff;
+        color: #ef6c11;
+        border: 2px solid #ef6c11;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        color: var(--text-light);
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: 100vh;
+        height: 100dvh;
+        background: var(--surface);
+        scroll-snap-align: start;
+      }
+
+      .hero-card {
+        position: absolute;
+        inset: calc(96px + 14px) 18px 18px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #1a1a1a;
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0.55) 35%,
+          rgba(0, 0, 0, 0.15) 60%,
+          transparent 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 20%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 0 3.2rem 3.95rem;
+        z-index: 2;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        width: min(1200px, 90%);
+        gap: 5px;
+        padding-left: 0.2rem;
+      }
+
+      .firm-name {
+        color: var(--accent);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.05rem, 5.4vw, 4rem);
+        margin-bottom: 1rem;
+      }
+
+      .hero-title {
+        margin: 0;
+        max-width: none;
+        color: #ffffff;
+        line-height: 1.05;
+        font-size: clamp(2.2rem, 4.6vw, 3.9rem);
+        font-family: "Domine", serif;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-title span {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .hero-title .hero-emphasis {
+        display: inline;
+        font-style: normal;
+      }
+
+      .hero-summary {
+        margin: 0;
+        max-width: none;
+        color: #f5f5f5;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .hero-copy .btn {
+        margin-top: 5px;
+      }
+
+      .hero-copy .btn.btn-primary {
+        background: #4a1040;
+        color: #ffffff;
+        border: 2px solid #4a1040;
+        box-shadow: none;
+        transition: all 0.25s ease;
+      }
+
+      .hero-copy .btn.btn-primary:hover {
+        background: #ffffff;
+        color: #4a1040;
+        border-color: #4a1040;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.85rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #2f2612;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+      }
+
+      .statement-section {
+        background: #390d2f;
+        padding: 120px 0;
+      }
+
+      .statement-text {
+        margin: 0 auto;
+        width: min(1200px, 96vw);
+        color: #ffffff;
+        font-family: "Domine", serif;
+        font-size: clamp(2rem, 2.3vw, 2.2rem);
+        font-weight: 300;
+        line-height: 1.4;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .practice-snap {
+        height: 100vh;
+        min-height: 100dvh;
+        overflow: hidden;
+        position: relative;
+        background: #faf8f5;
+        padding: 100px 100px 32px;
+        scroll-snap-align: start;
+      }
+
+      .practice-snap .container {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+      }
+
+      .practice-snap-inner {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 32px;
+      }
+
+      .practice-snap-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.25rem;
+      }
+
+      .practice-snap-left {
+        max-width: min(780px, 70%);
+      }
+
+      .practice-snap-title {
+        color: var(--bg-primary);
+        font-size: clamp(2rem, 4.2vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.05;
+      }
+
+      .practice-snap-title::after {
+        content: "";
+        display: block;
+        width: 110px;
+        height: 2px;
+        margin-top: 0.62rem;
+        background: var(--accent);
+      }
+
+      .practice-snap-copy {
+        margin: 0.72rem 0 0;
+        color: #4d4d4d;
+        font-size: 0.86rem;
+      }
+
+      .practice-snap-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        background: #ef6c11;
+        color: #ffffff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.64rem 1.25rem;
+        font-size: 0.84rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: all 0.25s ease;
+      }
+
+      .practice-snap-cta:hover {
+        background: #ffffff;
+        color: #ef6c11;
+        border: 2px solid #ef6c11;
+      }
+
+      .practice-snap-grid {
+        flex: 1;
+        height: calc(100vh - 280px);
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 28fr 34fr 28fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+          "family corporate labor"
+          "cyber corporate environmental";
+        align-content: stretch;
+        gap: 20px;
+      }
+
+      .practice-snap-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        background: #e0ddd8;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 0;
+      }
+
+      .practice-snap-card:hover {
+        transform: none;
+        transition: none;
+      }
+
+      .practice-snap-card:nth-child(1) {
+        grid-area: family;
+        background-image: url("family-law.jpg");
+      }
+
+      .practice-snap-card:nth-child(2) {
+        grid-area: corporate;
+        background-image: url("corporate-law.jpg");
+      }
+
+      .practice-snap-card:nth-child(3) {
+        grid-area: labor;
+        background-image: url("labor-law.jpg");
+      }
+
+      .practice-snap-card:nth-child(4) {
+        grid-area: cyber;
+        background-image: url("cybercrime-law.jpg");
+      }
+
+      .practice-snap-card:nth-child(5) {
+        grid-area: environmental;
+        background-image: url("environmental-law.jpg");
+      }
+
+      .practice-snap-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 48%);
+        z-index: 1;
+      }
+
+      .practice-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 2;
+        background: #ffffff;
+        color: var(--bg-primary);
+        border-radius: 999px;
+        padding: 0.3rem 0.7rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .practice-snap-meta {
+        position: absolute;
+        left: 14px;
+        right: 56px;
+        bottom: 12px;
+        z-index: 2;
+        color: #ffffff;
+      }
+
+      .practice-snap-meta h3 {
+        font-size: 1.25rem;
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      .practice-snap-meta p {
+        margin: 0.2rem 0 0;
+        font-size: 13.75px;
+        line-height: 1.35;
+        color: rgba(255, 255, 255, 0.94);
+      }
+
+      .practice-snap-arrow {
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        z-index: 2;
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: #ffffff;
+        color: var(--bg-primary);
+        font-size: 1.125rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .team-showcase {
+        background: var(--surface);
+        padding: 16px 18px;
+      }
+
+      .team-showcase .container {
+        width: 100%;
+        max-width: none;
+        padding: 40px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #390d2f 0%, #390d2f 60%, #990163 100%);
+      }
+
+      .team-showcase-inner {
+        display: grid;
+        grid-template-rows: auto auto;
+        gap: 24px;
+      }
+
+      .team-showcase-title {
+        color: #ffffff;
+        font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+        line-height: 1.08;
+      }
+
+      .team-showcase-copy {
+        margin: 0.65rem 0 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+      }
+
+      .team-lawyer-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .team-lawyer-card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        padding: 14px;
+        transition: all 0.25s ease;
+      }
+
+      .team-lawyer-card:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .team-lawyer-photo {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        border-radius: 16px;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+      }
+
+      .team-lawyer-name {
+        margin: 0.82rem 0 0;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .team-lawyer-role {
+        margin: 0.35rem 0 0;
+        color: #c9a84c;
+        font-size: 0.7rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .trust-section {
+        background: var(--surface);
+        padding: 16px 18px;
+      }
+
+      .trust-section .container {
+        width: 100%;
+        max-width: none;
+        padding: 40px;
+        border-radius: 26px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #390d2f 0%, #390d2f 60%, #990163 100%);
+      }
+
+      .trust-inner {
+        height: auto;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        gap: 24px;
+      }
+
+      .trust-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .trust-heading h2 {
+        color: #ffffff;
+        font-size: clamp(2rem, 4.4vw, 3.15rem);
+        line-height: 1.05;
+      }
+
+      .trust-heading p {
+        margin: 0.6rem 0 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+      }
+
+      .trust-nav {
+        display: flex;
+        gap: 0.7rem;
+      }
+
+      .trust-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        background: rgba(255, 255, 255, 0.16);
+        color: #ffffff;
+        display: grid;
+        place-items: center;
+        font-size: 1.05rem;
+        line-height: 1;
+      }
+
+      .trust-stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .trust-stat-card {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 0.9rem 1.05rem;
+      }
+
+      .trust-stat-number {
+        margin: 0;
+        color: #ffffff;
+        font-size: clamp(1.45rem, 3vw, 2.25rem);
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      .trust-stat-label {
+        margin: 0.28rem 0 0;
+        color: rgba(238, 238, 238, 0.95);
+        font-size: 0.86rem;
+        line-height: 1.35;
+      }
+
+      .trust-testimonial-row {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .trust-card {
+        min-height: 0;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 14px 30px rgba(57, 13, 47, 0.12);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .trust-case-tag {
+        align-self: flex-start;
+        background: #c9a84c;
+        color: #350b2d;
+        border-radius: 999px;
+        padding: 0.26rem 0.72rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .trust-quote {
+        margin: 1rem 0 0;
+        color: #303030;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        line-height: 1.45;
+      }
+
+      .trust-client {
+        margin-top: auto;
+        padding-top: 1rem;
+      }
+
+      .trust-client strong {
+        display: block;
+        color: #4a1040;
+        font-size: 0.96rem;
+      }
+
+      .trust-client span {
+        color: #8a8a8a;
+        font-size: 0.76rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        color: #2f0d28;
+        font-size: clamp(1.65rem, 3.2vw, 2.5rem);
+        margin-bottom: 0.95rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 78px;
+        height: 2px;
+        margin-top: 0.45rem;
+        background: var(--accent);
+      }
+
+      .section-copy {
+        color: #555;
+        max-width: 70ch;
+        margin: 0;
+      }
+
+      .about,
+      .grain {
+        background: var(--surface);
+      }
+
+      .practice-grid,
+      .grain-grid {
+        margin-top: 1.4rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .practice-card,
+      .grain-card {
+        background: var(--surface-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.1rem;
+      }
+
+      #team {
+        background: var(--surface);
+        padding: 2.6rem 0;
+      }
+
+      #team .container {
+        width: 100%;
+        max-width: none;
+        padding: 0 24px;
+      }
+
+      .featured-slideshow {
+        position: relative;
+        padding: 0;
+        height: auto;
+      }
+
+      .featured-slide {
+        display: none;
+        height: auto;
+      }
+
+      .featured-slide.active {
+        display: block;
+        height: auto;
+        animation: featuredFade 0.6s ease;
+      }
+
+      @keyframes featuredFade {
+        from {
+          opacity: 0.15;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .featured-lawyer-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 900px;
+        margin: 0 auto;
+        gap: 24px;
+        height: auto;
+        min-height: 420px;
+      }
+
+      .featured-photo-wrap {
+        width: 220px;
+        flex: 0 0 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: auto;
+      }
+
+      .featured-photo {
+        display: block;
+        width: min(100%, 220px);
+        height: 350px;
+        object-fit: contain;
+        object-position: bottom center;
+        background: transparent;
+        mix-blend-mode: normal;
+        filter: none;
+        transform: none;
+        transform-origin: bottom center;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .featured-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        padding: 0;
+        align-self: center;
+        max-width: 560px;
+      }
+
+      .featured-label {
+        margin: 0;
+        color: #c9a84c;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .featured-label::after {
+        content: "";
+        display: block;
+        width: 96px;
+        border-bottom: 2px solid #c9a84c;
+        margin-top: 0.62rem;
+      }
+
+      .featured-name {
+        margin: 0.72rem 0 0.7rem;
+        color: #390d2f;
+        font-size: clamp(1.9rem, 3vw, 2.5rem);
+        font-weight: 700;
+      }
+
+      .featured-bio {
+        margin: 0;
+        max-width: 100%;
+        color: #4a4a4a;
+        font-size: clamp(1rem, 1.15vw, 1.18rem);
+        line-height: 1.45;
+      }
+
+      .featured-focus {
+        margin: 0.7rem 0 0;
+        color: #c9a84c;
+        font-size: 0.86rem;
+        line-height: 1.35;
+        font-weight: 500;
+        font-style: italic;
+      }
+
+      .featured-focus span {
+        font-weight: 700;
+      }
+
+      .slide-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 1px solid rgba(74, 16, 64, 0.32);
+        background: rgba(250, 248, 245, 0.96);
+        color: #390d2f;
+        font-size: 1.2rem;
+        line-height: 1;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .slide-arrow:hover {
+        opacity: 1;
+        border-color: #390d2f;
+      }
+
+      .slide-arrow-left {
+        left: 0;
+      }
+
+      .slide-arrow-right {
+        right: 0;
+      }
+
+      .practice-card {
+        border-top: 3px solid var(--accent);
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(201, 168, 76, 0.17);
+        color: #5f4a1f;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+      }
+
+      .practice-card h3,
+      .grain-card h3 {
+        color: #2f0d28;
+        font-size: 1.25rem;
+      }
+
+      .practice-card p,
+      .grain-card p {
+        margin: 0.5rem 0 0;
+        color: #585858;
+      }
+
+      .grain-card a {
+        display: inline-block;
+        margin-top: 0.75rem;
+        color: #4a1040;
+        font-weight: 600;
+      }
+
+      .contact-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 1rem;
+      }
+
+      .contact-panel,
+      .form-panel {
+        background: var(--surface-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.15rem;
+      }
+
+      .contact-list {
+        margin: 0.8rem 0 0;
+        padding: 0;
+        list-style: none;
+        color: #444;
+      }
+
+      .contact-list li {
+        margin-bottom: 0.55rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.35rem;
+        margin-bottom: 0.8rem;
+      }
+
+      label {
+        font-size: 0.92rem;
+        color: #3b3b3b;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid #d4d4d4;
+        border-radius: 8px;
+        padding: 0.72rem 0.75rem;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .submit {
+        border: none;
+        cursor: pointer;
+      }
+
+      footer {
+        background: linear-gradient(145deg, #2f0d28, #47113c 52%, #8b1e63);
+        color: rgba(255, 255, 255, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .footer-inner {
+        padding: 2.35rem 0 1.2rem;
+        display: grid;
+        grid-template-columns: minmax(260px, 1.45fr) repeat(3, minmax(150px, 1fr));
+        gap: 1rem;
+        row-gap: 1.35rem;
+      }
+
+      .footer-brand .logo-wrap {
+        margin-bottom: 0.72rem;
+      }
+
+      .footer-brand .logo-text strong {
+        color: #ffffff;
+      }
+
+      .footer-brand .logo-text span {
+        color: #e9d0e0;
+        letter-spacing: 0.08em;
+      }
+
+      .footer-brand p {
+        margin: 0.2rem 0 0;
+        color: #f2dee8;
+        font-size: 0.9rem;
+        max-width: 30ch;
+      }
+
+      .footer-col {
+        min-height: 0;
+      }
+
+      .footer-col h4 {
+        margin: 0 0 0.72rem;
+        color: #ffffff;
+        font-size: 0.94rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .footer-links {
+        display: grid;
+        gap: 0.42rem;
+      }
+
+      .footer-links a {
+        width: fit-content;
+        font-size: 0.89rem;
+        color: #f5e3ee;
+      }
+
+      .footer-links a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        grid-column: 1 / -1;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin-top: 1.2rem;
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+        align-items: center;
+        flex-wrap: wrap;
+        color: #ecd8e3;
+      }
+
+      .footer-bottom p,
+      .footer-legal {
+        margin: 0;
+        font-size: 0.8rem;
+      }
+
+      .footer-legal {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .footer-legal a {
+        color: #f3dfeb;
+      }
+
+      .footer-legal a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      .socials {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 0.9rem;
+      }
+
+      .socials a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+      }
+
+      .socials a:hover {
+        background: rgba(255, 255, 255, 0.12);
+        text-decoration: underline;
+      }
+
+      @media (max-width: 930px) {
+        .nav {
+          min-height: auto;
+          gap: 0.8rem;
+          padding: 0.8rem 0;
+        }
+
+        .nav-links {
+          gap: 0.45rem;
+          font-size: 0.58rem;
+          letter-spacing: 0.12em;
+        }
+
+        .nav-links a:not(:last-child)::after {
+          margin-left: 0.45rem;
+        }
+
+        .nav-consult-btn {
+          padding: 0.34rem 0.58rem;
+          font-size: 0.58rem;
+          letter-spacing: 0.1em;
+        }
+
+        .hero-card {
+          inset: calc(88px + 12px) 16px 16px;
+          border-radius: 24px;
+        }
+
+        .hero-overlay {
+          padding: 0 1.6rem 0.75rem;
+          height: 20%;
+        }
+
+        .hero-copy {
+          width: min(640px, 88%);
+        }
+
+        .hero-title {
+          font-size: clamp(1.6rem, 4vw, 2.55rem);
+        }
+
+        .practice-snap {
+          height: 100vh;
+          min-height: 100dvh;
+          overflow: hidden;
+          padding: 100px 100px 32px;
+        }
+
+        .practice-snap .container {
+          padding: 0;
+        }
+
+        .practice-snap-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.9rem;
+        }
+
+        .practice-snap-left {
+          max-width: none;
+        }
+
+        .practice-snap-grid {
+          height: calc(100vh - 280px);
+          grid-template-columns: 28fr 34fr 28fr;
+          grid-template-rows: 1fr 1fr;
+          grid-template-areas:
+            "family corporate labor"
+            "cyber corporate environmental";
+        }
+
+        .practice-grid,
+        .grain-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .team-showcase .container {
+          padding: 32px;
+        }
+
+        .team-lawyer-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        #team {
+          padding: 2.3rem 0;
+        }
+
+        #team .container {
+          padding: 0 80px;
+        }
+
+        .featured-slideshow {
+          padding: 0;
+          height: auto;
+        }
+
+        .featured-slide,
+        .featured-slide.active {
+          height: auto;
+        }
+
+        .featured-lawyer-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          height: auto;
+          min-height: auto;
+          max-height: none;
+          gap: 1.1rem;
+        }
+
+        .featured-photo-wrap {
+          height: auto;
+        }
+
+        .featured-photo {
+          width: min(100%, 420px);
+          height: auto;
+          margin: 0 auto;
+          transform: none;
+          margin-bottom: 0;
+          object-position: bottom center;
+        }
+
+        .featured-content {
+          height: auto;
+          justify-content: flex-start;
+          padding-bottom: 0;
+          align-self: start;
+        }
+
+        .slide-arrow {
+          top: 28%;
+        }
+
+        .contact-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+      }
+
+      @media (max-width: 640px) {
+        section {
+          padding: 3.2rem 0;
+        }
+
+        .hero-card {
+          inset: calc(82px + 10px) 14px 14px;
+          border-radius: 22px;
+        }
+
+        .hero-overlay {
+          padding: 0 1rem 0.6rem;
+          height: 20%;
+        }
+
+        .firm-name {
+          font-size: 0.64rem;
+          letter-spacing: 0.18em;
+        }
+
+        .hero-title {
+          font-size: clamp(1.12rem, 4.3vw, 1.6rem);
+        }
+
+        .tagline {
+          font-size: 0.62rem;
+          letter-spacing: 0.12em;
+        }
+
+        .hero-summary {
+          font-size: 0.76rem;
+          max-width: 44ch;
+          white-space: nowrap;
+        }
+
+        .practice-snap {
+          height: 100vh;
+          min-height: 100dvh;
+          overflow: hidden;
+          padding: 100px 100px 32px;
+        }
+
+        .practice-snap .container {
+          padding: 0;
+        }
+
+        .practice-snap-title {
+          font-size: clamp(1.5rem, 7vw, 2rem);
+        }
+
+        .practice-snap-copy {
+          font-size: 0.8rem;
+        }
+
+        .practice-snap-cta {
+          font-size: 0.74rem;
+          padding: 0.56rem 1rem;
+        }
+
+        .practice-snap-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(5, minmax(0, 1fr));
+          grid-template-areas: none;
+        }
+
+        .practice-snap-card:nth-child(5) {
+          grid-area: auto;
+        }
+
+        .practice-snap-card:nth-child(1),
+        .practice-snap-card:nth-child(2),
+        .practice-snap-card:nth-child(3),
+        .practice-snap-card:nth-child(4) {
+          grid-area: auto;
+          aspect-ratio: auto;
+        }
+
+        .nav-links {
+          font-size: 0.5rem;
+          letter-spacing: 0.1em;
+          gap: 0.32rem;
+        }
+
+        .nav-links a:not(:last-child)::after {
+          margin-left: 0.32rem;
+        }
+
+        .nav-consult-btn {
+          font-size: 0.5rem;
+          padding: 0.3rem 0.48rem;
+        }
+
+        .practice-grid,
+        .grain-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .team-showcase {
+          padding: 14px;
+        }
+
+        .team-showcase .container {
+          padding: 24px;
+        }
+
+        .team-lawyer-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        #team {
+          padding: 1.9rem 0;
+        }
+
+        #team .container {
+          padding: 0 24px;
+        }
+
+        .featured-slideshow {
+          padding: 0;
+        }
+
+        .featured-name {
+          font-size: clamp(1.7rem, 8vw, 2.25rem);
+        }
+
+        .featured-content {
+          padding-bottom: 0;
+        }
+
+        .slide-arrow {
+          width: 32px;
+          height: 32px;
+          top: 24%;
+        }
+
+        .logo-image {
+          width: 44px;
+          height: 44px;
+        }
+
+        .logo-text strong {
+          font-size: 0.84rem;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-brand,
+        .footer-links,
+        .footer-contact {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="logo-wrap" href="#home" aria-label="Talampas and Associates home">
+          <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" />
+          <div class="logo-text">
+            <strong>TalampasLaw</strong>
+          </div>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#practice-snap">Work</a>
+          <a href="#team">Our Lawyers</a>
+          <a href="#about">Our Firm</a>
+          <a href="#grain">Blog</a>
+        </nav>
+        <div class="nav-action">
+          <a class="nav-consult-btn" href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-card">
+          <img
+            class="hero-media"
+            src="ruben-action-shot.png"
+            alt="TalampasLaw legal team"
+            loading="eager"
+          />
+          <div class="hero-overlay">
+            <div class="hero-copy">
+              <p class="firm-name">The Law Firm of Talampas &amp; Associates</p>
+              <h1 class="hero-title">
+                <span>Equitable legal solutions for all.</span>
+              </h1>
+              <p class="hero-summary">
+                Guided by faith and nearly 2 decades of experience, we fight for your rights with professionalism,
+                integrity, and excellence.
+              </p>
+              <a class="btn btn-primary" href="#contact">Book a Consultation</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement-section" aria-label="Firm statement">
+        <p class="statement-text">"Professionalism, Integrity, and Excellence &mdash; since 2007."</p>
+      </section>
+
+      <section id="practice-snap" class="practice-snap">
+        <div class="container practice-snap-inner">
+          <div class="practice-snap-header">
+            <div class="practice-snap-left">
+              <h2 class="practice-snap-title">Focused on What Matters Most</h2>
+              <p class="practice-snap-copy">
+                From family disputes to corporate cases &mdash; we handle the legal battles that shape lives.
+              </p>
+            </div>
+            <a class="practice-snap-cta" href="#contact">Book a Consultation</a>
+          </div>
+
+          <div class="practice-snap-grid">
+            <article class="practice-snap-card">
+              <span class="practice-badge">Family Law</span>
+              <div class="practice-snap-meta">
+                <h3>Protecting Families</h3>
+                <p>Annulment, custody, and support matters</p>
+              </div>
+              <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
+            </article>
+
+            <article class="practice-snap-card">
+              <span class="practice-badge">Corporate Law</span>
+              <div class="practice-snap-meta">
+                <h3>Building Strong Businesses</h3>
+                <p>Contracts, compliance, and corporate counsel</p>
+              </div>
+              <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
+            </article>
+
+            <article class="practice-snap-card">
+              <span class="practice-badge">Labor Law</span>
+              <div class="practice-snap-meta">
+                <h3>Defending Workers' Rights</h3>
+                <p>Workplace disputes and labor standards</p>
+              </div>
+              <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
+            </article>
+
+            <article class="practice-snap-card">
+              <span class="practice-badge">Cybercrime Law</span>
+              <div class="practice-snap-meta">
+                <h3>Justice in the Digital Age</h3>
+                <p>Cyber libel, fraud, and data protection</p>
+              </div>
+              <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
+            </article>
+
+            <article class="practice-snap-card">
+              <span class="practice-badge">Environmental Law</span>
+              <div class="practice-snap-meta">
+                <h3>Protecting the Planet</h3>
+                <p>Regulatory compliance and environmental cases</p>
+              </div>
+              <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="team">
+        <div class="container">
+          <div class="featured-slideshow" aria-live="polite">
+            <article class="featured-slide active" aria-hidden="false">
+              <div class="featured-lawyer-layout">
+                <div class="featured-photo-wrap">
+                  <img class="featured-photo" src="atty-ruben.png" alt="Atty. Ruben C. Talampas Jr." loading="lazy" />
+                </div>
+                <div class="featured-content">
+                  <p class="featured-label">Featured Lawyer</p>
+                  <h2 class="featured-name">Atty. Ruben C. Talampas Jr.</h2>
+                  <p class="featured-bio">
+                    Atty. Ruben C. Talampas Jr. leads complex legal strategy with a measured and client-focused approach.
+                    He is known for disciplined preparation and practical courtroom advocacy.
+                  </p>
+                  <p class="featured-focus"><span>Practice focus:</span> Civil Litigation, Labor Law, and Compliance Advisory.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="featured-slide" aria-hidden="true">
+              <div class="featured-lawyer-layout">
+                <div class="featured-photo-wrap">
+                  <img class="featured-photo" src="atty-jane.png" alt="Atty. Clarolyn Jane Capellan" loading="lazy" />
+                </div>
+                <div class="featured-content">
+                  <p class="featured-label">Featured Lawyer</p>
+                  <h2 class="featured-name">Atty. Clarolyn Jane Capellan</h2>
+                  <p class="featured-bio">
+                    Atty. Clarolyn Jane Capellan provides strategic counsel backed by clear communication and meticulous research.
+                    She supports clients through sensitive legal matters with steady, detail-oriented case management.
+                  </p>
+                  <p class="featured-focus"><span>Practice focus:</span> Family Law, Civil Law, and Contract Advisory.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="featured-slide" aria-hidden="true">
+              <div class="featured-lawyer-layout">
+                <div class="featured-photo-wrap">
+                  <img class="featured-photo" src="atty-aldrin.png" alt="Atty. Jan Aldrin Afos" loading="lazy" />
+                </div>
+                <div class="featured-content">
+                  <p class="featured-label">Featured Lawyer</p>
+                  <h2 class="featured-name">Atty. Jan Aldrin Afos</h2>
+                  <p class="featured-bio">
+                    Atty. Jan Aldrin Afos focuses on effective dispute resolution and precise procedural execution.
+                    He helps clients navigate contentious legal issues through practical, solutions-driven representation.
+                  </p>
+                  <p class="featured-focus"><span>Practice focus:</span> Labor Law, Regulatory Compliance, and Litigation Support.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="featured-slide" aria-hidden="true">
+              <div class="featured-lawyer-layout">
+                <div class="featured-photo-wrap">
+                  <img class="featured-photo" src="atty-louella.png" alt="Atty. Louella Janda" loading="lazy" />
+                </div>
+                <div class="featured-content">
+                  <p class="featured-label">Featured Lawyer</p>
+                  <h2 class="featured-name">Atty. Louella Janda</h2>
+                  <p class="featured-bio">
+                    Atty. Louella Janda advises clients with a calm and structured approach to complex legal questions.
+                    She prepares strong legal documentation and guides clients through key case milestones.
+                  </p>
+                  <p class="featured-focus"><span>Practice focus:</span> Civil Disputes, Environmental Law, and Legal Documentation.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="featured-slide" aria-hidden="true">
+              <div class="featured-lawyer-layout">
+                <div class="featured-photo-wrap">
+                  <img class="featured-photo" src="atty-gee.png" alt="Atty. Geelleanne Ubalde" loading="lazy" />
+                </div>
+                <div class="featured-content">
+                  <p class="featured-label">Featured Lawyer</p>
+                  <h2 class="featured-name">Atty. Geelleanne Ubalde</h2>
+                  <p class="featured-bio">
+                    Atty. Geelleanne Ubalde supports clients with practical legal planning and responsive representation.
+                    She works closely with clients to clarify legal options and build coherent dispute strategies.
+                  </p>
+                  <p class="featured-focus"><span>Practice focus:</span> Cybercrime Law, Civil Litigation, and Legal Advisory.</p>
+                </div>
+              </div>
+            </article>
+            <button class="slide-arrow slide-arrow-left" type="button" data-featured-prev aria-label="Previous lawyer">
+              <span aria-hidden="true">&#8249;</span>
+            </button>
+            <button class="slide-arrow slide-arrow-right" type="button" data-featured-next aria-label="Next lawyer">
+              <span aria-hidden="true">&#8250;</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <h2 class="section-title">About Us</h2>
+          <p class="section-copy">
+            The Law Firm of Talampas &amp; Associates is a Philippine-based practice built on principled
+            service and disciplined advocacy. We aim to protect our clients' rights through strategic,
+            transparent, and results-driven legal work while upholding the highest standards of professional conduct.
+          </p>
+        </div>
+      </section>
+
+      <section id="grain" class="grain">
+        <div class="container">
+          <h2 class="section-title">A Grain of Law</h2>
+          <p class="section-copy">Legal education insights to keep clients and communities informed.</p>
+
+          <div class="grain-grid">
+            <article class="grain-card">
+              <h3>Know Your Rights in Workplace Disputes</h3>
+              <p>A quick overview of employee remedies and key procedures under Philippine labor law.</p>
+              <a href="#">Read Preview</a>
+            </article>
+            <article class="grain-card">
+              <h3>Cyber Libel and Responsible Online Conduct</h3>
+              <p>Understanding legal exposure and practical safeguards in digital communication.</p>
+              <a href="#">Read Preview</a>
+            </article>
+            <article class="grain-card">
+              <h3>Family Property Rules in Common Situations</h3>
+              <p>Essential guidance on marital property regimes and proper legal documentation.</p>
+              <a href="#">Read Preview</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title">Contact &amp; Location</h2>
+          <p class="section-copy">Start with an initial consultation and get direct legal guidance.</p>
+
+          <div class="contact-wrap">
+            <article class="contact-panel">
+              <h3>Office Information</h3>
+              <ul class="contact-list">
+                <li><strong>Address:</strong> Unit 12, 5th Floor, Talampas Building, Makati City, Philippines</li>
+                <li><strong>Phone:</strong> +63 917 123 4567</li>
+                <li><strong>Email:</strong> consult@talampaslaw.ph</li>
+                <li><strong>Hours:</strong> Monday to Friday, 9:00 AM to 6:00 PM</li>
+              </ul>
+            </article>
+
+            <article class="form-panel">
+              <h3>Send an Inquiry</h3>
+              <form>
+                <label class="field">
+                  Full Name
+                  <input type="text" name="name" placeholder="Juan Dela Cruz" />
+                </label>
+                <label class="field">
+                  Email Address
+                  <input type="email" name="email" placeholder="name@example.com" />
+                </label>
+                <label class="field">
+                  Phone Number
+                  <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" />
+                </label>
+                <label class="field">
+                  Message
+                  <textarea name="message" placeholder="Tell us briefly about your legal concern."></textarea>
+                </label>
+                <button class="btn btn-primary submit" type="submit">Submit Inquiry</button>
+              </form>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <section class="footer-brand footer-col">
+          <a class="logo-wrap" href="#home" aria-label="Talampas and Associates home">
+            <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" loading="lazy" />
+            <div class="logo-text">
+              <strong>TLFTA</strong>
+            </div>
+          </a>
+          <p>Committed legal advocacy rooted in faith, diligence, and proven results for individuals and businesses.</p>
+          <div class="socials" aria-label="Social links">
+            <a href="#" aria-label="Facebook">Fb</a>
+            <a href="#" aria-label="LinkedIn">Ln</a>
+            <a href="#" aria-label="Instagram">Ig</a>
+          </div>
+        </section>
+        <nav class="footer-col footer-links" aria-label="Footer navigation links">
+          <h4>Explore</h4>
+          <a href="#home">Home</a>
+          <a href="#practice-snap">Work</a>
+          <a href="#team">Our Lawyers</a>
+          <a href="#about">Our Firm</a>
+          <a href="#grain">Blog</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <nav class="footer-col footer-links" aria-label="Practice areas">
+          <h4>Practice Areas</h4>
+          <a href="#practice-snap">Family Law</a>
+          <a href="#practice-snap">Labor Law</a>
+          <a href="#practice-snap">Corporate Law</a>
+          <a href="#practice-snap">Cybercrime Law</a>
+          <a href="#practice-snap">Environmental Law</a>
+        </nav>
+        <section class="footer-col footer-links footer-contact" aria-label="Contact details">
+          <h4>Contact</h4>
+          <a href="https://maps.google.com/?q=Talampas%20Building%20Makati%20City%2C%20Philippines" target="_blank" rel="noopener noreferrer">
+            Unit 12, 5th Floor, Talampas Building<br />Makati City, Philippines
+          </a>
+          <a href="tel:+639171234567">+63 917 123 4567</a>
+          <a href="mailto:consult@talampaslaw.ph">consult@talampaslaw.ph</a>
+          <a href="#contact">Get a consultation</a>
+        </section>
+        <div class="footer-bottom">
+          <p>&copy; 2026 The Law Firm of Talampas &amp; Associates. All rights reserved.</p>
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Accessibility</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (() => {
+        const slides = Array.from(document.querySelectorAll("#team .featured-slide"));
+        const section = document.querySelector("#team");
+        const prevButton = document.querySelector("[data-featured-prev]");
+        const nextButton = document.querySelector("[data-featured-next]");
+        if (slides.length < 2) return;
+
+        let currentIndex = 0;
+        let timerId = null;
+
+        const showSlide = (index) => {
+          currentIndex = (index + slides.length) % slides.length;
+          slides.forEach((slide, i) => {
+            const isActive = i === currentIndex;
+            slide.classList.toggle("active", isActive);
+            slide.setAttribute("aria-hidden", String(!isActive));
+          });
+        };
+
+        const stopAutoRotate = () => {
+          if (!timerId) return;
+          clearInterval(timerId);
+          timerId = null;
+        };
+
+        const startAutoRotate = () => {
+          stopAutoRotate();
+          timerId = window.setInterval(() => showSlide(currentIndex + 1), 6500);
+        };
+
+        prevButton?.addEventListener("click", () => {
+          showSlide(currentIndex - 1);
+          startAutoRotate();
+        });
+
+        nextButton?.addEventListener("click", () => {
+          showSlide(currentIndex + 1);
+          startAutoRotate();
+        });
+
+        section?.addEventListener("mouseenter", stopAutoRotate);
+        section?.addEventListener("mouseleave", startAutoRotate);
+
+        showSlide(0);
+        startAutoRotate();
+      })();
+    </script>
+    <script>
+      (() => {
+        const nav = document.querySelector("header");
+        const hero = document.querySelector(".hero");
+        if (!nav || !hero || typeof IntersectionObserver === "undefined") return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            nav.classList.toggle("nav-hidden", !entry.isIntersecting);
+          },
+          { threshold: 0.01 }
+        );
+
+        observer.observe(hero);
+      })();
+    </script>
+  </body>
+</html>
