@@ -124,7 +124,7 @@
       }
 
       .nav-links a:not(:last-child)::after {
-        content: "·";
+        content: "\00b7";
         margin-left: 1rem;
         color: rgba(57, 13, 47, 0.35);
       }
@@ -149,146 +149,241 @@
         border: 2px solid var(--cta);
       }
 
-      .blog-hero {
-        background:
-          linear-gradient(130deg, rgba(31, 18, 33, 0.88), rgba(57, 13, 47, 0.8)),
-          url("tlfta-cover-photo.jpg") center / cover no-repeat;
-        color: #fff;
-        padding: 5rem 0 4rem;
-      }
-
-      .blog-hero h1 {
-        font-size: clamp(2rem, 3.7vw, 3.2rem);
-      }
-
-      .blog-tagline {
-        font-size: 0.78rem;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        opacity: 0.95;
-      }
-
-      .blog-lead {
-        margin: 0.85rem 0 0;
-        max-width: 67ch;
-        color: rgba(255, 255, 255, 0.94);
-      }
-
-      .hero-cta {
-        margin-top: 1.2rem;
-        display: flex;
-        gap: 0.8rem;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        display: inline-block;
-        border-radius: 999px;
-        padding: 0.66rem 1.35rem;
-        font-size: 0.84rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        font-weight: 700;
-      }
-
-      .btn-cta {
-        background: var(--cta);
-        color: #fff;
-      }
-
-      .btn-ghost {
-        border: 1px solid rgba(255, 255, 255, 0.55);
-        color: #fff;
-      }
-
       .blog-main {
-        display: grid;
-        grid-template-columns: minmax(0, 2.3fr) minmax(260px, 1fr);
-        gap: 1.3rem;
-        padding: 2.3rem 0 3rem;
+        display: block;
+        padding: 2.8rem 0 3rem;
+        width: min(1400px, 96vw);
+        margin: 0 auto;
       }
 
       .panel {
-        background: var(--surface-card);
-        border-radius: 15px;
-        border: 1px solid var(--border);
-        padding: 1.2rem;
+        background: transparent;
+        border: none;
+        padding: 0;
+        width: 100%;
+        margin: 0;
       }
 
       .panel-title {
         color: var(--bg-primary);
-        font-size: 1.05rem;
-        margin-bottom: 0.9rem;
+        font-size: 1.7rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .blog-head {
+        text-align: center;
+        margin-bottom: 0.6rem;
+      }
+
+      .blog-head .panel-title {
+        font-size: clamp(2rem, 3.4vw, 3rem);
+      }
+
+      .filter-label {
+        margin: 1rem 0 0.55rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6a586a;
       }
 
       .filter-group {
         display: flex;
         flex-wrap: wrap;
         gap: 0.55rem;
-        margin: 0.8rem 0 1rem;
+        justify-content: center;
       }
 
       .chip {
-        border: none;
+        border: 1px solid #e7e8ee;
         border-radius: 999px;
-        padding: 0.45rem 0.9rem;
-        background: #f3e7ef;
-        color: #4b3247;
+        padding: 0.44rem 0.85rem;
+        background: #f2f4f7;
+        color: #4b5563;
         font: inherit;
         font-size: 0.8rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
+        letter-spacing: 0.01em;
         cursor: pointer;
       }
 
       .chip.active {
-        background: var(--bg-primary);
+        background: #a13d78;
+        border-color: #a13d78;
         color: #fff;
+      }
+
+      .summary {
+        margin: 0.8rem 0 0;
+        color: #6a5e69;
+        font-size: 0.9rem;
+      }
+
+      .search-wrap {
+        margin: 1rem auto 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-shell {
+        position: relative;
+        width: min(760px, 100%);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 0.9rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9aa3b2;
+        pointer-events: none;
+        font-size: 1rem;
+      }
+
+      .search-input {
+        width: 100%;
+        border: 2px solid #d5d9e1;
+        border-radius: 999px;
+        padding: 0.64rem 1rem 0.64rem 2.45rem;
+        font: inherit;
+        font-size: 0.92rem;
+        background: #fff;
+        color: #1f2937;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #a13d78;
+        box-shadow: 0 0 0 3px rgba(161, 61, 120, 0.13);
+      }
+
+      .featured-post {
+        margin-top: 1rem;
+        border: 1px solid #eadde8;
+        border-radius: 14px;
+        background: #fffdfb;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) minmax(0, 1.15fr);
+      }
+
+      .featured-thumb {
+        min-height: 240px;
+      }
+
+      .featured-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .featured-content {
+        padding: 1rem;
+        display: grid;
+        align-content: center;
+        gap: 0.55rem;
+      }
+
+      .featured-kicker {
+        width: fit-content;
+        border-radius: 999px;
+        background: #f4e8f0;
+        color: var(--bg-primary);
+        padding: 0.2rem 0.55rem;
+        font-size: 0.69rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .featured-title {
+        color: var(--bg-primary);
+        font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+      }
+
+      .featured-excerpt {
+        margin: 0;
+        color: #4e3c4f;
+        font-size: 0.94rem;
+      }
+
+      .featured-link {
+        margin-top: 0.2rem;
+        width: fit-content;
+        color: var(--bg-primary);
+        font-weight: 700;
       }
 
       .post-grid {
         display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0.95rem;
+        margin-top: 1rem;
       }
 
       .post-card {
         background: #fefcfa;
         border: 1px solid #eadde8;
         border-radius: 12px;
-        padding: 1rem;
+        overflow: hidden;
         display: grid;
-        gap: 0.46rem;
       }
 
-      .post-card[hidden] {
-        display: none;
+      .post-thumb {
+        aspect-ratio: 16 / 9;
+        background: #f1e8ef;
+      }
+
+      .post-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .post-content {
+        padding: 0.95rem;
+        display: grid;
+        gap: 0.45rem;
       }
 
       .post-meta {
         display: flex;
         align-items: center;
         gap: 0.55rem;
-        font-size: 0.82rem;
+        font-size: 0.76rem;
         color: #5d495d;
         letter-spacing: 0.04em;
         text-transform: uppercase;
       }
 
-      .post-meta .sep {
-        color: #b89aba;
-      }
-
       .post-title {
-        font-size: 1.25rem;
+        font-size: 1.08rem;
         color: var(--bg-primary);
       }
 
       .post-excerpt {
         margin: 0;
         color: #453448;
+        font-size: 0.93rem;
+      }
+
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .post-tag {
+        font-size: 0.7rem;
+        padding: 0.18rem 0.5rem;
+        border-radius: 999px;
+        border: 1px solid #d6bfcb;
+        color: #553e55;
       }
 
       .read-link {
+        margin-top: 0.25rem;
         font-weight: 700;
         color: var(--bg-primary);
         width: fit-content;
@@ -298,26 +393,33 @@
         color: var(--cta);
       }
 
-      .highlight {
-        background: linear-gradient(180deg, #fff6e8 0, #fff6e8 100%);
-        border-color: #ffd7a5;
+      .empty {
+        margin-top: 1rem;
+        border: 1px dashed #d9c9d5;
+        border-radius: 10px;
+        padding: 1rem;
+        color: #6a5e69;
+        font-size: 0.95rem;
       }
 
-      .sidebar-list {
-        display: grid;
-        gap: 0.75rem;
-        margin: 0;
-        padding-left: 0;
-        list-style: none;
+      .load-wrap {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
       }
 
-      .sidebar-list a {
-        color: var(--bg-primary);
-        font-size: 0.92rem;
-      }
-
-      .sidebar-list a:hover {
-        color: var(--cta);
+      .load-btn {
+        border: none;
+        border-radius: 999px;
+        background: var(--cta);
+        color: #fff;
+        padding: 0.62rem 1.2rem;
+        font: inherit;
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 700;
+        cursor: pointer;
       }
 
       .muted {
@@ -417,9 +519,9 @@
         line-height: 1.45;
       }
 
-      @media (max-width: 960px) {
-        .blog-main {
-          grid-template-columns: 1fr;
+      @media (max-width: 980px) {
+        .post-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
@@ -428,11 +530,17 @@
           display: none;
         }
 
-        .blog-hero {
-          padding-top: 4rem;
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .post-grid {
+          grid-template-columns: 1fr;
         }
 
-        .footer-inner {
+        .featured-post {
           grid-template-columns: 1fr;
         }
       }
@@ -442,11 +550,6 @@
           padding: 0 14px;
         }
 
-        .hero-cta {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
         .container {
           width: min(1120px, 93vw);
         }
@@ -454,228 +557,214 @@
     </style>
   </head>
   <body>
-    <header>
-      <div class="container nav">
-        <a class="logo-wrap" href="index.html#home" aria-label="Talampas and Associates home">
-          <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" />
-          <div class="logo-text">
-            <strong>TLFTA</strong>
-            <span>Legal Advocacy Group</span>
-          </div>
-        </a>
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="index.html#practice-snap">Work</a>
-          <a href="index.html#team">Our Lawyers</a>
-          <a href="about-us.html">Our Firm</a>
-          <a href="blog.html" aria-current="page">Blog</a>
-        </nav>
-        <a class="nav-consult-btn" href="index.html#contact">Contact Us</a>
-      </div>
-    </header>
+    <header id="site-nav"></header>
 
     <main>
-      <section class="blog-hero">
-        <div class="container">
-          <p class="blog-tagline">A Grain of Law</p>
-          <h1>A practical legal resource for families, workers, and communities.</h1>
-          <p class="blog-lead">
-            We publish practical articles for Philippine clients in plain language—focused on clear
-            process, rights awareness, and trusted next steps.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-cta" href="#posts">Read Latest Updates</a>
-            <a class="btn btn-ghost" href="index.html#contact">Book a Consultation</a>
-          </div>
-        </div>
-      </section>
-
-      <div class="container">
-        <section id="posts" class="blog-main">
-          <article class="panel">
-            <h2 class="panel-title">Latest Articles</h2>
-            <p class="muted">
-              Updated legal updates and practical guides for clients in Metro Manila and the Philippines.
-            </p>
-
-            <div class="filter-group" role="tablist" aria-label="Blog categories">
-              <button class="chip active" type="button" data-category="All">All</button>
-              <button class="chip" type="button" data-category="Family Law">Family Law</button>
-              <button class="chip" type="button" data-category="Labor Law">Labor Law</button>
-              <button class="chip" type="button" data-category="Corporate Law">Corporate Law</button>
-              <button class="chip" type="button" data-category="Cybercrime Law">Cybercrime Law</button>
-              <button class="chip" type="button" data-category="Environmental Law">Environmental Law</button>
+      <section id="posts" class="blog-main">
+        <article class="panel">
+            <div class="blog-head">
+              <h2 class="panel-title">A Grain of Law</h2>
             </div>
 
-            <section class="post-grid" id="post-grid">
-              <article class="post-card highlight" data-category="Labor Law">
-                <p class="post-meta">
-                  Labor Law <span class="sep">•</span> July 26, 2026
-                </p>
-                <h3 class="post-title">Know Your Rights in Workplace Disputes</h3>
-                <p class="post-excerpt">
-                  A practical guide to claims, documentation, and procedural steps for resolving
-                  workplace conflicts in the Philippines with less stress.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
+            <div class="search-wrap">
+              <div class="search-shell">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input
+                  id="search-input"
+                  class="search-input"
+                  type="search"
+                  placeholder="Search blog posts..."
+                  aria-label="Search blog posts"
+                />
+              </div>
+            </div>
 
-              <article class="post-card" data-category="Cybercrime Law">
-                <p class="post-meta">
-                  Cybercrime Law <span class="sep">•</span> July 18, 2026
-                </p>
-                <h3 class="post-title">Cyber Libel and Responsible Online Conduct</h3>
-                <p class="post-excerpt">
-                  What to do when online content affects reputation, and how evidence handling and timing
-                  can affect legal options.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
+            <div id="category-chips" class="filter-group" aria-label="Blog categories"></div>
 
-              <article class="post-card" data-category="Family Law">
-                <p class="post-meta">
-                  Family Law <span class="sep">•</span> July 11, 2026
-                </p>
-                <h3 class="post-title">Family Property Regimes: What to Confirm Early</h3>
-                <p class="post-excerpt">
-                  A plain-language checklist for couples to organize legal documents and avoid avoidable
-                  conflict when entering or ending a union.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
-
-              <article class="post-card" data-category="Corporate Law">
-                <p class="post-meta">
-                  Corporate Law <span class="sep">•</span> June 29, 2026
-                </p>
-                <h3 class="post-title">Essential Contract Clauses for Small Businesses</h3>
-                <p class="post-excerpt">
-                  A quick look at commercial clauses that reduce risk and prevent disputes before they
-                  become expensive litigation.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
-
-              <article class="post-card" data-category="Environmental Law">
-                <p class="post-meta">
-                  Environmental Law <span class="sep">•</span> June 14, 2026
-                </p>
-                <h3 class="post-title">Environmental Compliance: Where to Start</h3>
-                <p class="post-excerpt">
-                  Initial compliance steps for private projects and operations, including document trails and
-                  practical internal controls.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
-
-              <article class="post-card" data-category="Labor Law">
-                <p class="post-meta">
-                  Labor Law <span class="sep">•</span> June 03, 2026
-                </p>
-                <h3 class="post-title">Overtime, Benefits, and Written Records You Can Keep</h3>
-                <p class="post-excerpt">
-                  Why written records matter most during claims and how to document payroll and hours
-                  defensibly.
-                </p>
-                <a class="read-link" href="#">Read Preview</a>
-              </article>
+            <section id="featured-post" class="featured-post" hidden>
+              <div class="featured-thumb">
+                <img id="featured-image" src="" alt="" loading="lazy" />
+              </div>
+              <div class="featured-content">
+                <span class="featured-kicker">Featured Post</span>
+                <p id="featured-meta" class="post-meta"></p>
+                <h3 id="featured-title" class="featured-title"></h3>
+                <p id="featured-excerpt" class="featured-excerpt"></p>
+                <a id="featured-link" class="featured-link" href="#">Read more &rarr;</a>
+              </div>
             </section>
-          </article>
 
-          <aside class="panel">
-            <h2 class="panel-title">Explore</h2>
-            <ul class="sidebar-list">
-              <li><a href="family-law.html">Family Law Guides</a></li>
-              <li><a href="labor-law.html">Labor Law Updates</a></li>
-              <li><a href="corporate-law.html">Corporate Advisory Notes</a></li>
-              <li><a href="cybercrime-law.html">Cybercrime Alerts</a></li>
-              <li><a href="environmental-law.html">Environmental Law Coverage</a></li>
-              <li><a href="index.html#contact">Contact us to request topic support</a></li>
-            </ul>
-          </aside>
-        </section>
-      </div>
+            <p id="summary" class="summary"></p>
+
+            <section class="post-grid" id="post-grid" aria-live="polite"></section>
+            <div id="empty-state" class="empty" hidden>No posts match your current filter.</div>
+
+            <div class="load-wrap">
+              <button id="load-more" class="load-btn" type="button">Load More Posts</button>
+            </div>
+        </article>
+      </section>
     </main>
 
-    <footer>
-      <div class="container footer-inner">
-        <section class="footer-brand footer-col">
-          <a class="logo-wrap" href="index.html#home" aria-label="Talampas and Associates home">
-            <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" loading="lazy" />
-            <div class="logo-text">
-              <strong>TLFTA</strong>
-            </div>
-          </a>
-          <p>Committed legal advocacy rooted in faith, diligence, and trusted outcomes-focused legal education.</p>
-          <div class="socials" aria-label="Social links">
-            <a href="#" aria-label="Facebook">Fb</a>
-            <a href="#" aria-label="LinkedIn">Ln</a>
-            <a href="#" aria-label="Instagram">Ig</a>
-          </div>
-        </section>
+    <footer id="site-footer"></footer>
 
-        <nav class="footer-col footer-links" aria-label="Footer navigation links">
-          <h4>Explore</h4>
-          <a href="index.html#home">Home</a>
-          <a href="index.html#practice-snap">Work</a>
-          <a href="index.html#team">Our Lawyers</a>
-          <a href="about-us.html">Our Firm</a>
-          <a href="blog.html">Blog</a>
-          <a href="index.html#contact">Contact</a>
-        </nav>
+    <script src="layout-loader.js"></script>
+    <script src="ai-chatbot.js"></script>
 
-        <nav class="footer-col footer-links" aria-label="Practice areas">
-          <h4>Practice Areas</h4>
-          <a href="family-law.html">Family Law</a>
-          <a href="labor-law.html">Labor Law</a>
-          <a href="corporate-law.html">Corporate Law</a>
-          <a href="cybercrime-law.html">Cybercrime Law</a>
-          <a href="environmental-law.html">Environmental Law</a>
-        </nav>
-
-        <section class="footer-col footer-links footer-contact" aria-label="Contact details">
-          <h4>Contact</h4>
-          <a href="https://maps.google.com/?q=Unit%20202%20Philippine%20College%20of%20Surgeons%2C%20992%20EDSA%2C%20Brgy.%20Sto.%20Cristo%20beside%20SM%20North%20EDSA%20Annex%20Bldg%201105%2C%20Quezon%20City%2C%20Philippines" target="_blank" rel="noopener noreferrer">
-            Unit 202 Philippine College of Surgeons, 992 EDSA, Brgy. Sto. Cristo beside SM North EDSA Annex Bldg 1105, Quezon City, Philippines
-          </a>
-          <a href="tel:+63289620069">289620069</a>
-          <a href="mailto:talampasandassociates@yahoo.com">talampasandassociates@yahoo.com</a>
-        </section>
-
-        <div class="footer-bottom">
-          <p>&copy; 2026 The Law Firm of Talampas &amp; Associates. All rights reserved.</p>
-          <p class="disclaimer">
-            The information on this website is for general informational purposes only and does not constitute legal advice. Visiting this website or contacting the firm does not create an attorney-client relationship.
-          </p>
-          <p class="disclaimer">
-            Past results do not guarantee similar outcomes. Every case is unique and results may vary.
-          </p>
-          <p class="disclaimer">
-            The Law Firm of Talampas &amp; Associates is authorized to practice law in the Philippines only.
-          </p>
-        </div>
-      </div>
-    </footer>
-
+    <script src="blog-images.js"></script>
+    <script src="blog-cms.js"></script>
     <script>
       (() => {
-        const chips = Array.from(document.querySelectorAll(".chip"));
-        const posts = Array.from(document.querySelectorAll(".post-card"));
-
-        const activate = (filter) => {
-          chips.forEach((chip) => {
-            const isActive = chip.dataset.category === filter;
-            chip.classList.toggle("active", isActive);
-          });
-
-          posts.forEach((post) => {
-            const isMatch = filter === "All" || post.dataset.category === filter;
-            post.hidden = !isMatch;
-          });
+        const PAGE_SIZE = 24;
+        const state = {
+          activeCategory: "All Posts",
+          searchTerm: "",
+          visibleCount: PAGE_SIZE,
         };
 
-        chips.forEach((chip) => {
-          chip.addEventListener("click", () => activate(chip.dataset.category));
+        const postGrid = document.getElementById("post-grid");
+        const categoryChips = document.getElementById("category-chips");
+        const searchInput = document.getElementById("search-input");
+        const summary = document.getElementById("summary");
+        const loadMoreBtn = document.getElementById("load-more");
+        const emptyState = document.getElementById("empty-state");
+        const featuredSection = document.getElementById("featured-post");
+        const featuredImage = document.getElementById("featured-image");
+        const featuredMeta = document.getElementById("featured-meta");
+        const featuredTitle = document.getElementById("featured-title");
+        const featuredExcerpt = document.getElementById("featured-excerpt");
+        const featuredLink = document.getElementById("featured-link");
+
+        const allPosts = window.TLFTA_BLOG.getPosts();
+        const featuredPost = window.TLFTA_BLOG.getFeaturedPost(allPosts);
+        const nonFeaturedPosts = featuredPost
+          ? allPosts.filter((post) => post.id !== featuredPost.id)
+          : allPosts.slice();
+        const query = new URLSearchParams(window.location.search);
+        const requestedTag = (query.get("tag") || "").trim();
+        const requestedCategory = (query.get("category") || "").trim();
+        const requestedSearch = (query.get("search") || "").trim();
+        const categoryNames = new Set(
+          window.TLFTA_BLOG.getCategoryCounts(allPosts).map((entry) => entry.name)
+        );
+
+        if (requestedTag) {
+          if (categoryNames.has(requestedTag)) {
+            state.activeCategory = requestedTag;
+          }
+        }
+
+        if (requestedCategory && categoryNames.has(requestedCategory)) {
+          state.activeCategory = requestedCategory;
+        }
+
+        if (requestedSearch) {
+          state.searchTerm = requestedSearch.toLowerCase();
+          searchInput.value = requestedSearch;
+        }
+
+        const renderFeatured = () => {
+          if (!featuredPost) {
+            featuredSection.hidden = true;
+            return;
+          }
+          featuredImage.src = featuredPost.imagePath;
+          featuredImage.alt = featuredPost.title;
+          featuredMeta.textContent = `${featuredPost.category} • ${window.TLFTA_BLOG.formatDisplayDate(
+            featuredPost.dateIso
+          )}`;
+          featuredTitle.textContent = featuredPost.title;
+          featuredExcerpt.textContent = featuredPost.excerpt;
+          featuredLink.href = `blog-detail.html?id=${encodeURIComponent(featuredPost.id)}`;
+          featuredSection.hidden = false;
+        };
+
+        const filteredPosts = () =>
+          nonFeaturedPosts.filter((post) => {
+            const categoryMatch =
+              state.activeCategory === "All Posts" || post.category === state.activeCategory;
+            const searchBlob =
+              `${post.title} ${post.excerpt} ${post.category} ${post.tags.join(" ")}`.toLowerCase();
+            const searchMatch = !state.searchTerm || searchBlob.includes(state.searchTerm);
+            return categoryMatch && searchMatch;
+          });
+
+        const renderCategoryChips = () => {
+          const chips = window.TLFTA_BLOG.getCategoryCounts(allPosts)
+            .map(
+              (entry) =>
+                `<button class="chip ${entry.name === state.activeCategory ? "active" : ""}" type="button" data-category="${entry.name}">${entry.name} ${entry.count}</button>`
+            )
+            .join("");
+          categoryChips.innerHTML = chips;
+        };
+
+        const renderPosts = () => {
+          const filtered = filteredPosts();
+          const visible = filtered.slice(0, state.visibleCount);
+
+          summary.textContent = `Showing ${visible.length} of ${filtered.length} post${
+            filtered.length === 1 ? "" : "s"
+          }${featuredPost ? " (plus 1 featured post)." : "."}`;
+
+          if (!visible.length) {
+            postGrid.innerHTML = "";
+            emptyState.hidden = false;
+          } else {
+            emptyState.hidden = true;
+            postGrid.innerHTML = visible
+              .map(
+                (post) => `
+                  <article class="post-card">
+                    <div class="post-thumb">
+                      <img src="${post.imagePath}" alt="${post.title}" loading="lazy" />
+                    </div>
+                    <div class="post-content">
+                      <p class="post-meta">${post.category} <span>&bull;</span> ${window.TLFTA_BLOG.formatDisplayDate(
+                        post.dateIso
+                      )}</p>
+                      <h3 class="post-title">${post.title}</h3>
+                      <p class="post-excerpt">${post.excerpt}</p>
+                      <div class="post-tags">${post.tags
+                        .slice(0, 3)
+                        .map((tag) => `<span class="post-tag">${tag}</span>`)
+                        .join("")}</div>
+                      <a class="read-link" href="blog-detail.html?id=${encodeURIComponent(
+                        post.id
+                      )}">Read Full Post</a>
+                    </div>
+                  </article>
+                `
+              )
+              .join("");
+          }
+
+          loadMoreBtn.hidden = state.visibleCount >= filtered.length;
+        };
+
+        categoryChips.addEventListener("click", (event) => {
+          const target = event.target.closest("[data-category]");
+          if (!target) return;
+          state.activeCategory = target.dataset.category;
+          state.visibleCount = PAGE_SIZE;
+          renderCategoryChips();
+          renderPosts();
         });
+
+        loadMoreBtn.addEventListener("click", () => {
+          state.visibleCount += PAGE_SIZE;
+          renderPosts();
+        });
+
+        searchInput.addEventListener("input", () => {
+          state.searchTerm = searchInput.value.trim().toLowerCase();
+          state.visibleCount = PAGE_SIZE;
+          renderPosts();
+        });
+
+        renderFeatured();
+        renderCategoryChips();
+        renderPosts();
       })();
     </script>
   </body>

@@ -467,6 +467,7 @@
       }
 
       .practice-snap-card {
+        display: block;
         position: relative;
         overflow: hidden;
         border-radius: 28px;
@@ -475,11 +476,17 @@
         background-position: center;
         background-repeat: no-repeat;
         min-height: 0;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
       }
 
       .practice-snap-card:hover {
-        transform: none;
-        transition: none;
+        transform: translateY(-2px);
+        box-shadow: 0 14px 26px rgba(27, 9, 22, 0.2);
+      }
+
+      .practice-snap-card:focus-visible {
+        outline: 3px solid rgba(239, 108, 17, 0.65);
+        outline-offset: 3px;
       }
 
       .practice-snap-card:nth-child(1) {
@@ -566,6 +573,11 @@
         font-size: 1.125rem;
         font-weight: 700;
         line-height: 1;
+        transition: transform 0.22s ease;
+      }
+
+      .practice-snap-card:hover .practice-snap-arrow {
+        transform: translateX(2px);
       }
 
       .team-showcase {
@@ -813,6 +825,115 @@
       .about,
       .grain {
         background: var(--surface);
+      }
+
+      .about {
+        background:
+          radial-gradient(circle at 88% 12%, rgba(201, 168, 76, 0.16) 0%, rgba(201, 168, 76, 0) 42%),
+          var(--surface);
+      }
+
+      .about-shell {
+        margin-top: 0.35rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+        gap: 1rem;
+      }
+
+      .about-main,
+      .about-side {
+        background: var(--surface-card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.35rem 1.4rem;
+      }
+
+      .about-main {
+        background: linear-gradient(180deg, #fffdfa 0%, #ffffff 100%);
+        box-shadow: 0 16px 34px rgba(57, 13, 47, 0.08);
+      }
+
+      .about-kicker {
+        margin: 0;
+        color: #c9a84c;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .about-main .section-title {
+        margin-bottom: 0.8rem;
+      }
+
+      .about-main .section-copy {
+        max-width: 58ch;
+      }
+
+      .about-actions {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .about-link {
+        color: #4a1040;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .about-link:hover {
+        text-decoration: underline;
+      }
+
+      .about-side h3 {
+        margin: 0;
+        color: #2f0d28;
+        font-family: "Domine", serif;
+        font-size: 1.3rem;
+        line-height: 1.25;
+      }
+
+      .about-side p {
+        margin: 0.55rem 0 0;
+        color: #555;
+      }
+
+      .about-timeline {
+        list-style: none;
+        margin: 1rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .about-timeline li {
+        position: relative;
+        padding-left: 1rem;
+        color: #484848;
+      }
+
+      .about-timeline li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.47rem;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #c9a84c;
+        box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.16);
+      }
+
+      .about-note {
+        margin-top: 1rem;
+        padding: 0.75rem 0.85rem;
+        border-left: 3px solid #c9a84c;
+        background: #faf6ee;
+        color: #4a3b34;
+        font-size: 0.92rem;
       }
 
       .practice-grid,
@@ -1066,7 +1187,8 @@
       }
 
       input,
-      textarea {
+      textarea,
+      select {
         width: 100%;
         border: 1px solid #d4d4d4;
         border-radius: 8px;
@@ -1096,6 +1218,375 @@
 
       .form-message.error {
         color: #b42318;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      .consult-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1600;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(18, 12, 20, 0.72);
+      }
+
+      .consult-modal-backdrop.open {
+        display: flex;
+      }
+
+      .consult-modal {
+        width: min(980px, 100%);
+        max-height: 92vh;
+        overflow: auto;
+        background: #faf8f5;
+        border: 4px solid #2f2f33;
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+        padding: 1.2rem;
+      }
+
+      .consult-modal-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .consult-modal-head h2 {
+        margin: 0;
+        color: #2f0d28;
+        font-size: clamp(1.55rem, 2vw, 2rem);
+      }
+
+      .consult-modal-head p {
+        margin: 0.3rem 0 0;
+        color: #4e4e4e;
+        font-size: 0.94rem;
+      }
+
+      .consult-modal-close {
+        border: none;
+        background: transparent;
+        color: #2f2f33;
+        font-size: 1.6rem;
+        line-height: 1;
+        padding: 0.1rem 0.3rem;
+        cursor: pointer;
+      }
+
+      .consult-modal-meta {
+        margin: 0.95rem 0 1rem;
+        padding: 0.7rem 0;
+        border-top: 3px solid #ef6c11;
+        border-bottom: 3px solid #ef6c11;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .consult-modal-meta strong {
+        display: block;
+        margin-bottom: 0.2rem;
+        color: #2f0d28;
+        font-size: 0.92rem;
+      }
+
+      .consult-modal-meta span {
+        color: #333333;
+        font-size: 0.9rem;
+      }
+
+      .consult-modal-form .field {
+        margin-bottom: 0;
+      }
+
+      .consult-modal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .consult-modal-grid .full {
+        grid-column: 1 / -1;
+      }
+
+      .consult-modal-actions {
+        margin-top: 0.9rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .consult-modal-note {
+        margin: 0.6rem 0 0;
+        text-align: right;
+        color: #3f3f3f;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 760px) {
+        .consult-modal-meta,
+        .consult-modal-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .ai-chatbot {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 1200;
+        width: min(400px, calc(100vw - 24px));
+        display: grid;
+        justify-items: end;
+        gap: 0.65rem;
+      }
+
+      .ai-chatbot.open {
+        gap: 0;
+      }
+
+      .ai-chat-toggle {
+        width: 58px;
+        height: 58px;
+        border: 1px solid #c9a84c;
+        border-radius: 999px;
+        background: #390d2f;
+        color: #ffffff;
+        padding: 0;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 12px 22px rgba(57, 13, 47, 0.32);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .ai-chat-toggle svg {
+        width: 27px;
+        height: 27px;
+        fill: currentColor;
+        transition: transform 0.2s ease;
+      }
+
+      .ai-chat-toggle:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 16px 28px rgba(57, 13, 47, 0.42);
+      }
+
+      .ai-chat-toggle:hover svg {
+        transform: scale(1.06);
+      }
+
+      .ai-chat-toggle:focus-visible {
+        outline: 2px solid #4a1040;
+        outline-offset: 2px;
+      }
+
+      .ai-chat-panel {
+        width: 100%;
+        margin: 0;
+        padding: 0 !important;
+        max-height: min(70vh, 560px);
+        background: #faf8f5;
+        border: 1px solid #c9a84c;
+        border-radius: 16px;
+        box-shadow: 0 28px 54px rgba(57, 13, 47, 0.24);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .ai-chatbot.open .ai-chat-panel {
+        display: flex;
+        animation: aiChatPanelIn 0.2s ease-out;
+      }
+
+      .ai-chatbot.open .ai-chat-toggle {
+        display: none;
+      }
+
+      @keyframes aiChatPanelIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .ai-chat-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.85rem;
+        align-items: flex-start;
+        padding: 0.8rem 1rem 0.68rem;
+        background: linear-gradient(160deg, #390d2f 0%, #4a1040 100%);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.55);
+      }
+
+      .ai-chat-head h3 {
+        margin: 0;
+        font-size: 1.08rem;
+        color: #faf8f5;
+      }
+
+      .ai-chat-head p {
+        margin: 0.28rem 0 0;
+        color: rgba(250, 248, 245, 0.85);
+        font-size: 0.79rem;
+        line-height: 1.35;
+      }
+
+      .ai-chat-close {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(201, 168, 76, 0.65);
+        border-radius: 999px;
+        background: rgba(250, 248, 245, 0.14);
+        color: #faf8f5;
+        font-size: 1.05rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0;
+        display: grid;
+        place-items: center;
+      }
+
+      .ai-chat-model {
+        padding: 0.5rem 1rem;
+        font-size: 0.72rem;
+        color: #390d2f;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.55);
+        background: #f4ecdf;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .ai-chat-messages {
+        padding: 0.7rem 0.9rem;
+        background: radial-gradient(circle at top right, #fff7e8 0%, #faf8f5 62%, #f7f2eb 100%);
+        overflow-y: auto;
+        flex: 1 1 auto;
+        display: grid;
+        gap: 0.55rem;
+        align-content: start;
+      }
+
+      .ai-chat-messages::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .ai-chat-messages::-webkit-scrollbar-thumb {
+        background: #ceb680;
+        border-radius: 999px;
+      }
+
+      .ai-chat-bubble {
+        max-width: 89%;
+        border-radius: 14px;
+        padding: 0.68rem 0.78rem;
+        font-size: 0.9rem;
+        line-height: 1.42;
+        white-space: pre-wrap;
+      }
+
+      .ai-chat-bubble.user {
+        margin-left: auto;
+        background: linear-gradient(140deg, #4d1543 0%, #390d2f 100%);
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(57, 13, 47, 0.2);
+      }
+
+      .ai-chat-bubble.assistant {
+        margin-right: auto;
+        background: #f8efe0;
+        border: 1px solid #dcc28c;
+        color: #311027;
+      }
+
+      .ai-chat-bubble strong {
+        font-weight: 700;
+      }
+
+      .ai-chat-bubble code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        background: rgba(57, 13, 47, 0.08);
+        padding: 0.1rem 0.3rem;
+        border-radius: 5px;
+        font-size: 0.84em;
+      }
+
+      .ai-chat-form {
+        border-top: 1px solid rgba(201, 168, 76, 0.55);
+        padding: 0.6rem 0.85rem 0.55rem;
+        background: #faf8f5;
+      }
+
+      .ai-chat-input {
+        width: 100%;
+        border: 1px solid #ccb072;
+        border-radius: 12px;
+        min-height: 72px;
+        max-height: 132px;
+        padding: 0.68rem 0.72rem;
+        font: inherit;
+        font-size: 0.9rem;
+        line-height: 1.42;
+        resize: vertical;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .ai-chat-input:focus {
+        outline: none;
+        border-color: #390d2f;
+        box-shadow: 0 0 0 3px rgba(57, 13, 47, 0.16);
+      }
+
+      .ai-chat-actions {
+        margin-top: 0.55rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.55rem;
+      }
+
+      .ai-chat-actions button {
+        border: none;
+        border-radius: 999px;
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.52rem 0.92rem;
+        transition: transform 0.14s ease, box-shadow 0.14s ease;
+      }
+
+      .ai-chat-actions button:hover {
+        transform: translateY(-1px);
+      }
+
+      .ai-chat-send {
+        background: linear-gradient(135deg, #ef6c11 0%, #d95b05 100%);
+        color: #ffffff;
+        box-shadow: 0 6px 14px rgba(239, 108, 17, 0.32);
+      }
+
+      .ai-chat-reset {
+        background: #e9ddbf;
+        color: #390d2f;
+      }
+
+      .ai-chat-note {
+        margin: 0.5rem 0 0;
+        color: #5a4d45;
+        font-size: 0.72rem;
+        line-height: 1.35;
       }
 
       footer {
@@ -1295,6 +1786,15 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .about-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .about-main,
+        .about-side {
+          padding: 1.1rem 1.15rem;
+        }
+
         .team-showcase .container {
           padding: 32px;
         }
@@ -1466,6 +1966,20 @@
           grid-template-columns: 1fr;
         }
 
+        .about-main,
+        .about-side {
+          border-radius: 14px;
+        }
+
+        .about-actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .about-side h3 {
+          font-size: 1.16rem;
+        }
+
         .team-showcase {
           padding: 14px;
         }
@@ -1523,30 +2037,237 @@
         .footer-contact {
           width: 100%;
         }
+
+        .ai-chatbot {
+          right: 10px;
+          bottom: 10px;
+          width: calc(100vw - 20px);
+        }
+
+        .ai-chat-toggle {
+          width: 52px;
+          height: 52px;
+        }
+
+        .ai-chat-toggle svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .ai-chat-panel {
+          max-height: 66vh;
+          border-radius: 14px;
+        }
+
+        .ai-chat-head {
+          padding: 0.85rem 0.88rem 0.72rem;
+        }
+
+        .ai-chat-head h3 {
+          font-size: 1rem;
+        }
+
+        .ai-chat-messages,
+        .ai-chat-form {
+          padding-left: 0.88rem;
+          padding-right: 0.88rem;
+        }
+
+        .ai-chat-input {
+          min-height: 66px;
+          font-size: 0.88rem;
+        }
+      }
+      .grain-home {
+        background: linear-gradient(180deg, #faf8f5 0%, #f6eee6 100%);
+        padding: 62px 18px;
+      }
+
+      .grain-home .container {
+        width: min(1200px, 94vw);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2px;
+      }
+
+      .grain-home-head {
+        text-align: center;
+        margin-bottom: 1.55rem;
+      }
+
+      .grain-home-head p {
+        margin: 0 0 0.4rem;
+        color: #5a4b53;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .grain-home-head h2 {
+        margin: 0;
+        color: var(--bg-primary);
+        font-size: clamp(2rem, 3.2vw, 2.9rem);
+        letter-spacing: 0.01em;
+      }
+
+      .grain-home-summary {
+        margin: 0.5rem auto 0;
+        color: #5e5554;
+        font-size: 0.92rem;
+        max-width: 68ch;
+      }
+
+      .grain-carousel {
+        margin-top: 1.1rem;
+      }
+
+      .grain-viewport {
+        overflow: hidden;
+      }
+
+      .grain-track {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.35s ease;
+        will-change: transform;
+      }
+
+      .grain-home-card {
+        display: block;
+        color: inherit;
+        border: 1px solid #decdd8;
+        border-radius: 14px;
+        background: #ffffff;
+        position: relative;
+        box-shadow: 0 10px 24px rgba(57, 13, 47, 0.08);
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .grain-home-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 30px rgba(57, 13, 47, 0.12);
+      }
+
+      .grain-home-image {
+        width: 100%;
+        height: 235px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .grain-home-accent {
+        height: 6px;
+        background: #ef6c11;
+      }
+
+      .grain-home-body {
+        padding: 14px 18px 17px;
+      }
+
+      .grain-home-title {
+        margin: 0;
+        color: var(--bg-primary);
+        font-size: 1.28rem;
+        line-height: 1.24;
+      }
+
+      .grain-home-date {
+        margin-top: 0.55rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6e5d6d;
+        font-weight: 600;
+      }
+
+      .grain-home-meta {
+        margin-top: 0.72rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .grain-home-tag {
+        font-size: 0.76rem;
+        color: #43284d;
+        background: #f4edf2;
+        border: 1px solid #e3cfdd;
+        border-radius: 999px;
+        padding: 0.2rem 0.55rem;
+      }
+
+      .grain-home-controls {
+        margin-top: 1.12rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .grain-arrow {
+        border: 1px solid #d0b1c4;
+        padding: 0.42rem 0.85rem;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--bg-primary);
+        font: inherit;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.78rem;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }
+
+      .grain-arrow:hover {
+        background: var(--bg-primary);
+        color: #fff;
+      }
+
+      .grain-arrow:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      .grain-home-link {
+        color: var(--bg-primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.78rem;
+        padding: 0.42rem 0.92rem;
+        border-radius: 999px;
+        border: 1px solid #c9a84c;
+        background: #fff8ea;
+      }
+
+      .grain-home-link:hover {
+        background: #c9a84c;
+        color: #2f1f04;
+      }
+
+      @media (max-width: 960px) {
+        .grain-home-title {
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .grain-home {
+          padding: 14px;
+        }
+
+        .grain-home-title {
+          font-size: 1.1rem;
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container nav">
-        <a class="logo-wrap" href="#home" aria-label="Talampas and Associates home">
-          <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" />
-          <div class="logo-text">
-            <strong>TalampasLaw</strong>
-          </div>
-        </a>
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#practice-snap">Work</a>
-          <a href="#team">Our Lawyers</a>
-          <a href="about-us.html">Our Firm</a>
-          <a href="careers.html">Careers</a>
-          <a href="blog.html">Blog</a>
-        </nav>
-        <div class="nav-action">
-          <a class="nav-consult-btn" href="#contact">Contact Us</a>
-        </div>
-      </div>
-    </header>
+    <header id="site-nav"></header>
 
     <main id="home">
       <section class="hero">
@@ -1567,7 +2288,7 @@
                 Guided by faith and nearly 2 decades of experience, we fight for your rights with professionalism,
                 integrity, and excellence.
               </p>
-              <a class="btn btn-primary" href="#contact">Book a Consultation</a>
+              <a class="btn btn-primary" href="#contact" data-open-consult-modal>Book a Consultation</a>
             </div>
           </div>
         </div>
@@ -1586,54 +2307,54 @@
                 From family disputes to corporate cases &mdash; we handle the legal battles that shape lives.
               </p>
             </div>
-            <a class="practice-snap-cta" href="#contact">Book a Consultation</a>
+            <a class="practice-snap-cta" href="#contact" data-open-consult-modal>Book a Consultation</a>
           </div>
 
           <div class="practice-snap-grid">
-            <article class="practice-snap-card">
+            <a class="practice-snap-card" href="blog.html?tag=Family%20Law#posts" aria-label="View Family Law posts">
               <span class="practice-badge">Family Law</span>
               <div class="practice-snap-meta">
                 <h3>Protecting Families</h3>
                 <p>Annulment, custody, and support matters</p>
               </div>
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
-            </article>
+            </a>
 
-            <article class="practice-snap-card">
+            <a class="practice-snap-card" href="blog.html?tag=Corporate%20Law#posts" aria-label="View Corporate Law posts">
               <span class="practice-badge">Corporate Law</span>
               <div class="practice-snap-meta">
                 <h3>Building Strong Businesses</h3>
                 <p>Contracts, compliance, and corporate counsel</p>
               </div>
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
-            </article>
+            </a>
 
-            <article class="practice-snap-card">
+            <a class="practice-snap-card" href="blog.html?tag=Labor%20Law#posts" aria-label="View Labor Law posts">
               <span class="practice-badge">Labor Law</span>
               <div class="practice-snap-meta">
                 <h3>Defending Workers' Rights</h3>
                 <p>Workplace disputes and labor standards</p>
               </div>
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
-            </article>
+            </a>
 
-            <article class="practice-snap-card">
+            <a class="practice-snap-card" href="blog.html?tag=Cybercrime%20Law#posts" aria-label="View Cybercrime Law posts">
               <span class="practice-badge">Cybercrime Law</span>
               <div class="practice-snap-meta">
                 <h3>Justice in the Digital Age</h3>
                 <p>Cyber libel, fraud, and data protection</p>
               </div>
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
-            </article>
+            </a>
 
-            <article class="practice-snap-card">
+            <a class="practice-snap-card" href="blog.html?tag=Environmental%20Law#posts" aria-label="View Environmental Law posts">
               <span class="practice-badge">Environmental Law</span>
               <div class="practice-snap-meta">
                 <h3>Protecting the Planet</h3>
                 <p>Regulatory compliance and environmental cases</p>
               </div>
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
-            </article>
+            </a>
           </div>
         </div>
       </section>
@@ -1735,39 +2456,60 @@
         </div>
       </section>
 
-      <section id="about" class="about">
+      <section id="grain-home" class="grain-home" aria-label="A Grain of Law">
         <div class="container">
-          <h2 class="section-title">About Us</h2>
-          <p class="section-copy">
-            The Law Firm of Talampas &amp; Associates is a Philippine-based practice built on principled
-            service and disciplined advocacy. We aim to protect our clients' rights through strategic,
-            transparent, and results-driven legal work while upholding the highest standards of professional conduct.
-          </p>
-          <a class="btn btn-primary" href="about-us.html" style="margin-top: 1rem;">Read Our Firm History</a>
+          <div class="grain-home-head">
+            <div>
+              <h2>Legal News &amp; Articles From Our Lawyers</h2>
+            </div>
+          </div>
+
+          <div class="grain-carousel">
+            <div class="grain-viewport">
+              <div id="grain-track" class="grain-track"></div>
+            </div>
+          </div>
+
+          <div class="grain-home-controls">
+            <button id="grain-prev" class="grain-arrow" type="button" aria-label="Previous posts">Prev</button>
+            <button id="grain-next" class="grain-arrow" type="button" aria-label="Next posts">Next</button>
+            <a class="grain-home-link" href="blog.html">See All Posts...</a>
+          </div>
         </div>
       </section>
 
-      <section id="grain" class="grain">
+      <section id="about" class="about">
         <div class="container">
-          <h2 class="section-title">A Grain of Law</h2>
-          <p class="section-copy">Legal education insights to keep clients and communities informed.</p>
-
-          <div class="grain-grid">
-            <article class="grain-card">
-              <h3>Know Your Rights in Workplace Disputes</h3>
-              <p>A quick overview of employee remedies and key procedures under Philippine labor law.</p>
-              <a href="#">Read Preview</a>
+          <div class="about-shell">
+            <article class="about-main">
+              <p class="about-kicker">Our Firm</p>
+              <h2 class="section-title">About Us</h2>
+              <p class="section-copy">
+                The Law Firm of Talampas &amp; Associates is a Philippine-based practice built on principled
+                service and disciplined advocacy. We aim to protect our clients' rights through strategic,
+                transparent, and results-driven legal work while upholding the highest standards of professional conduct.
+              </p>
+              <div class="about-actions">
+                <a class="btn btn-primary" href="about-us.html">Read Our Firm History</a>
+                <a class="about-link" href="#team">Meet Our Lawyers</a>
+              </div>
             </article>
-            <article class="grain-card">
-              <h3>Cyber Libel and Responsible Online Conduct</h3>
-              <p>Understanding legal exposure and practical safeguards in digital communication.</p>
-              <a href="#">Read Preview</a>
-            </article>
-            <article class="grain-card">
-              <h3>Family Property Rules in Common Situations</h3>
-              <p>Essential guidance on marital property regimes and proper legal documentation.</p>
-              <a href="#">Read Preview</a>
-            </article>
+            <aside class="about-side" aria-label="Firm history highlights">
+              <h3>Built Through Years of Principled Advocacy</h3>
+              <p>
+                From courtroom litigation to multi-practice advisory, the firm grew by solving high-stakes legal
+                problems with discipline and clarity.
+              </p>
+              <ul class="about-timeline">
+                <li>Started as a focused litigation practice serving families and small businesses.</li>
+                <li>Expanded into labor, corporate, cybercrime, and environmental matters.</li>
+                <li>Developed a modern, client-centered service model without losing courtroom rigor.</li>
+              </ul>
+              <p class="about-note">
+                Every case is guided by the same standard that shaped our history: prepared advocacy, transparent
+                counsel, and practical outcomes.
+              </p>
+            </aside>
           </div>
         </div>
       </section>
@@ -1816,60 +2558,230 @@
       </section>
     </main>
 
-    <footer>
-      <div class="container footer-inner">
-        <section class="footer-brand footer-col">
-          <a class="logo-wrap" href="#home" aria-label="Talampas and Associates home">
-            <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" loading="lazy" />
-            <div class="logo-text">
-              <strong>TLFTA</strong>
-            </div>
-          </a>
-          <p>Committed legal advocacy rooted in faith, diligence, and proven results for individuals and businesses.</p>
-          <div class="socials" aria-label="Social links">
-            <a href="#" aria-label="Facebook">Fb</a>
-            <a href="#" aria-label="LinkedIn">Ln</a>
-            <a href="#" aria-label="Instagram">Ig</a>
+    <section
+      id="consultation-modal"
+      class="consult-modal-backdrop"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consultation-modal-title"
+    >
+      <div class="consult-modal">
+        <div class="consult-modal-head">
+          <div>
+            <h2 id="consultation-modal-title">Contact Our Team</h2>
+            <p>Complete the form below and we will follow up with your consultation request.</p>
           </div>
-        </section>
-        <nav class="footer-col footer-links" aria-label="Footer navigation links">
-          <h4>Explore</h4>
-          <a href="#home">Home</a>
-          <a href="#practice-snap">Work</a>
-          <a href="#team">Our Lawyers</a>
-          <a href="about-us.html">Our Firm</a>
-          <a href="careers.html">Careers</a>
-          <a href="blog.html">Blog</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <nav class="footer-col footer-links" aria-label="Practice areas">
-          <h4>Practice Areas</h4>
-          <a href="family-law.html">Family Law</a>
-          <a href="labor-law.html">Labor Law</a>
-          <a href="corporate-law.html">Corporate Law</a>
-          <a href="cybercrime-law.html">Cybercrime Law</a>
-          <a href="environmental-law.html">Environmental Law</a>
-        </nav>
-        <section class="footer-col footer-links footer-contact" aria-label="Contact details">
-          <h4>Contact</h4>
-          <a href="https://maps.google.com/?q=Talampas%20Building%20Makati%20City%2C%20Philippines" target="_blank" rel="noopener noreferrer">
-            Unit 12, 5th Floor, Talampas Building<br />Makati City, Philippines
-          </a>
-          <a href="tel:+639171234567">+63 917 123 4567</a>
-          <a href="mailto:consult@talampaslaw.ph">consult@talampaslaw.ph</a>
-          <a href="#contact">Get a consultation</a>
-          <a href="admin.html">Admin Login</a>
-        </section>
-        <div class="footer-bottom">
-          <p>&copy; 2026 The Law Firm of Talampas &amp; Associates. All rights reserved.</p>
-          <div class="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Accessibility</a>
+          <button type="button" id="consultation-modal-close" class="consult-modal-close" aria-label="Close consultation form">
+            &times;
+          </button>
+        </div>
+        <div class="consult-modal-meta">
+          <div>
+            <strong>Phone</strong>
+            <span>+63 917 123 4567</span>
+          </div>
+          <div>
+            <strong>Email</strong>
+            <span>consult@talampaslaw.ph</span>
+          </div>
+          <div>
+            <strong>Office Hours</strong>
+            <span>Monday to Friday, 9:00 AM to 6:00 PM</span>
           </div>
         </div>
+        <form id="consultation-modal-form" class="consult-modal-form">
+          <div class="consult-modal-grid">
+            <label class="field">
+              Name
+              <input type="text" name="name" placeholder="Your full name" required />
+            </label>
+            <label class="field">
+              Email
+              <input type="email" name="email" placeholder="name@example.com" required />
+            </label>
+            <label class="field">
+              Phone Number
+              <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" required />
+            </label>
+            <label class="field">
+              Name of Workplace
+              <input type="text" name="workplace" placeholder="Company or organization" />
+            </label>
+            <label class="field">
+              Employer or Employee
+              <select name="partyType" required>
+                <option value="">Please select...</option>
+                <option value="Employer">Employer</option>
+                <option value="Employee">Employee</option>
+              </select>
+            </label>
+            <label class="field">
+              Location
+              <input type="text" name="location" placeholder="City / Province" required />
+            </label>
+            <label class="field full">
+              I'd like to talk to you about...
+              <textarea name="message" placeholder="Tell us briefly about your legal concern." required></textarea>
+            </label>
+          </div>
+          <div class="consult-modal-actions">
+            <button class="btn btn-primary submit" type="submit">Send</button>
+          </div>
+          <p id="consultation-modal-message" class="form-message" aria-live="polite"></p>
+          <p class="consult-modal-note">Initial 10-minute phone call is free.</p>
+        </form>
       </div>
-    </footer>
+    </section>
+
+    <div class="ai-chatbot" id="ai-chatbot">
+      <button
+        type="button"
+        id="ai-chat-toggle"
+        class="ai-chat-toggle"
+        aria-expanded="false"
+        aria-controls="ai-chat-panel"
+        aria-label="Open Lex chat"
+      >
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-5.2L9 22v-4H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Zm2.6 9a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7Zm4.4 0a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7Zm4.4 0a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7Z"/>
+        </svg>
+      </button>
+      <section class="ai-chat-panel" id="ai-chat-panel" hidden>
+        <div class="ai-chat-head">
+          <div>
+            <h3>Hi, I'm Lex! Ask me a question.</h3>
+            <p>Ask about services, lawyers, and office details.</p>
+          </div>
+          <button class="ai-chat-close" id="ai-chat-close" type="button" aria-label="Close chatbot">×</button>
+        </div>
+        <div class="ai-chat-model" id="ai-chat-model">Connecting to OpenRouter free model...</div>
+        <div class="ai-chat-messages" id="ai-chat-messages" aria-live="polite"></div>
+        <form id="ai-chat-form" class="ai-chat-form">
+          <label for="ai-chat-input" style="display: none">Message</label>
+          <textarea
+            id="ai-chat-input"
+            class="ai-chat-input"
+            placeholder="Ask about our lawyers, services, or consultation process..."
+            required
+          ></textarea>
+          <div class="ai-chat-actions">
+            <button type="button" id="ai-chat-reset" class="ai-chat-reset">Reset</button>
+            <button type="submit" id="ai-chat-send" class="ai-chat-send">Send</button>
+          </div>
+          <p class="ai-chat-note">
+            The information on this website is for general informational purposes only and does not constitute legal advice.
+          </p>
+        </form>
+      </section>
+    </div>
+
+    <footer id="site-footer"></footer>
+
+    <script src="layout-loader.js"></script>
+    <script src="ai-chatbot.js"></script>
+    <script src="blog-images.js"></script>
+    <script src="blog-cms.js"></script>
+    <script>
+      (() => {
+        const track = document.getElementById("grain-track");
+        const prevButton = document.getElementById("grain-prev");
+        const nextButton = document.getElementById("grain-next");
+        const viewport = document.querySelector(".grain-viewport");
+        if (!track || !prevButton || !nextButton || !viewport || !window.TLFTA_BLOG) return;
+
+        const posts = window.TLFTA_BLOG.getPosts().slice(0, 12);
+        if (!posts.length) return;
+
+        track.innerHTML = posts
+          .map(
+            (post) => `
+              <a class="grain-home-card" href="blog-detail.html?id=${encodeURIComponent(post.id)}">
+                <img class="grain-home-image" src="${post.imagePath}" alt="${post.title}" loading="lazy" />
+                <div class="grain-home-accent" aria-hidden="true"></div>
+                <div class="grain-home-body">
+                  <h3 class="grain-home-title">${post.title}</h3>
+                  <time class="grain-home-date" datetime="${post.dateIso}">${window.TLFTA_BLOG.formatDisplayDate(post.dateIso)}</time>
+                  <div class="grain-home-meta">${post.tags
+                    .slice(0, 2)
+                    .map((tag) => `<span class="grain-home-tag">${tag}</span>`)
+                    .join("")}</div>
+                </div>
+              </a>
+            `
+          )
+          .join("");
+
+        let currentIndex = 0;
+        let perView = 3;
+        let autoRotateId = null;
+
+        const getPerView = () => {
+          if (window.innerWidth <= 700) return 1;
+          if (window.innerWidth <= 1100) return 2;
+          return 3;
+        };
+
+        const maxIndex = () => Math.max(0, posts.length - perView);
+
+        const applyCardWidths = () => {
+          const basis = `calc((100% - ${(perView - 1) * 16}px) / ${perView})`;
+          Array.from(track.children).forEach((card) => {
+            card.style.flex = `0 0 ${basis}`;
+          });
+        };
+
+        const renderPosition = () => {
+          const cards = Array.from(track.children);
+          const target = cards[currentIndex];
+          const offset = target ? target.offsetLeft : 0;
+          track.style.transform = `translateX(-${offset}px)`;
+          prevButton.disabled = currentIndex <= 0;
+          nextButton.disabled = currentIndex >= maxIndex();
+        };
+
+        const rerender = () => {
+          perView = getPerView();
+          if (currentIndex > maxIndex()) currentIndex = maxIndex();
+          applyCardWidths();
+          renderPosition();
+        };
+
+        const stopAutoRotate = () => {
+          if (!autoRotateId) return;
+          clearInterval(autoRotateId);
+          autoRotateId = null;
+        };
+
+        const startAutoRotate = () => {
+          stopAutoRotate();
+          if (posts.length <= perView) return;
+          autoRotateId = window.setInterval(() => {
+            currentIndex = currentIndex >= maxIndex() ? 0 : currentIndex + 1;
+            renderPosition();
+          }, 5500);
+        };
+
+        prevButton.addEventListener("click", () => {
+          currentIndex = Math.max(0, currentIndex - 1);
+          renderPosition();
+          startAutoRotate();
+        });
+
+        nextButton.addEventListener("click", () => {
+          currentIndex = Math.min(maxIndex(), currentIndex + 1);
+          renderPosition();
+          startAutoRotate();
+        });
+
+        viewport.addEventListener("mouseenter", stopAutoRotate);
+        viewport.addEventListener("mouseleave", startAutoRotate);
+        window.addEventListener("resize", rerender);
+
+        rerender();
+        startAutoRotate();
+      })();
+    </script>
     <script>
       (() => {
         const slides = Array.from(document.querySelectorAll("#team .featured-slide"));
@@ -1937,53 +2849,111 @@
     </script>
     <script>
       (() => {
-        const form = document.getElementById("inquiry-form");
-        const messageEl = document.getElementById("inquiry-form-message");
-        if (!form || !messageEl) return;
-
         const STORAGE_KEY = "tlfta_inquiries";
+        const modalBackdrop = document.getElementById("consultation-modal");
+        const modalCloseButton = document.getElementById("consultation-modal-close");
+        const modalFirstField = document.querySelector("#consultation-modal-form input[name='name']");
+        let lastFocusedElement = null;
 
-        const setMessage = (message, type) => {
-          messageEl.textContent = message;
-          messageEl.className = `form-message ${type}`;
+        const openModal = () => {
+          if (!modalBackdrop) return;
+          lastFocusedElement = document.activeElement;
+          modalBackdrop.classList.add("open");
+          modalBackdrop.setAttribute("aria-hidden", "false");
+          document.body.classList.add("modal-open");
+          modalFirstField?.focus();
         };
 
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          setMessage("", "");
-
-          const formData = new FormData(form);
-          const name = String(formData.get("name") || "").trim();
-          const email = String(formData.get("email") || "").trim();
-          const phone = String(formData.get("phone") || "").trim();
-          const message = String(formData.get("message") || "").trim();
-
-          if (!name || !email || !phone || !message) {
-            setMessage("Please complete all fields before submitting.", "error");
-            return;
+        const closeModal = () => {
+          if (!modalBackdrop) return;
+          modalBackdrop.classList.remove("open");
+          modalBackdrop.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("modal-open");
+          if (lastFocusedElement instanceof HTMLElement) {
+            lastFocusedElement.focus();
           }
+        };
 
-          const inquiry = {
-            id: `inq_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-            createdAt: new Date().toISOString(),
-            name,
-            email,
-            phone,
-            message
-          };
+        document.addEventListener("click", (event) => {
+          const trigger = event.target.closest("[data-open-consult-modal]");
+          if (!trigger) return;
+          event.preventDefault();
+          openModal();
+        });
 
-          try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            const inquiries = raw ? JSON.parse(raw) : [];
-            const nextInquiries = Array.isArray(inquiries) ? [inquiry, ...inquiries] : [inquiry];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(nextInquiries));
-
-            form.reset();
-            setMessage("Inquiry submitted successfully. Our team will contact you soon.", "success");
-          } catch (error) {
-            setMessage("Unable to submit right now. Please try again.", "error");
+        modalCloseButton?.addEventListener("click", closeModal);
+        modalBackdrop?.addEventListener("click", (event) => {
+          if (event.target === modalBackdrop) closeModal();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && modalBackdrop?.classList.contains("open")) {
+            closeModal();
           }
         });
+
+        const bindInquiryForm = (formId, messageId, onSuccess) => {
+          const form = document.getElementById(formId);
+          const messageEl = document.getElementById(messageId);
+          if (!form || !messageEl) return;
+
+          const setMessage = (message, type) => {
+            messageEl.textContent = message;
+            messageEl.className = `form-message ${type}`;
+          };
+
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            setMessage("", "");
+
+            const formData = new FormData(form);
+            const name = String(formData.get("name") || "").trim();
+            const email = String(formData.get("email") || "").trim();
+            const phone = String(formData.get("phone") || "").trim();
+            const message = String(formData.get("message") || "").trim();
+
+            if (!name || !email || !phone || !message) {
+              setMessage("Please complete all fields before submitting.", "error");
+              return;
+            }
+
+            const inquiry = {
+              id: `inq_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+              createdAt: new Date().toISOString(),
+              name,
+              email,
+              phone,
+              message,
+              workplace: String(formData.get("workplace") || "").trim(),
+              partyType: String(formData.get("partyType") || "").trim(),
+              location: String(formData.get("location") || "").trim()
+            };
+
+            try {
+              const raw = localStorage.getItem(STORAGE_KEY);
+              const inquiries = raw ? JSON.parse(raw) : [];
+              const nextInquiries = Array.isArray(inquiries) ? [inquiry, ...inquiries] : [inquiry];
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(nextInquiries));
+
+              form.reset();
+              setMessage("Inquiry submitted successfully. Our team will contact you soon.", "success");
+              if (typeof onSuccess === "function") onSuccess();
+            } catch (error) {
+              setMessage("Unable to submit right now. Please try again.", "error");
+            }
+          });
+        };
+
+        bindInquiryForm("inquiry-form", "inquiry-form-message");
+        bindInquiryForm("consultation-modal-form", "consultation-modal-message", () => {
+          window.setTimeout(closeModal, 700);
+        });
+
+        const url = new URL(window.location.href);
+        if (url.searchParams.get("consult") === "1") {
+          openModal();
+          url.searchParams.delete("consult");
+          window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+        }
       })();
     </script>
   </body>

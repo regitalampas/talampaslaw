@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Detail | The Law Firm of Talampas &amp; Associates</title>
+    <meta
+      name="description"
+      content="Detailed legal update from The Law Firm of Talampas &amp; Associates with practical guidance for Philippine clients."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #390d2f;
+        --accent: #c9a84c;
+        --cta: #ef6c11;
+        --text: #201821;
+        --surface: #faf8f5;
+        --card: #ffffff;
+        --border: #eadde6;
+        --max-width: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        color: var(--text);
+        line-height: 1.6;
+        background: var(--surface);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.2;
+        font-family: "Domine", serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto;
+      }
+
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-image {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+        border: none;
+        border-radius: 12px;
+      }
+
+      .logo-text strong {
+        color: var(--bg-primary);
+        font-size: 1.45rem;
+        letter-spacing: 0.04em;
+      }
+
+      .logo-text span {
+        color: #6b5a6b;
+        font-size: 0.72rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(250, 248, 245, 0.95);
+        border-bottom: 1px solid #efe7ef;
+      }
+
+      .container.nav {
+        width: 100%;
+        max-width: none;
+        padding: 0 24px;
+        min-height: 86px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.4rem;
+      }
+
+      .nav-links {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        color: var(--bg-primary);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      .nav-links a:not(:last-child)::after {
+        content: "\00b7";
+        margin-left: 1rem;
+        color: rgba(57, 13, 47, 0.35);
+      }
+
+      .nav-consult-btn {
+        display: inline-block;
+        white-space: nowrap;
+        background: var(--cta);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.5rem 1.75rem;
+        font-size: 0.94rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .breadcrumbs {
+        margin: 1rem auto 0.7rem;
+        font-size: 0.78rem;
+        color: #6e5b6d;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .feature {
+        position: relative;
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto;
+        height: 420px;
+        border-radius: 14px;
+        overflow: hidden;
+        color: #ffffff;
+        background: #2f2230;
+        cursor: zoom-in;
+      }
+
+      .feature img {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        object-fit: cover;
+        display: block;
+      }
+
+      .feature-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(15, 11, 15, 0.28), rgba(15, 11, 15, 0.74));
+        display: grid;
+        align-content: end;
+      }
+
+      .feature-inner {
+        width: 100%;
+        margin: 0;
+        padding: 1.1rem 1.35rem 1.45rem;
+      }
+
+      .meta-line {
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        opacity: 0.95;
+      }
+
+      .feature h1 {
+        margin-top: 0.35rem;
+        font-size: clamp(1.8rem, 3.2vw, 3rem);
+        max-width: 26ch;
+      }
+
+      .feature-actions {
+        margin-top: 0.8rem;
+        display: flex;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 0.52rem 0.95rem;
+        font: inherit;
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn-share {
+        background: var(--cta);
+        color: #fff;
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: #fff;
+      }
+
+      .article-wrap {
+        width: min(var(--max-width), 92vw);
+        margin: 1.45rem auto 3rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.4rem;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-bottom: 1rem;
+      }
+
+      .tag {
+        border-radius: 999px;
+        border: 1px solid #d9c2cf;
+        padding: 0.25rem 0.65rem;
+        font-size: 0.77rem;
+        color: #563f55;
+      }
+
+      .article-wrap p {
+        margin: 0 0 1rem;
+        color: #3e3340;
+      }
+
+      .cta-box {
+        margin-top: 1.4rem;
+        padding: 1.1rem;
+        border-radius: 12px;
+        border: 1px solid #f0c6a5;
+        background: #fff8f2;
+      }
+
+      .cta-title {
+        font-family: "Domine", serif;
+        color: var(--bg-primary);
+        font-size: 1.1rem;
+      }
+
+      .cta-btn {
+        margin-top: 0.75rem;
+        display: inline-block;
+        border-radius: 8px;
+        padding: 0.66rem 1.2rem;
+        background: var(--cta);
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .cta-note {
+        margin-top: 0.55rem;
+        font-size: 0.9rem;
+        color: #6a5d66;
+      }
+
+      .not-found {
+        width: min(880px, 92vw);
+        margin: 2rem auto;
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid #d8c7d4;
+        background: #fff;
+        color: #583f55;
+      }
+
+      .more-reading {
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto 3rem;
+      }
+
+      .more-reading h2 {
+        font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+        color: var(--bg-primary);
+        margin-bottom: 1rem;
+      }
+
+      .recommended-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .recommended-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .recommended-card img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        display: block;
+      }
+
+      .recommended-card-body {
+        padding: 0.8rem;
+      }
+
+      .recommended-title {
+        font-family: "Domine", serif;
+        color: var(--bg-primary);
+        font-size: 1.15rem;
+        line-height: 1.3;
+      }
+
+      .recommended-meta {
+        margin-top: 0.45rem;
+        font-size: 0.83rem;
+        color: #665865;
+      }
+
+      footer {
+        background: linear-gradient(145deg, #2f0d28, #47113c 52%, #8b1e63);
+        color: rgba(255, 255, 255, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .footer-inner {
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto;
+        padding: 2.2rem 0 1.1rem;
+        display: grid;
+        grid-template-columns: minmax(260px, 1.45fr) repeat(3, minmax(150px, 1fr));
+        gap: 1rem;
+        row-gap: 1.25rem;
+      }
+
+      .footer-col {
+        min-height: 0;
+      }
+
+      .footer-brand .logo-text strong {
+        color: #fff;
+      }
+
+      .footer-brand p {
+        margin-top: 0.65rem;
+        margin-bottom: 0;
+        color: #f3d7e8;
+        font-size: 0.9rem;
+        max-width: 30ch;
+      }
+
+      .footer-col h4 {
+        margin: 0 0 0.7rem;
+        font-size: 0.94rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .footer-links {
+        display: grid;
+        gap: 0.38rem;
+      }
+
+      .footer-links a {
+        width: fit-content;
+        font-size: 0.89rem;
+        color: #f5e3ee;
+      }
+
+      .footer-links a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      .socials {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 0.9rem;
+      }
+
+      .socials a {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .footer-bottom {
+        grid-column: 1 / -1;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
+      .footer-bottom p {
+        margin: 0;
+        color: #ecd8e3;
+        font-size: 0.8rem;
+      }
+
+      .disclaimer {
+        margin: 0.55rem 0 0;
+        color: #ecd8e3;
+        font-size: 0.75rem;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+
+        .feature {
+          height: 320px;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .recommended-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .container.nav {
+          padding: 0 14px;
+        }
+
+        .feature-inner {
+          padding: 0.9rem 0.9rem 1.05rem;
+        }
+
+        .feature-actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="site-nav"></header>
+
+    <main>
+      <div class="container breadcrumbs">
+        <a href="index.html">Home</a> / <a href="blog.html">News and Insights</a> /
+        <span id="crumb-title">Article</span>
+      </div>
+
+      <article id="article-view" hidden>
+        <section
+          id="feature-card"
+          class="feature"
+          role="button"
+          tabindex="0"
+          aria-label="Open full-size image in a new tab"
+        >
+          <img id="feature-image" src="" alt="" />
+          <div class="feature-overlay">
+            <div class="feature-inner">
+              <p class="meta-line" id="feature-meta"></p>
+              <h1 id="feature-title"></h1>
+              <div class="feature-actions">
+                <button id="share-btn" class="btn btn-share" type="button">Share This</button>
+                <a class="btn btn-outline" href="index.html?consult=1#contact">Book a Consultation</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-wrap">
+          <div class="tags" id="tag-list"></div>
+          <p id="lead"></p>
+          <p id="body"></p>
+
+          <div class="cta-box">
+            <p class="cta-title">Need legal guidance for your specific concern?</p>
+            <p id="note"></p>
+            <a class="cta-btn" href="index.html?consult=1#contact">Contact Our Team Now</a>
+            <p class="cta-note">Enjoy a complimentary 10-minute phone call as a first-time offer.</p>
+          </div>
+        </section>
+
+        <section id="more-reading" class="more-reading" hidden>
+          <h2>More Reading...</h2>
+          <div id="recommended-grid" class="recommended-grid"></div>
+        </section>
+      </article>
+
+      <section id="not-found" class="not-found" hidden>
+        The requested blog post was not found. Please return to <a href="blog.html">News and Insights</a>.
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <script src="layout-loader.js"></script>
+    <script src="ai-chatbot.js"></script>
+
+    <script src="blog-images.js"></script>
+    <script src="blog-cms.js"></script>
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id") || "";
+        const post = window.TLFTA_BLOG.getPostById(id);
+
+        const articleView = document.getElementById("article-view");
+        const notFound = document.getElementById("not-found");
+
+        if (!post) {
+          notFound.hidden = false;
+          return;
+        }
+
+        const featureImage = document.getElementById("feature-image");
+        const featureTitle = document.getElementById("feature-title");
+        const featureMeta = document.getElementById("feature-meta");
+        const crumbTitle = document.getElementById("crumb-title");
+        const tagList = document.getElementById("tag-list");
+        const lead = document.getElementById("lead");
+        const body = document.getElementById("body");
+        const note = document.getElementById("note");
+        const shareBtn = document.getElementById("share-btn");
+        const featureCard = document.getElementById("feature-card");
+        const moreReading = document.getElementById("more-reading");
+        const recommendedGrid = document.getElementById("recommended-grid");
+
+        document.title = `${post.title} | The Law Firm of Talampas & Associates`;
+        featureImage.src = post.imagePath;
+        featureImage.alt = post.title;
+        featureTitle.textContent = post.title;
+        featureMeta.textContent = `${post.category} • ${window.TLFTA_BLOG.formatDisplayDate(post.dateIso)}`;
+        crumbTitle.textContent = post.title;
+
+        tagList.innerHTML = post.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+        lead.textContent = post.lead;
+        body.textContent = post.body;
+        note.textContent = post.note;
+
+        const openFullImage = () => {
+          window.open(post.imagePath, "_blank", "noopener,noreferrer");
+        };
+
+        featureCard.addEventListener("click", (event) => {
+          if (event.target.closest(".feature-actions")) return;
+          openFullImage();
+        });
+
+        featureCard.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          if (event.target.closest(".feature-actions")) return;
+          event.preventDefault();
+          openFullImage();
+        });
+
+        const allPosts = window.TLFTA_BLOG.getPosts();
+        const preferredTag = post.tags[0] || "";
+        const chosenIds = new Set();
+
+        const recommendations = [];
+
+        allPosts.forEach((candidate) => {
+          if (recommendations.length >= 3) return;
+          if (candidate.id === post.id) return;
+          if (!preferredTag || !candidate.tags.includes(preferredTag)) return;
+          recommendations.push(candidate);
+          chosenIds.add(candidate.id);
+        });
+
+        allPosts.forEach((candidate) => {
+          if (recommendations.length >= 3) return;
+          if (candidate.id === post.id || chosenIds.has(candidate.id)) return;
+          if (candidate.category !== post.category) return;
+          recommendations.push(candidate);
+          chosenIds.add(candidate.id);
+        });
+
+        allPosts.forEach((candidate) => {
+          if (recommendations.length >= 3) return;
+          if (candidate.id === post.id || chosenIds.has(candidate.id)) return;
+          recommendations.push(candidate);
+          chosenIds.add(candidate.id);
+        });
+
+        if (recommendations.length) {
+          recommendedGrid.innerHTML = recommendations
+            .map(
+              (item) => `
+                <a class="recommended-card" href="blog-detail.html?id=${encodeURIComponent(item.id)}">
+                  <img src="${item.imagePath}" alt="${item.title}" loading="lazy" />
+                  <div class="recommended-card-body">
+                    <div class="recommended-title">${item.title}</div>
+                    <div class="recommended-meta">${window.TLFTA_BLOG.formatDisplayDate(item.dateIso)} • ${item.tags
+                      .slice(0, 2)
+                      .join(" • ")}</div>
+                  </div>
+                </a>
+              `
+            )
+            .join("");
+          moreReading.hidden = false;
+        }
+
+        shareBtn.addEventListener("click", async () => {
+          const shareData = {
+            title: post.title,
+            text: post.excerpt,
+            url: window.location.href,
+          };
+
+          if (navigator.share) {
+            try {
+              await navigator.share(shareData);
+              return;
+            } catch (error) {
+              return;
+            }
+          }
+
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            shareBtn.textContent = "Link Copied";
+            window.setTimeout(() => {
+              shareBtn.textContent = "Share This";
+            }, 1500);
+          } catch (error) {
+            window.prompt("Copy this link:", window.location.href);
+          }
+        });
+
+        articleView.hidden = false;
+      })();
+    </script>
+  </body>
+</html>
