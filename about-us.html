@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Family Law | The Law Firm of Talampas &amp; Associates</title>
+    <title>About Us | The Law Firm of Talampas &amp; Associates</title>
     <meta
       name="description"
-      content="Family law services for annulment, divorce, child custody, support, and other family-related matters by Talampas &amp; Associates."
+      content="Learn the history of The Law Firm of Talampas &amp; Associates, from its early beginnings to its growth into a trusted multi-practice legal team."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,6 +43,7 @@
       .logo-text strong { color: var(--bg-primary); font-size: 1.2rem; }
       .nav-links { display: flex; gap: .9rem; color: var(--bg-primary); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
       .nav-links a { text-decoration: none; }
+      .nav-links a[aria-current="page"] { font-weight: 700; }
       .nav-consult-btn {
         background: #ef6c11;
         color: #fff;
@@ -54,32 +55,92 @@
         text-decoration: none;
         font-weight: 700;
       }
+
       .hero {
-        padding: 4rem 0 2.5rem;
-        background: linear-gradient(135deg, #390d2f 0%, #57104a 55%, #8d185d 100%);
+        padding: 4.5rem 0 3rem;
         color: #fff;
+        background:
+          linear-gradient(120deg, rgba(40, 9, 33, 0.9) 0%, rgba(74, 16, 64, 0.84) 48%, rgba(139, 30, 99, 0.8) 100%),
+          url("tlfta-group-photo.jpg") center 26% / cover no-repeat;
       }
-      .hero h1 { margin: 0; font-family: "Domine", serif; font-size: clamp(2rem, 3.6vw, 3rem); }
-      .hero p { margin: .8rem 0 0; max-width: 70ch; opacity: .95; }
+
       .pill {
         display: inline-block;
         padding: .28rem .75rem;
         border-radius: 999px;
-        border: 1px solid rgba(255,255,255,.45);
+        border: 1px solid rgba(255,255,255,.52);
         font-size: .75rem;
         text-transform: uppercase;
         letter-spacing: .12em;
       }
+
+      .hero h1 {
+        margin: .9rem 0 .75rem;
+        font-family: "Domine", serif;
+        font-size: clamp(2.1rem, 4.1vw, 3.3rem);
+      }
+
+      .hero .lead {
+        margin: 0;
+        max-width: 72ch;
+        color: rgba(255,255,255,.94);
+      }
+
       .content { padding: 2.4rem 0 3rem; }
-      .content h2 { font-family: "Domine", serif; color: var(--bg-primary); margin-top: 0; }
       .card {
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1rem 1.1rem;
+        padding: 1.1rem 1.2rem;
+      }
+
+      .content h2 {
+        margin: 0 0 .4rem;
+        color: var(--bg-primary);
+        font-family: "Domine", serif;
+      }
+
+      .content p { margin: 0; color: #4a4a4a; }
+
+      .intro { margin-bottom: 1rem; }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, .95fr);
+        gap: 1rem;
         margin-bottom: 1rem;
       }
-      .content ul { margin: 0; padding-left: 1.15rem; }
+
+      .timeline {
+        border-left: 2px solid rgba(74, 16, 64, .16);
+        margin-top: .95rem;
+        padding-left: 1rem;
+        display: grid;
+        gap: .85rem;
+      }
+
+      .milestone h3 {
+        margin: 0;
+        color: #2f0d28;
+        font-size: 1rem;
+        letter-spacing: .02em;
+      }
+
+      .milestone p {
+        margin-top: .25rem;
+        font-size: .95rem;
+      }
+
+      .principles {
+        margin: .75rem 0 0;
+        padding-left: 1.1rem;
+      }
+
+      .principles li {
+        margin-bottom: .5rem;
+        color: #4a4a4a;
+      }
+
       .btn {
         display: inline-block;
         background: #ef6c11;
@@ -92,11 +153,22 @@
         letter-spacing: .06em;
         text-transform: uppercase;
       }
+
+      .legacy p + p { margin-top: .7rem; }
+
+      .text-link {
+        display: inline-block;
+        margin-top: .65rem;
+        color: var(--bg-primary);
+        font-weight: 700;
+      }
+
       footer {
         background: linear-gradient(145deg, #2f0d28, #47113c 52%, #8b1e63);
         color: rgba(255, 255, 255, 0.95);
         border-top: 1px solid rgba(255, 255, 255, 0.12);
       }
+
       .footer-inner {
         padding: 2.35rem 0 1.2rem;
         display: grid;
@@ -104,6 +176,7 @@
         gap: 1rem;
         row-gap: 1.35rem;
       }
+
       .footer-brand .logo-wrap { margin-bottom: 0.72rem; }
       .footer-brand .logo-text strong { color: #ffffff; }
       .footer-brand p {
@@ -112,6 +185,7 @@
         font-size: 0.9rem;
         max-width: 30ch;
       }
+
       .footer-col { min-height: 0; }
       .footer-col h4 {
         margin: 0 0 0.72rem;
@@ -120,13 +194,16 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
       }
+
       .footer-links { display: grid; gap: 0.42rem; }
       .footer-links a {
         width: fit-content;
         font-size: 0.89rem;
         color: #f5e3ee;
       }
+
       .footer-links a:hover { color: #ffffff; text-decoration: underline; }
+
       .footer-bottom {
         grid-column: 1 / -1;
         border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -139,11 +216,14 @@
         flex-wrap: wrap;
         color: #ecd8e3;
       }
+
       .footer-bottom p,
       .footer-legal { margin: 0; font-size: 0.8rem; }
+
       .footer-legal { display: flex; gap: 1rem; }
       .footer-legal a { color: #f3dfeb; }
       .footer-legal a:hover { color: #ffffff; text-decoration: underline; }
+
       .socials { display: flex; gap: 0.75rem; margin-top: 0.9rem; }
       .socials a {
         display: inline-flex;
@@ -159,14 +239,23 @@
         font-weight: 600;
         letter-spacing: 0.03em;
       }
+
       .socials a:hover {
         background: rgba(255, 255, 255, 0.12);
         text-decoration: underline;
       }
+
       @media (max-width: 930px) {
+        .story-grid { grid-template-columns: 1fr; }
         .footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .footer-bottom { flex-direction: column; align-items: flex-start; }
       }
+
+      @media (max-width: 700px) {
+        .nav { flex-wrap: wrap; justify-content: center; padding: .75rem 0; }
+        .nav-links { flex-wrap: wrap; justify-content: center; }
+      }
+
       @media (max-width: 640px) {
         .footer-inner { grid-template-columns: 1fr; }
         .footer-brand,
@@ -182,42 +271,95 @@
           <img class="logo-image" src="logo.jpg" alt="Talampas and Associates logo" />
           <div class="logo-text"><strong>TLFTA</strong></div>
         </a>
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Primary navigation">
           <a href="index.html#practice-snap">Work</a>
           <a href="index.html#team">Our Lawyers</a>
-          <a href="about-us.html">Our Firm</a>
+          <a href="about-us.html" aria-current="page">Our Firm</a>
           <a href="index.html#grain">Blog</a>
         </nav>
         <a class="nav-consult-btn" href="index.html#contact">Contact Us</a>
       </div>
     </header>
+
     <main>
       <section class="hero">
         <div class="container">
-          <p class="pill">Practice Area</p>
-          <h1>Family Law</h1>
-          <p>We handle family disputes with practical strategy and compassionate advocacy, balancing legal rights and family stability.</p>
+          <p class="pill">Our Firm</p>
+          <h1>About Us</h1>
+          <p class="lead">
+            The Law Firm of Talampas &amp; Associates started as a small litigation practice built on trial discipline,
+            client trust, and principled legal service. Over the years, we expanded into a multi-practice team while
+            preserving the same founding commitment: practical legal strategy delivered with integrity.
+          </p>
         </div>
       </section>
+
       <section class="content">
         <div class="container">
-          <article class="card">
-            <h2>How we help</h2>
-            <ul>
-              <li>Annulment and legal separation matters</li>
-              <li>Child custody and support proceedings</li>
-              <li>Parental support and property settlement disputes</li>
-              <li>Family protection orders and urgent relief motions</li>
-            </ul>
+          <article class="card intro">
+            <h2>How the Firm Began</h2>
+            <p>
+              In its earliest years, the firm focused on resolving complex disputes for individuals and small businesses in
+              Makati. This early courtroom work shaped the way we continue to practice today: prepare deeply, communicate
+              clearly, and advocate decisively when clients are at critical turning points.
+            </p>
           </article>
-          <article class="card">
-            <h2>Our approach</h2>
-            <p>We prioritize clarity, confidentiality, and timeline management so clients understand every stage from initial filing to resolution.</p>
-            <a class="btn" href="index.html#contact">Book a Consultation</a>
+
+          <div class="story-grid">
+            <article class="card">
+              <h2>Firm Milestones</h2>
+              <div class="timeline" aria-label="Firm history timeline">
+                <article class="milestone">
+                  <h3>Founding Period</h3>
+                  <p>A focused litigation practice is established to support clients facing urgent civil and family disputes.</p>
+                </article>
+                <article class="milestone">
+                  <h3>Practice Expansion</h3>
+                  <p>The firm broadens to labor, corporate, and cybercrime matters as client needs become more interdisciplinary.</p>
+                </article>
+                <article class="milestone">
+                  <h3>Team Growth</h3>
+                  <p>Additional lawyers join to strengthen trial readiness, client advisory services, and legal research depth.</p>
+                </article>
+                <article class="milestone">
+                  <h3>Modern Service Model</h3>
+                  <p>Operations evolve with digital workflows, faster client communication, and preventive legal planning support.</p>
+                </article>
+              </div>
+            </article>
+
+            <aside class="card">
+              <h2>Enduring Principles</h2>
+              <p>
+                Our history is grounded in values that have remained constant through every stage of growth.
+              </p>
+              <ul class="principles">
+                <li>Faithful and ethical representation in every engagement.</li>
+                <li>Disciplined preparation before negotiation, filing, or trial.</li>
+                <li>Transparent communication with realistic legal options.</li>
+                <li>Long-term protection of each client&apos;s rights and interests.</li>
+              </ul>
+              <a class="btn" href="index.html#contact">Book a Consultation</a>
+            </aside>
+          </div>
+
+          <article class="card legacy">
+            <h2>Where We Are Today</h2>
+            <p>
+              Today, Talampas &amp; Associates serves both individuals and organizations across multiple practice areas. While
+              the scope of our work has expanded, our identity remains rooted in the firm&apos;s original mission: dependable
+              legal advocacy shaped by diligence, accountability, and respect for the people we represent.
+            </p>
+            <p>
+              We continue to build on this history by mentoring younger lawyers, refining our legal process, and staying
+              responsive to the legal realities our clients face.
+            </p>
+            <a class="text-link" href="index.html#team">Meet Our Lawyers</a>
           </article>
         </div>
       </section>
     </main>
+
     <footer>
       <div class="container footer-inner">
         <section class="footer-brand footer-col">
@@ -251,9 +393,7 @@
         </nav>
         <section class="footer-col footer-links footer-contact" aria-label="Contact details">
           <h4>Contact</h4>
-          <a href="https://maps.google.com/?q=Talampas%20Building%20Makati%20City%2C%20Philippines" target="_blank" rel="noopener noreferrer">
-            Unit 12, 5th Floor, Talampas Building<br />Makati City, Philippines
-          </a>
+          <a href="https://maps.google.com/?q=Talampas%20Building%20Makati%20City%2C%20Philippines" target="_blank" rel="noopener noreferrer">Unit 12, 5th Floor, Talampas Building<br />Makati City, Philippines</a>
           <a href="tel:+639171234567">+63 917 123 4567</a>
           <a href="mailto:consult@talampaslaw.ph">consult@talampaslaw.ph</a>
           <a href="index.html#contact">Get a consultation</a>
