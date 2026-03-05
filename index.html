@@ -953,7 +953,9 @@
       }
 
       #team {
-        background: var(--surface);
+        background: #f0ece6;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         padding: 2.6rem 0;
       }
 
@@ -994,10 +996,10 @@
       .featured-lawyer-layout {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-end;
         max-width: 900px;
         margin: 0 auto;
-        gap: 24px;
+        gap: 34px;
         height: auto;
         min-height: 420px;
       }
@@ -1031,9 +1033,10 @@
       .featured-content {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         height: auto;
-        padding: 0;
+        min-height: 430px;
+        padding: 0.2rem 0;
         align-self: center;
         max-width: 560px;
       }
@@ -1041,7 +1044,7 @@
       .featured-label {
         margin: 0;
         color: #c9a84c;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         font-weight: 700;
         letter-spacing: 0.13em;
         text-transform: uppercase;
@@ -1058,7 +1061,8 @@
       .featured-name {
         margin: 0.72rem 0 0.7rem;
         color: #390d2f;
-        font-size: clamp(1.9rem, 3vw, 2.5rem);
+        font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+        line-height: 1.06;
         font-weight: 700;
       }
 
@@ -1066,15 +1070,15 @@
         margin: 0;
         max-width: 100%;
         color: #4a4a4a;
-        font-size: clamp(1rem, 1.15vw, 1.18rem);
-        line-height: 1.45;
+        font-size: clamp(1.22rem, 1.55vw, 1.62rem);
+        line-height: 1.52;
       }
 
       .featured-focus {
-        margin: 0.7rem 0 0;
+        margin: 1.12rem 0 0;
         color: #c9a84c;
-        font-size: 0.86rem;
-        line-height: 1.35;
+        font-size: clamp(1.02rem, 1.2vw, 1.2rem);
+        line-height: 1.4;
         font-weight: 500;
         font-style: italic;
       }
@@ -1148,6 +1152,70 @@
         margin-top: 0.75rem;
         color: #4a1040;
         font-weight: 600;
+      }
+
+      #contact.contact-cta-section {
+        padding: 0;
+        margin-bottom: 5rem;
+      }
+
+      .contact-cta-banner {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        background: linear-gradient(108deg, var(--bg-primary-deep) 0%, var(--bg-primary) 62%, #6a2357 100%);
+      }
+
+      .contact-cta-inner {
+        width: min(var(--max-width), 92vw);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2.6rem 0;
+      }
+
+      .contact-cta-title {
+        margin: 0;
+        color: #ffffff;
+        font-family: "DM Sans", sans-serif;
+        font-size: clamp(1.85rem, 3vw, 2.85rem);
+        line-height: 1.2;
+        font-weight: 500;
+        max-width: 30ch;
+      }
+
+      .contact-cta-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        flex-shrink: 0;
+      }
+
+      .contact-cta-btn {
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        min-width: 154px;
+        font-size: 1.05rem;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .contact-cta-btn-primary {
+        color: #2f0d28;
+      }
+
+      .contact-cta-btn-secondary {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        box-shadow: none;
+      }
+
+      .contact-cta-btn-secondary:hover {
+        background: #ffffff;
+        color: var(--bg-primary);
       }
 
       .contact-wrap {
@@ -1845,6 +1913,7 @@
 
         .featured-content {
           height: auto;
+          min-height: auto;
           justify-content: flex-start;
           padding-bottom: 0;
           align-self: start;
@@ -1852,6 +1921,26 @@
 
         .slide-arrow {
           top: 28%;
+        }
+
+        .contact-cta-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 2rem 0;
+          gap: 1.2rem;
+        }
+
+        .contact-cta-actions {
+          width: 100%;
+          flex-wrap: wrap;
+        }
+
+        .contact-cta-btn {
+          flex: 1 1 170px;
+        }
+
+        #contact.contact-cta-section {
+          margin-bottom: 3.5rem;
         }
 
         .contact-wrap {
@@ -2006,7 +2095,7 @@
         }
 
         .featured-name {
-          font-size: clamp(1.7rem, 8vw, 2.25rem);
+          font-size: clamp(1.95rem, 8vw, 2.6rem);
         }
 
         .featured-content {
@@ -2079,7 +2168,7 @@
         }
       }
       .grain-home {
-        background: linear-gradient(180deg, #faf8f5 0%, #f6eee6 100%);
+        background: #390d2f;
         padding: 62px 18px;
       }
 
@@ -2106,7 +2195,7 @@
 
       .grain-home-head h2 {
         margin: 0;
-        color: var(--bg-primary);
+        color: #ffffff;
         font-size: clamp(2rem, 3.2vw, 2.9rem);
         letter-spacing: 0.01em;
       }
@@ -2136,18 +2225,19 @@
       .grain-home-card {
         display: block;
         color: inherit;
-        border: 1px solid #decdd8;
-        border-radius: 14px;
-        background: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
         position: relative;
-        box-shadow: 0 10px 24px rgba(57, 13, 47, 0.08);
+        box-shadow: none;
         overflow: hidden;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: all 0.25s ease;
+        backdrop-filter: blur(3px);
       }
 
       .grain-home-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 16px 30px rgba(57, 13, 47, 0.12);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
       }
 
       .grain-home-image {
@@ -2168,7 +2258,7 @@
 
       .grain-home-title {
         margin: 0;
-        color: var(--bg-primary);
+        color: #ffffff;
         font-size: 1.28rem;
         line-height: 1.24;
       }
@@ -2178,7 +2268,7 @@
         font-size: 0.78rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #6e5d6d;
+        color: rgba(255, 255, 255, 0.5);
         font-weight: 600;
       }
 
@@ -2191,9 +2281,9 @@
 
       .grain-home-tag {
         font-size: 0.76rem;
-        color: #43284d;
-        background: #f4edf2;
-        border: 1px solid #e3cfdd;
+        color: #c9a84c;
+        background: transparent;
+        border: 1px solid #c9a84c;
         border-radius: 999px;
         padding: 0.2rem 0.55rem;
       }
@@ -2208,11 +2298,11 @@
       }
 
       .grain-arrow {
-        border: 1px solid #d0b1c4;
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
         padding: 0.42rem 0.85rem;
         border-radius: 999px;
-        background: #fff;
-        color: var(--bg-primary);
+        background: transparent;
+        color: #ffffff;
         font: inherit;
         font-weight: 700;
         text-transform: uppercase;
@@ -2223,8 +2313,8 @@
       }
 
       .grain-arrow:hover {
-        background: var(--bg-primary);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
       }
 
       .grain-arrow:disabled {
@@ -2233,20 +2323,21 @@
       }
 
       .grain-home-link {
-        color: var(--bg-primary);
+        color: #ffffff;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         font-size: 0.78rem;
         padding: 0.42rem 0.92rem;
         border-radius: 999px;
-        border: 1px solid #c9a84c;
-        background: #fff8ea;
+        border: 1px solid #ef6c11;
+        background: #ef6c11;
       }
 
       .grain-home-link:hover {
-        background: #c9a84c;
-        color: #2f1f04;
+        background: #d95f0d;
+        border-color: #d95f0d;
+        color: #ffffff;
       }
 
       @media (max-width: 960px) {
@@ -2514,45 +2605,14 @@
         </div>
       </section>
 
-      <section id="contact">
-        <div class="container">
-          <h2 class="section-title">Contact &amp; Location</h2>
-          <p class="section-copy">Start with an initial consultation and get direct legal guidance.</p>
-
-          <div class="contact-wrap">
-            <article class="contact-panel">
-              <h3>Office Information</h3>
-              <ul class="contact-list">
-                <li><strong>Address:</strong> Unit 12, 5th Floor, Talampas Building, Makati City, Philippines</li>
-                <li><strong>Phone:</strong> +63 917 123 4567</li>
-                <li><strong>Email:</strong> consult@talampaslaw.ph</li>
-                <li><strong>Hours:</strong> Monday to Friday, 9:00 AM to 6:00 PM</li>
-              </ul>
-            </article>
-
-            <article class="form-panel">
-              <h3>Send an Inquiry</h3>
-              <form id="inquiry-form">
-                <label class="field">
-                  Full Name
-                  <input type="text" name="name" placeholder="Juan Dela Cruz" required />
-                </label>
-                <label class="field">
-                  Email Address
-                  <input type="email" name="email" placeholder="name@example.com" required />
-                </label>
-                <label class="field">
-                  Phone Number
-                  <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" required />
-                </label>
-                <label class="field">
-                  Message
-                  <textarea name="message" placeholder="Tell us briefly about your legal concern." required></textarea>
-                </label>
-                <button class="btn btn-primary submit" type="submit">Submit Inquiry</button>
-              </form>
-              <p id="inquiry-form-message" class="form-message" aria-live="polite"></p>
-            </article>
+      <section id="contact" class="contact-cta-section">
+        <div class="contact-cta-banner" aria-label="Contact call to action">
+          <div class="contact-cta-inner">
+            <h2 class="contact-cta-title">Ready to book an appointment?<br />Contact us today to get started.</h2>
+            <div class="contact-cta-actions">
+              <a class="btn btn-primary contact-cta-btn contact-cta-btn-primary" href="#contact" data-open-consult-modal>Contact Us</a>
+              <a class="btn contact-cta-btn contact-cta-btn-secondary" href="tel:289620069">Call Now</a>
+            </div>
           </div>
         </div>
       </section>
@@ -2579,11 +2639,11 @@
         <div class="consult-modal-meta">
           <div>
             <strong>Phone</strong>
-            <span>+63 917 123 4567</span>
+            <span>289620069</span>
           </div>
           <div>
             <strong>Email</strong>
-            <span>consult@talampaslaw.ph</span>
+            <span>talampasandassociates@yahoo.com</span>
           </div>
           <div>
             <strong>Office Hours</strong>
@@ -2602,7 +2662,7 @@
             </label>
             <label class="field">
               Phone Number
-              <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" required />
+              <input type="tel" name="phone" placeholder="289620069" required />
             </label>
             <label class="field">
               Name of Workplace
@@ -2629,7 +2689,6 @@
             <button class="btn btn-primary submit" type="submit">Send</button>
           </div>
           <p id="consultation-modal-message" class="form-message" aria-live="polite"></p>
-          <p class="consult-modal-note">Initial 10-minute phone call is free.</p>
         </form>
       </div>
     </section>

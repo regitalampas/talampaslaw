@@ -192,6 +192,7 @@
         flex-wrap: wrap;
         gap: 0.55rem;
         justify-content: center;
+        margin-top: 1.45rem;
       }
 
       .chip {
@@ -264,10 +265,13 @@
         overflow: hidden;
         display: grid;
         grid-template-columns: minmax(220px, 1fr) minmax(0, 1.15fr);
+        height: 380px;
+        max-height: 380px;
       }
 
       .featured-thumb {
-        min-height: 240px;
+        min-height: 0;
+        height: 100%;
       }
 
       .featured-thumb img {
@@ -282,6 +286,7 @@
         display: grid;
         align-content: center;
         gap: 0.55rem;
+        overflow: hidden;
       }
 
       .featured-kicker {
@@ -305,6 +310,10 @@
         margin: 0;
         color: #4e3c4f;
         font-size: 0.94rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .featured-link {
@@ -542,6 +551,13 @@
 
         .featured-post {
           grid-template-columns: 1fr;
+          height: auto;
+          max-height: none;
+        }
+
+        .featured-thumb {
+          min-height: 220px;
+          height: 220px;
         }
       }
 
@@ -664,8 +680,14 @@
         }
 
         const renderFeatured = () => {
-          if (!featuredPost) {
+          const shouldShowFeatured =
+            !!featuredPost &&
+            state.activeCategory === "All Posts" &&
+            !state.searchTerm;
+
+          if (!shouldShowFeatured) {
             featuredSection.hidden = true;
+            featuredSection.style.display = "none";
             return;
           }
           featuredImage.src = featuredPost.imagePath;
@@ -677,6 +699,7 @@
           featuredExcerpt.textContent = featuredPost.excerpt;
           featuredLink.href = `blog-detail.html?id=${encodeURIComponent(featuredPost.id)}`;
           featuredSection.hidden = false;
+          featuredSection.style.display = "grid";
         };
 
         const filteredPosts = () =>
@@ -705,7 +728,7 @@
 
           summary.textContent = `Showing ${visible.length} of ${filtered.length} post${
             filtered.length === 1 ? "" : "s"
-          }${featuredPost ? " (plus 1 featured post)." : "."}`;
+          }.`;
 
           if (!visible.length) {
             postGrid.innerHTML = "";
@@ -748,6 +771,7 @@
           state.activeCategory = target.dataset.category;
           state.visibleCount = PAGE_SIZE;
           renderCategoryChips();
+          renderFeatured();
           renderPosts();
         });
 
@@ -759,6 +783,7 @@
         searchInput.addEventListener("input", () => {
           state.searchTerm = searchInput.value.trim().toLowerCase();
           state.visibleCount = PAGE_SIZE;
+          renderFeatured();
           renderPosts();
         });
 

@@ -29,7 +29,7 @@
       }
 
       .wrap {
-        width: min(1060px, 94vw);
+        width: min(1120px, 94vw);
         margin: 2rem auto;
       }
 
@@ -71,7 +71,8 @@
       }
 
       h1,
-      h2 {
+      h2,
+      h3 {
         margin: 0 0 0.7rem;
         color: var(--brand);
       }
@@ -91,11 +92,18 @@
         font-size: 0.9rem;
       }
 
-      input {
+      input,
+      select,
+      textarea {
         border: 1px solid #cec6bf;
         border-radius: 10px;
         padding: 0.65rem 0.7rem;
         font: inherit;
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
       }
 
       .btn-row {
@@ -121,6 +129,11 @@
       .btn-muted {
         background: #ece8e3;
         color: #433a34;
+      }
+
+      .btn-danger {
+        background: #ffe4de;
+        color: var(--danger);
       }
 
       .msg {
@@ -190,6 +203,68 @@
         font-size: 0.85rem;
       }
 
+      .grid-2 {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .subpanel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.9rem;
+        background: #fff;
+      }
+
+      .list-table {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .list-table th,
+      .list-table td {
+        font-size: 0.84rem;
+      }
+
+      .list-table td:last-child {
+        width: 180px;
+      }
+
+      .list-actions {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+      }
+
+      .list-actions button {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.75rem;
+        border-radius: 999px;
+      }
+
+      .blog-editor {
+        margin-top: 1rem;
+      }
+
+      .status {
+        margin-top: 0.5rem;
+        min-height: 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .featured-note {
+        margin: 0.35rem 0 0.75rem;
+        font-size: 0.87rem;
+        color: #574a54;
+      }
+
+      @media (max-width: 980px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 700px) {
         .top,
         .dashboard-header {
@@ -236,6 +311,7 @@
             <button id="logout-btn" class="btn-muted" type="button">Log Out</button>
           </div>
         </div>
+
         <div class="table-wrap">
           <table aria-label="Submitted inquiries">
             <thead>
@@ -250,9 +326,115 @@
             <tbody id="inquiry-rows"></tbody>
           </table>
         </div>
+
+        <div class="grid-2">
+          <section class="subpanel">
+            <h3>Categories (CRUD)</h3>
+            <form id="add-category-form" class="btn-row" style="margin-bottom: 0.6rem">
+              <input id="new-category" type="text" placeholder="Add category" required />
+              <button class="btn-primary" type="submit">Add</button>
+            </form>
+            <div class="table-wrap">
+              <table class="list-table" aria-label="Category list">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Posts</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="category-rows"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="subpanel">
+            <h3>Tags (CRUD)</h3>
+            <form id="add-tag-form" class="btn-row" style="margin-bottom: 0.6rem">
+              <input id="new-tag" type="text" placeholder="Add tag" required />
+              <button class="btn-primary" type="submit">Add</button>
+            </form>
+            <div class="table-wrap">
+              <table class="list-table" aria-label="Tag list">
+                <thead>
+                  <tr>
+                    <th>Tag</th>
+                    <th>Posts</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tag-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="subpanel blog-editor">
+          <h3>Edit Blog Post Metadata</h3>
+          <p>Customize title, category, tags, and detail-page text for each post.</p>
+          <div class="btn-row" style="margin-bottom: 0.65rem">
+            <button id="set-featured-btn" class="btn-muted" type="button">Set Selected as Featured</button>
+          </div>
+          <p id="featured-post-label" class="featured-note"></p>
+          <form id="post-editor-form">
+            <label class="field">
+              Select post
+              <select id="post-select" required></select>
+            </label>
+
+            <label class="field">
+              Title
+              <input id="post-title" type="text" required />
+            </label>
+
+            <label class="field">
+              Excerpt
+              <textarea id="post-excerpt" required></textarea>
+            </label>
+
+            <div class="grid-2" style="margin-top: 0">
+              <label class="field">
+                Category
+                <select id="post-category" required></select>
+              </label>
+              <label class="field">
+                Publish date
+                <input id="post-date" type="date" required />
+              </label>
+            </div>
+
+            <label class="field">
+              Tags (comma separated)
+              <input id="post-tags" type="text" placeholder="Client Rights, Compliance, Documentation" required />
+            </label>
+
+            <label class="field">
+              Lead paragraph
+              <textarea id="post-lead" required></textarea>
+            </label>
+
+            <label class="field">
+              Body paragraph
+              <textarea id="post-body" required></textarea>
+            </label>
+
+            <label class="field">
+              End note
+              <textarea id="post-note" required></textarea>
+            </label>
+
+            <div class="btn-row">
+              <button class="btn-primary" type="submit">Save Post Changes</button>
+              <button id="reset-post-btn" class="btn-danger" type="button">Reset to Default</button>
+            </div>
+          </form>
+          <div id="editor-status" class="status" aria-live="polite"></div>
+        </section>
       </section>
     </div>
 
+    <script src="blog-images.js"></script>
+    <script src="blog-cms.js"></script>
     <script>
       (() => {
         const USERNAME = "admin";
@@ -269,15 +451,50 @@
         const refreshBtn = document.getElementById("refresh-btn");
         const logoutBtn = document.getElementById("logout-btn");
 
+        const categoryRows = document.getElementById("category-rows");
+        const tagRows = document.getElementById("tag-rows");
+        const addCategoryForm = document.getElementById("add-category-form");
+        const addTagForm = document.getElementById("add-tag-form");
+        const newCategoryInput = document.getElementById("new-category");
+        const newTagInput = document.getElementById("new-tag");
+
+        const postEditorForm = document.getElementById("post-editor-form");
+        const postSelect = document.getElementById("post-select");
+        const postTitle = document.getElementById("post-title");
+        const postExcerpt = document.getElementById("post-excerpt");
+        const postCategory = document.getElementById("post-category");
+        const postDate = document.getElementById("post-date");
+        const postTags = document.getElementById("post-tags");
+        const postLead = document.getElementById("post-lead");
+        const postBody = document.getElementById("post-body");
+        const postNote = document.getElementById("post-note");
+        const resetPostBtn = document.getElementById("reset-post-btn");
+        const editorStatus = document.getElementById("editor-status");
+        const setFeaturedBtn = document.getElementById("set-featured-btn");
+        const featuredPostLabel = document.getElementById("featured-post-label");
+
         const setLoginMessage = (text, type = "") => {
           loginMessage.textContent = text;
           loginMessage.className = `msg ${type}`.trim();
+        };
+
+        const setEditorStatus = (text, type = "") => {
+          editorStatus.textContent = text;
+          editorStatus.style.color = type === "error" ? "#b42318" : type === "success" ? "#1f7a3b" : "#6c6c6c";
         };
 
         const formatDate = (value) => {
           const date = new Date(value);
           if (Number.isNaN(date.getTime())) return "Unknown";
           return date.toLocaleString();
+        };
+
+        const dateInputValue = (value) => {
+          const date = new Date(value);
+          if (Number.isNaN(date.getTime())) return "";
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${date.getFullYear()}-${month}-${day}`;
         };
 
         const escapeHtml = (value) =>
@@ -322,10 +539,138 @@
             .join("");
         };
 
+        const getPosts = () => window.TLFTA_BLOG.getPosts();
+
+        const renderCategoryRows = () => {
+          const counts = window.TLFTA_BLOG.getCategoryCounts(getPosts()).filter(
+            (entry) => entry.name !== "All Posts"
+          );
+
+          if (!counts.length) {
+            categoryRows.innerHTML = `<tr><td class="empty" colspan="3">No categories available.</td></tr>`;
+            return;
+          }
+
+          categoryRows.innerHTML = counts
+            .map(
+              (entry) => `
+                <tr>
+                  <td>${escapeHtml(entry.name)}</td>
+                  <td>${entry.count}</td>
+                  <td>
+                    <div class="list-actions">
+                      <button class="btn-muted" type="button" data-cat-action="rename" data-name="${escapeHtml(
+                        entry.name
+                      )}">Rename</button>
+                      <button class="btn-danger" type="button" data-cat-action="delete" data-name="${escapeHtml(
+                        entry.name
+                      )}">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              `
+            )
+            .join("");
+        };
+
+        const renderTagRows = () => {
+          const counts = window.TLFTA_BLOG.getTagCounts(getPosts());
+
+          if (!counts.length) {
+            tagRows.innerHTML = `<tr><td class="empty" colspan="3">No tags available.</td></tr>`;
+            return;
+          }
+
+          tagRows.innerHTML = counts
+            .map(
+              (entry) => `
+                <tr>
+                  <td>${escapeHtml(entry.name)}</td>
+                  <td>${entry.count}</td>
+                  <td>
+                    <div class="list-actions">
+                      <button class="btn-muted" type="button" data-tag-action="rename" data-name="${escapeHtml(
+                        entry.name
+                      )}">Rename</button>
+                      <button class="btn-danger" type="button" data-tag-action="delete" data-name="${escapeHtml(
+                        entry.name
+                      )}">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              `
+            )
+            .join("");
+        };
+
+        const renderCategorySelect = (selectedValue = "") => {
+          const categories = window.TLFTA_BLOG.getCategories();
+          postCategory.innerHTML = categories
+            .map(
+              (name) =>
+                `<option value="${escapeHtml(name)}" ${
+                  name === selectedValue ? "selected" : ""
+                }>${escapeHtml(name)}</option>`
+            )
+            .join("");
+        };
+
+        const renderPostSelect = () => {
+          const posts = getPosts();
+          const currentId = postSelect.value;
+          const featured = window.TLFTA_BLOG.getFeaturedPost(posts);
+          const featuredId = featured ? featured.id : "";
+          postSelect.innerHTML = posts
+            .map(
+              (post) =>
+                `<option value="${post.id}" ${post.id === currentId ? "selected" : ""}>${escapeHtml(
+                  `${post.id === featuredId ? "★ " : ""}${post.title}`
+                )}</option>`
+            )
+            .join("");
+
+          if (!postSelect.value && posts.length) {
+            postSelect.value = posts[0].id;
+          }
+        };
+
+        const loadSelectedPost = () => {
+          const post = window.TLFTA_BLOG.getPostById(postSelect.value);
+          if (!post) return;
+          postTitle.value = post.title;
+          postExcerpt.value = post.excerpt;
+          renderCategorySelect(post.category);
+          postDate.value = dateInputValue(post.dateIso);
+          postTags.value = post.tags.join(", ");
+          postLead.value = post.lead;
+          postBody.value = post.body;
+          postNote.value = post.note;
+        };
+
+        const renderFeaturedLabel = () => {
+          const featured = window.TLFTA_BLOG.getFeaturedPost(getPosts());
+          if (!featured) {
+            featuredPostLabel.textContent = "Featured post: none";
+            return;
+          }
+          featuredPostLabel.textContent = `Featured post: ${featured.title}`;
+        };
+
+        const rerenderBlogAdmin = () => {
+          const selectedId = postSelect.value;
+          renderCategoryRows();
+          renderTagRows();
+          renderPostSelect();
+          if (selectedId) postSelect.value = selectedId;
+          loadSelectedPost();
+          renderFeaturedLabel();
+        };
+
         const showDashboard = () => {
           loginView.classList.add("hidden");
           dashboardView.classList.remove("hidden");
           renderInquiries();
+          rerenderBlogAdmin();
         };
 
         const showLogin = () => {
@@ -335,7 +680,7 @@
 
         const isLoggedIn = () => sessionStorage.getItem(AUTH_KEY) === "1";
 
-        loginForm?.addEventListener("submit", (event) => {
+        loginForm.addEventListener("submit", (event) => {
           event.preventDefault();
           setLoginMessage("");
 
@@ -353,13 +698,170 @@
           setLoginMessage("Invalid username or password.", "error");
         });
 
-        refreshBtn?.addEventListener("click", renderInquiries);
+        refreshBtn.addEventListener("click", renderInquiries);
 
-        logoutBtn?.addEventListener("click", () => {
+        logoutBtn.addEventListener("click", () => {
           sessionStorage.removeItem(AUTH_KEY);
           showLogin();
           setLoginMessage("");
-          loginForm?.reset();
+          loginForm.reset();
+        });
+
+        addCategoryForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const name = newCategoryInput.value.trim();
+          if (!name) return;
+
+          if (!window.TLFTA_BLOG.addCategory(name)) {
+            setEditorStatus("Category already exists or invalid.", "error");
+            return;
+          }
+
+          newCategoryInput.value = "";
+          rerenderBlogAdmin();
+          setEditorStatus("Category added.", "success");
+        });
+
+        addTagForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const name = newTagInput.value.trim();
+          if (!name) return;
+
+          if (!window.TLFTA_BLOG.addTag(name)) {
+            setEditorStatus("Tag already exists or invalid.", "error");
+            return;
+          }
+
+          newTagInput.value = "";
+          rerenderBlogAdmin();
+          setEditorStatus("Tag added.", "success");
+        });
+
+        categoryRows.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-cat-action]");
+          if (!button) return;
+
+          const action = button.dataset.catAction;
+          const name = button.dataset.name || "";
+
+          if (action === "rename") {
+            const next = window.prompt("Rename category:", name);
+            if (!next) return;
+            if (!window.TLFTA_BLOG.renameCategory(name, next)) {
+              setEditorStatus("Unable to rename category.", "error");
+              return;
+            }
+            rerenderBlogAdmin();
+            setEditorStatus("Category renamed.", "success");
+            return;
+          }
+
+          if (action === "delete") {
+            const confirmed = window.confirm(`Delete category \"${name}\"? Posts will be moved to a fallback category.`);
+            if (!confirmed) return;
+            if (!window.TLFTA_BLOG.deleteCategory(name)) {
+              setEditorStatus("Unable to delete category.", "error");
+              return;
+            }
+            rerenderBlogAdmin();
+            setEditorStatus("Category deleted.", "success");
+          }
+        });
+
+        tagRows.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-tag-action]");
+          if (!button) return;
+
+          const action = button.dataset.tagAction;
+          const name = button.dataset.name || "";
+
+          if (action === "rename") {
+            const next = window.prompt("Rename tag:", name);
+            if (!next) return;
+            if (!window.TLFTA_BLOG.renameTag(name, next)) {
+              setEditorStatus("Unable to rename tag.", "error");
+              return;
+            }
+            rerenderBlogAdmin();
+            setEditorStatus("Tag renamed.", "success");
+            return;
+          }
+
+          if (action === "delete") {
+            const confirmed = window.confirm(`Delete tag \"${name}\" from all posts?`);
+            if (!confirmed) return;
+            if (!window.TLFTA_BLOG.deleteTag(name)) {
+              setEditorStatus("Unable to delete tag.", "error");
+              return;
+            }
+            rerenderBlogAdmin();
+            setEditorStatus("Tag deleted.", "success");
+          }
+        });
+
+        postSelect.addEventListener("change", loadSelectedPost);
+
+        postEditorForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const id = postSelect.value;
+          if (!id) {
+            setEditorStatus("Select a post first.", "error");
+            return;
+          }
+
+          const dateValue = postDate.value;
+          const dateIso = dateValue
+            ? new Date(`${dateValue}T08:00:00`).toISOString()
+            : new Date().toISOString();
+
+          const payload = {
+            title: postTitle.value,
+            excerpt: postExcerpt.value,
+            category: postCategory.value,
+            dateIso,
+            tags: window.TLFTA_BLOG.parseTagsInput(postTags.value),
+            lead: postLead.value,
+            body: postBody.value,
+            note: postNote.value,
+          };
+
+          if (!window.TLFTA_BLOG.updatePost(id, payload)) {
+            setEditorStatus("Unable to save post changes.", "error");
+            return;
+          }
+
+          rerenderBlogAdmin();
+          postSelect.value = id;
+          loadSelectedPost();
+          setEditorStatus("Post metadata saved.", "success");
+        });
+
+        resetPostBtn.addEventListener("click", () => {
+          const id = postSelect.value;
+          if (!id) return;
+          const confirmed = window.confirm("Reset this post to generated defaults?");
+          if (!confirmed) return;
+          window.TLFTA_BLOG.resetPostOverride(id);
+          rerenderBlogAdmin();
+          postSelect.value = id;
+          loadSelectedPost();
+          setEditorStatus("Post reset to default values.", "success");
+        });
+
+        setFeaturedBtn.addEventListener("click", () => {
+          const id = postSelect.value;
+          if (!id) {
+            setEditorStatus("Select a post first.", "error");
+            return;
+          }
+          if (!window.TLFTA_BLOG.setFeaturedPostId(id)) {
+            setEditorStatus("Unable to set featured post.", "error");
+            return;
+          }
+          rerenderBlogAdmin();
+          postSelect.value = id;
+          setEditorStatus("Featured post updated.", "success");
         });
 
         if (isLoggedIn()) {
