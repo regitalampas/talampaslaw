@@ -358,7 +358,7 @@
 
       .statement-section {
         background: #390d2f;
-        padding: 120px 0;
+        padding: 170px 0;
       }
 
       .statement-text {
@@ -828,29 +828,25 @@
       }
 
       .about {
-        background:
-          radial-gradient(circle at 88% 12%, rgba(201, 168, 76, 0.16) 0%, rgba(201, 168, 76, 0) 42%),
-          var(--surface);
+        background: #390d2f;
       }
 
-      .about-shell {
-        margin-top: 0.35rem;
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      .about .container {
+        width: 100%;
+        max-width: none;
+        padding: 0 18px;
+      }
+
+      .about-head-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
         gap: 1rem;
+        margin-bottom: 32px;
       }
 
-      .about-main,
-      .about-side {
-        background: var(--surface-card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.35rem 1.4rem;
-      }
-
-      .about-main {
-        background: linear-gradient(180deg, #fffdfa 0%, #ffffff 100%);
-        box-shadow: 0 16px 34px rgba(57, 13, 47, 0.08);
+      .about-header {
+        max-width: 72ch;
       }
 
       .about-kicker {
@@ -862,12 +858,14 @@
         text-transform: uppercase;
       }
 
-      .about-main .section-title {
-        margin-bottom: 0.8rem;
+      .about .section-title {
+        margin: 0.7rem 0 0.8rem;
+        color: #ffffff;
       }
 
-      .about-main .section-copy {
-        max-width: 58ch;
+      .about .section-copy {
+        max-width: 66ch;
+        color: rgba(255, 255, 255, 0.7);
       }
 
       .about-actions {
@@ -879,61 +877,211 @@
       }
 
       .about-link {
-        color: #4a1040;
+        color: #ffffff;
         font-weight: 700;
         letter-spacing: 0.03em;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 0.28em;
+        transition: text-decoration-color 0.2s ease;
       }
 
       .about-link:hover {
-        text-decoration: underline;
+        text-decoration-color: #c9a84c;
       }
 
-      .about-side h3 {
+      .about .btn.btn-primary {
+        background: #ef6c11;
+        color: #ffffff;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      }
+
+      .about .btn.btn-primary:hover {
+        background: #d95b05;
+      }
+
+      .about-counter {
         margin: 0;
-        color: #2f0d28;
-        font-family: "Domine", serif;
-        font-size: 1.3rem;
-        line-height: 1.25;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        font-family: "Roboto", sans-serif;
       }
 
-      .about-side p {
-        margin: 0.55rem 0 0;
-        color: #555;
-      }
-
-      .about-timeline {
-        list-style: none;
-        margin: 1rem 0 0;
-        padding: 0;
+      .about-nav-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        font-size: 1.18rem;
+        line-height: 1;
         display: grid;
-        gap: 0.8rem;
+        place-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
       }
 
-      .about-timeline li {
+      .about-nav-btn-left {
+        left: 8px;
+      }
+
+      .about-nav-btn-right {
+        right: 8px;
+      }
+
+      .about-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .about-nav-btn:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
+      }
+
+      .about-timeline-wrap {
         position: relative;
-        padding-left: 1rem;
-        color: #484848;
       }
 
-      .about-timeline li::before {
+      .about-timeline-shell {
+        position: relative;
+        height: 620px;
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      }
+
+      .about-timeline-shell::-webkit-scrollbar {
+        display: none;
+      }
+
+      .about-timeline-shell::before {
         content: "";
         position: absolute;
         left: 0;
-        top: 0.47rem;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
+        right: 0;
+        top: 50%;
+        height: 2px;
         background: #c9a84c;
-        box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.16);
+        transform: translateY(-50%);
+        z-index: 0;
       }
 
-      .about-note {
-        margin-top: 1rem;
-        padding: 0.75rem 0.85rem;
-        border-left: 3px solid #c9a84c;
-        background: #faf6ee;
-        color: #4a3b34;
-        font-size: 0.92rem;
+      .about-track {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        width: max-content;
+        min-width: 1920px;
+        height: 100%;
+      }
+
+      .about-milestone {
+        position: relative;
+        flex: 0 0 320px;
+        width: 320px;
+        height: 100%;
+        scroll-snap-align: center;
+      }
+
+      .about-dot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #c9a84c;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+
+      .about-dot.active {
+        box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.3), 0 0 12px rgba(201, 168, 76, 0.5);
+      }
+
+      .about-year {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        color: rgba(255, 255, 255, 0.1);
+        font-family: "Domine", serif;
+        font-size: 5.5rem;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        z-index: 1;
+      }
+
+      .about-milestone--top .about-year {
+        transform: translate(-50%, 10px);
+      }
+
+      .about-milestone--bottom .about-year {
+        transform: translate(-50%, calc(-100% - 10px));
+      }
+
+      .about-milestone-card {
+        position: absolute;
+        left: 50%;
+        width: 260px;
+        scroll-snap-align: center;
+        border: 1px solid #e3e3e3;
+        border-top: 3px solid #c9a84c;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        padding: 24px;
+        max-height: 240px;
+        overflow: hidden;
+        transform: translateX(-50%);
+        z-index: 3;
+      }
+
+      .about-milestone--top .about-milestone-card {
+        bottom: calc(50% + 32px);
+      }
+
+      .about-milestone--bottom .about-milestone-card {
+        top: calc(50% + 32px);
+      }
+
+      .about-milestone-label {
+        margin: 0;
+        color: #c9a84c;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .about-milestone-title {
+        margin: 0.45rem 0 0;
+        color: #2f0d28;
+        font-family: "Domine", serif;
+        font-size: 1.23rem;
+        line-height: 1.3;
+      }
+
+      .about-milestone-body {
+        margin: 0.55rem 0 0;
+        color: #333333;
+        font-size: 0.95rem;
+        line-height: 1.5;
       }
 
       .practice-grid,
@@ -1194,12 +1342,14 @@
       }
 
       .contact-cta-btn {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         min-height: 56px;
         min-width: 154px;
         font-size: 1.05rem;
         font-family: "DM Sans", sans-serif;
+        text-align: center;
       }
 
       .contact-cta-btn-primary {
@@ -1210,6 +1360,7 @@
         background: transparent;
         color: #ffffff;
         border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
         box-shadow: none;
       }
 
@@ -1854,13 +2005,16 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .about-shell {
-          grid-template-columns: 1fr;
+        .about-head-row {
+          flex-wrap: wrap;
         }
 
-        .about-main,
-        .about-side {
-          padding: 1.1rem 1.15rem;
+        .about-header {
+          flex: 1 1 640px;
+        }
+
+        .about-counter {
+          margin-left: auto;
         }
 
         .team-showcase .container {
@@ -2055,18 +2209,18 @@
           grid-template-columns: 1fr;
         }
 
-        .about-main,
-        .about-side {
-          border-radius: 14px;
-        }
-
         .about-actions {
           flex-direction: column;
           align-items: flex-start;
         }
 
-        .about-side h3 {
-          font-size: 1.16rem;
+        .about .container {
+          padding: 0 14px;
+        }
+
+        .about-nav-btn {
+          width: 44px;
+          height: 44px;
         }
 
         .team-showcase {
@@ -2379,7 +2533,7 @@
                 Guided by faith and nearly 2 decades of experience, we fight for your rights with professionalism,
                 integrity, and excellence.
               </p>
-              <a class="btn btn-primary" href="#contact" data-open-consult-modal>Book a Consultation</a>
+              <a class="btn btn-primary" href="#contact" data-open-consult-modal data-cta-style="native">Book a Consultation</a>
             </div>
           </div>
         </div>
@@ -2571,36 +2725,110 @@
 
       <section id="about" class="about">
         <div class="container">
-          <div class="about-shell">
-            <article class="about-main">
-              <p class="about-kicker">Our Firm</p>
-              <h2 class="section-title">About Us</h2>
+          <div class="about-head-row">
+            <div class="about-header">
+              <p class="about-kicker">OUR FIRM</p>
+              <h2 class="section-title">Our Story</h2>
               <p class="section-copy">
-                The Law Firm of Talampas &amp; Associates is a Philippine-based practice built on principled
-                service and disciplined advocacy. We aim to protect our clients' rights through strategic,
-                transparent, and results-driven legal work while upholding the highest standards of professional conduct.
+                From a focused litigation practice to a full-service firm &mdash; eighteen years of principled advocacy
+                for every Filipino.
               </p>
               <div class="about-actions">
                 <a class="btn btn-primary" href="about-us.html">Read Our Firm History</a>
                 <a class="about-link" href="#team">Meet Our Lawyers</a>
               </div>
-            </article>
-            <aside class="about-side" aria-label="Firm history highlights">
-              <h3>Built Through Years of Principled Advocacy</h3>
-              <p>
-                From courtroom litigation to multi-practice advisory, the firm grew by solving high-stakes legal
-                problems with discipline and clarity.
-              </p>
-              <ul class="about-timeline">
-                <li>Started as a focused litigation practice serving families and small businesses.</li>
-                <li>Expanded into labor, corporate, cybercrime, and environmental matters.</li>
-                <li>Developed a modern, client-centered service model without losing courtroom rigor.</li>
-              </ul>
-              <p class="about-note">
-                Every case is guided by the same standard that shaped our history: prepared advocacy, transparent
-                counsel, and practical outcomes.
-              </p>
-            </aside>
+            </div>
+            <p class="about-counter" data-about-count>01 / 06</p>
+          </div>
+
+          <div class="about-timeline-wrap">
+            <button class="about-nav-btn about-nav-btn-left" type="button" data-about-prev aria-label="Scroll timeline left">
+              <span aria-hidden="true">&#8592;</span>
+            </button>
+            <div class="about-timeline-shell" data-about-timeline aria-label="Firm history timeline">
+              <div class="about-track">
+              <article class="about-milestone about-milestone--top">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2007</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">FOUNDING</p>
+                  <h3 class="about-milestone-title">Where It All Began</h3>
+                  <p class="about-milestone-body">
+                    Established in Quezon City, the firm launched with family law and civil litigation at its core,
+                    guided by integrity and disciplined legal preparation.
+                  </p>
+                </div>
+              </article>
+
+              <article class="about-milestone about-milestone--bottom">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2009</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">GROWTH</p>
+                  <h3 class="about-milestone-title">Expanding Our Reach</h3>
+                  <p class="about-milestone-body">
+                    The practice expanded into labor and corporate advisory while welcoming new associates, allowing
+                    the team to serve both individuals and growing businesses.
+                  </p>
+                </div>
+              </article>
+
+              <article class="about-milestone about-milestone--top">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2012</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">MILESTONE</p>
+                  <h3 class="about-milestone-title">100 Cases and Counting</h3>
+                  <p class="about-milestone-body">
+                    Reaching the 100-case mark strengthened the firm&apos;s reputation for thorough courtroom work
+                    and practical client representation across complex disputes.
+                  </p>
+                </div>
+              </article>
+
+              <article class="about-milestone about-milestone--bottom">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2016</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">EXPANSION</p>
+                  <h3 class="about-milestone-title">A Full-Service Firm</h3>
+                  <p class="about-milestone-body">
+                    New practice areas in cybercrime and environmental law transformed the team into a broader
+                    legal partner for institutions, businesses, and families.
+                  </p>
+                </div>
+              </article>
+
+              <article class="about-milestone about-milestone--top">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2020</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">RESILIENCE</p>
+                  <h3 class="about-milestone-title">Serving Through Adversity</h3>
+                  <p class="about-milestone-body">
+                    During the pandemic, the firm maintained continuity with remote consultations and digital case
+                    workflows while keeping legal support accessible to clients.
+                  </p>
+                </div>
+              </article>
+
+              <article class="about-milestone about-milestone--bottom">
+                <span class="about-dot" aria-hidden="true"></span>
+                <p class="about-year">2026</p>
+                <div class="about-milestone-card">
+                  <p class="about-milestone-label">TODAY</p>
+                  <h3 class="about-milestone-title">Still Fighting for You</h3>
+                  <p class="about-milestone-body">
+                    Now a five-lawyer team across fifteen-plus practice areas, the firm continues to deliver
+                    equitable legal solutions with the same founding principles.
+                  </p>
+                </div>
+              </article>
+              </div>
+            </div>
+            <button class="about-nav-btn about-nav-btn-right" type="button" data-about-next aria-label="Scroll timeline right">
+              <span aria-hidden="true">&#8594;</span>
+            </button>
           </div>
         </div>
       </section>
@@ -2611,7 +2839,7 @@
             <h2 class="contact-cta-title">Ready to book an appointment?<br />Contact us today to get started.</h2>
             <div class="contact-cta-actions">
               <a class="btn btn-primary contact-cta-btn contact-cta-btn-primary" href="#contact" data-open-consult-modal>Contact Us</a>
-              <a class="btn contact-cta-btn contact-cta-btn-secondary" href="tel:289620069">Call Now</a>
+              <a class="btn contact-cta-btn contact-cta-btn-secondary" href="tel:289620069" data-cta-style="native">Call Now</a>
             </div>
           </div>
         </div>
@@ -2636,20 +2864,6 @@
             &times;
           </button>
         </div>
-        <div class="consult-modal-meta">
-          <div>
-            <strong>Phone</strong>
-            <span>289620069</span>
-          </div>
-          <div>
-            <strong>Email</strong>
-            <span>talampasandassociates@yahoo.com</span>
-          </div>
-          <div>
-            <strong>Office Hours</strong>
-            <span>Monday to Friday, 9:00 AM to 6:00 PM</span>
-          </div>
-        </div>
         <form id="consultation-modal-form" class="consult-modal-form">
           <div class="consult-modal-grid">
             <label class="field">
@@ -2662,23 +2876,11 @@
             </label>
             <label class="field">
               Phone Number
-              <input type="tel" name="phone" placeholder="289620069" required />
-            </label>
-            <label class="field">
-              Name of Workplace
-              <input type="text" name="workplace" placeholder="Company or organization" />
-            </label>
-            <label class="field">
-              Employer or Employee
-              <select name="partyType" required>
-                <option value="">Please select...</option>
-                <option value="Employer">Employer</option>
-                <option value="Employee">Employee</option>
-              </select>
+              <input type="tel" name="phone" placeholder="+63 9xx xxx xxxx" required />
             </label>
             <label class="field">
               Location
-              <input type="text" name="location" placeholder="City / Province" required />
+              <input type="text" name="location" placeholder="City/Province" required />
             </label>
             <label class="field full">
               I'd like to talk to you about...
@@ -2887,6 +3089,67 @@
 
         showSlide(0);
         startAutoRotate();
+      })();
+    </script>
+    <script>
+      (() => {
+        const timeline = document.querySelector("[data-about-timeline]");
+        const prevButton = document.querySelector("[data-about-prev]");
+        const nextButton = document.querySelector("[data-about-next]");
+        const countLabel = document.querySelector("[data-about-count]");
+        if (!timeline || !prevButton || !nextButton) return;
+
+        const milestones = Array.from(timeline.querySelectorAll(".about-milestone"));
+        const dots = Array.from(timeline.querySelectorAll(".about-dot"));
+        if (!milestones.length) return;
+
+        const getStep = () => {
+          if (milestones.length < 2) return 320;
+          return milestones[1].offsetLeft - milestones[0].offsetLeft || 320;
+        };
+
+        const scrollByStep = (direction) => {
+          timeline.scrollBy({ left: direction * getStep(), behavior: "smooth" });
+        };
+
+        const formatCount = (value) => String(value).padStart(2, "0");
+
+        const updateActiveMilestone = () => {
+          const centerX = timeline.scrollLeft + timeline.clientWidth / 2;
+          let activeIndex = 0;
+          let smallestDistance = Number.POSITIVE_INFINITY;
+
+          milestones.forEach((milestone, index) => {
+            const milestoneCenter = milestone.offsetLeft + milestone.offsetWidth / 2;
+            const distance = Math.abs(milestoneCenter - centerX);
+            if (distance < smallestDistance) {
+              smallestDistance = distance;
+              activeIndex = index;
+            }
+          });
+
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === activeIndex);
+          });
+
+          if (countLabel) {
+            countLabel.textContent = `${formatCount(activeIndex + 1)} / ${formatCount(milestones.length)}`;
+          }
+        };
+
+        let scrollRaf = null;
+        timeline.addEventListener("scroll", () => {
+          if (scrollRaf) return;
+          scrollRaf = window.requestAnimationFrame(() => {
+            updateActiveMilestone();
+            scrollRaf = null;
+          });
+        }, { passive: true });
+
+        window.addEventListener("resize", updateActiveMilestone);
+        prevButton.addEventListener("click", () => scrollByStep(-1));
+        nextButton.addEventListener("click", () => scrollByStep(1));
+        updateActiveMilestone();
       })();
     </script>
     <script>
