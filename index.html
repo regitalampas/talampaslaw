@@ -31,6 +31,7 @@
         --surface-card: #ffffff;
         --border: #e3e3e3;
         --max-width: 1120px;
+        --nav-height: 96px;
       }
 
       * {
@@ -43,16 +44,11 @@
         padding: 0;
       }
 
-      html {
-        scroll-snap-type: y proximity;
-      }
-
       body {
         font-family: "Roboto", sans-serif;
         color: #262626;
         background: var(--surface);
         line-height: 1.6;
-        scroll-snap-type: y proximity;
         overflow-anchor: none;
       }
 
@@ -109,14 +105,15 @@
       }
 
       header {
-        position: sticky;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 100;
         width: 100%;
-        background: rgba(250, 248, 245, 0.92);
-        border-bottom: none;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        box-shadow: none;
         opacity: 1;
         transform: translateY(0);
         transition: all 0.3s ease;
@@ -126,6 +123,53 @@
         opacity: 0;
         transform: translateY(-100%);
         pointer-events: none;
+      }
+
+      body.home-page #site-nav {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        z-index: 100 !important;
+        background: transparent !important;
+        border-bottom: 1px solid transparent !important;
+        box-shadow: none !important;
+        transition: all 0.3s ease !important;
+      }
+
+      body.home-page #site-nav:not(.scrolled) .logo-text strong,
+      body.home-page #site-nav:not(.scrolled) .nav-links,
+      body.home-page #site-nav:not(.scrolled) .nav-links a {
+        color: #ffffff !important;
+      }
+
+      body.home-page #site-nav:not(.scrolled) .nav-links a:not(:last-child)::after {
+        color: rgba(255, 255, 255, 0.4) !important;
+      }
+
+      body.home-page #site-nav:not(.scrolled) .logo-image {
+        filter: none !important;
+      }
+
+      body.home-page #site-nav.scrolled {
+        background: rgba(250, 248, 245, 0.94) !important;
+        border-bottom: 1px solid rgba(57, 13, 47, 0.08) !important;
+        box-shadow: none !important;
+      }
+
+      body.home-page #site-nav.scrolled .logo-text strong,
+      body.home-page #site-nav.scrolled .nav-links,
+      body.home-page #site-nav.scrolled .nav-links a {
+        color: #390d2f !important;
+      }
+
+      body.home-page #site-nav.scrolled .nav-links a:not(:last-child)::after {
+        color: rgba(57, 13, 47, 0.42) !important;
+      }
+
+      body.home-page #site-nav.scrolled .logo-image {
+        filter: none !important;
       }
 
       header .container {
@@ -218,14 +262,15 @@
         min-height: 100dvh;
         height: 100vh;
         height: 100dvh;
-        background: var(--surface);
-        scroll-snap-align: start;
+        margin: 0;
+        padding: 0;
+        background: transparent;
       }
 
       .hero-card {
         position: absolute;
-        inset: calc(96px + 14px) 18px 18px;
-        border-radius: 28px;
+        inset: 0;
+        border-radius: 0;
         overflow: hidden;
         background: #1a1a1a;
       }
@@ -236,53 +281,63 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: center 20%;
         z-index: 0;
       }
 
       .hero-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.8) 0%,
-          rgba(0, 0, 0, 0.55) 35%,
-          rgba(0, 0, 0, 0.15) 60%,
-          transparent 100%
-        );
-        z-index: 1;
+        display: none;
       }
 
       .hero-overlay {
         position: absolute;
-        inset: auto 0 0 0;
-        height: 20%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        padding: 0 3.2rem 3.95rem;
+        inset: 0;
+        padding-top: 72px;
+        box-sizing: border-box;
         z-index: 2;
       }
 
+      .hero-overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          rgba(57, 13, 47, 0.82) 0%,
+          rgba(57, 13, 47, 0.55) 30%,
+          rgba(57, 13, 47, 0.15) 55%,
+          transparent 72%
+        );
+        z-index: 0;
+      }
+
       .hero-copy {
+        position: absolute;
+        top: 50%;
+        left: 80px;
+        transform: translateY(-50%);
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
         text-align: left;
-        width: min(1200px, 90%);
-        gap: 5px;
+        width: min(600px, calc(100% - 96px));
+        max-width: 600px;
+        gap: 0;
         padding-left: 0.2rem;
+        z-index: 1;
       }
 
       .firm-name {
-        color: var(--accent);
-        letter-spacing: 0.16em;
+        color: #c9a84c;
+        letter-spacing: 0.15em;
         text-transform: uppercase;
-        font-size: 0.72rem;
+        font-size: 0.8rem;
         font-weight: 600;
-        margin: 0;
+        margin: 0 0 8px;
       }
 
       h1 {
@@ -291,11 +346,11 @@
       }
 
       .hero-title {
-        margin: 0;
+        margin: 0 0 16px;
         max-width: none;
         color: #ffffff;
-        line-height: 1.05;
-        font-size: clamp(2.2rem, 4.6vw, 3.9rem);
+        line-height: 1.15;
+        font-size: 3.8rem;
         font-family: "Domine", serif;
         font-weight: 400;
         font-style: normal;
@@ -313,15 +368,15 @@
       }
 
       .hero-summary {
-        margin: 0;
-        max-width: none;
-        color: #f5f5f5;
-        font-size: 0.8rem;
-        white-space: nowrap;
+        margin: 0 0 28px;
+        max-width: 560px;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1rem;
+        white-space: normal;
       }
 
       .hero-copy .btn {
-        margin-top: 5px;
+        margin-top: 0;
       }
 
       .hero-copy .btn.btn-primary {
@@ -329,6 +384,8 @@
         color: #ffffff;
         border: 2px solid #4a1040;
         box-shadow: none;
+        padding: 14px 28px;
+        font-size: 1rem;
         transition: all 0.25s ease;
       }
 
@@ -357,14 +414,14 @@
       }
 
       .statement-section {
-        background: #390d2f;
+        background: #ffffff;
         padding: 170px 0;
       }
 
       .statement-text {
         margin: 0 auto;
         width: min(1200px, 96vw);
-        color: #ffffff;
+        color: #390d2f;
         font-family: "Domine", serif;
         font-size: clamp(2rem, 2.3vw, 2.2rem);
         font-weight: 300;
@@ -380,7 +437,6 @@
         position: relative;
         background: #faf8f5;
         padding: 100px 100px 32px;
-        scroll-snap-align: start;
       }
 
       .practice-snap .container {
@@ -828,25 +884,30 @@
       }
 
       .about {
-        background: #390d2f;
+        background: #ffffff;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding-top: 48px;
+        padding-bottom: 48px;
       }
 
       .about .container {
         width: 100%;
         max-width: none;
-        padding: 0 18px;
+        padding: 0 100px;
       }
 
       .about-head-row {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: flex-end;
         gap: 1rem;
-        margin-bottom: 32px;
+        margin-bottom: 28px;
       }
 
       .about-header {
-        max-width: 72ch;
+        max-width: 68ch;
+        width: 100%;
       }
 
       .about-kicker {
@@ -859,25 +920,29 @@
       }
 
       .about .section-title {
-        margin: 0.7rem 0 0.8rem;
-        color: #ffffff;
+        margin: 6px 0 12px;
+        color: #390d2f;
+      }
+
+      .about .section-title::after {
+        margin-top: 8px;
       }
 
       .about .section-copy {
         max-width: 66ch;
-        color: rgba(255, 255, 255, 0.7);
+        color: #555555;
       }
 
       .about-actions {
-        margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.75rem;
         align-items: center;
+        justify-content: flex-end;
       }
 
       .about-link {
-        color: #ffffff;
+        color: #390d2f;
         font-weight: 700;
         letter-spacing: 0.03em;
         text-decoration: underline;
@@ -900,22 +965,13 @@
         background: #d95b05;
       }
 
-      .about-counter {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.8rem;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        font-family: "Roboto", sans-serif;
-      }
-
       .about-nav-btn {
         width: 48px;
         height: 48px;
         border-radius: 999px;
-        border: 1.5px solid rgba(255, 255, 255, 0.3);
-        background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        border: 1.5px solid rgba(57, 13, 47, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        color: #390d2f;
         font-size: 1.18rem;
         line-height: 1;
         display: grid;
@@ -936,11 +992,11 @@
       }
 
       .about-nav-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: #f3ece4;
       }
 
       .about-nav-btn:focus-visible {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline: 2px solid rgba(57, 13, 47, 0.45);
         outline-offset: 2px;
       }
 
@@ -950,7 +1006,7 @@
 
       .about-timeline-shell {
         position: relative;
-        height: 620px;
+        height: 680px;
         border-radius: 24px;
         background: #ffffff;
         box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
@@ -959,9 +1015,8 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #ffffff 4%, #ffffff 96%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #ffffff 4%, #ffffff 96%, transparent 100%);
       }
 
       .about-timeline-shell::-webkit-scrollbar {
@@ -994,7 +1049,6 @@
         flex: 0 0 320px;
         width: 320px;
         height: 100%;
-        scroll-snap-align: center;
       }
 
       .about-dot {
@@ -1019,7 +1073,7 @@
         top: 50%;
         margin: 0;
         transform: translate(-50%, -50%);
-        color: rgba(255, 255, 255, 0.1);
+        color: rgba(57, 13, 47, 0.08);
         font-family: "Domine", serif;
         font-size: 5.5rem;
         line-height: 1;
@@ -1038,26 +1092,25 @@
       .about-milestone-card {
         position: absolute;
         left: 50%;
-        width: 260px;
-        scroll-snap-align: center;
+        width: 240px;
         border: 1px solid #e3e3e3;
         border-top: 3px solid #c9a84c;
         border-radius: 16px;
         background: #ffffff;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        padding: 24px;
-        max-height: 240px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        max-height: 260px;
         overflow: hidden;
         transform: translateX(-50%);
         z-index: 3;
       }
 
       .about-milestone--top .about-milestone-card {
-        bottom: calc(50% + 32px);
+        bottom: calc(50% + 48px);
       }
 
       .about-milestone--bottom .about-milestone-card {
-        top: calc(50% + 32px);
+        top: calc(50% + 48px);
       }
 
       .about-milestone-label {
@@ -1079,8 +1132,8 @@
 
       .about-milestone-body {
         margin: 0.55rem 0 0;
-        color: #333333;
-        font-size: 0.95rem;
+        color: #444444;
+        font-size: 0.85rem;
         line-height: 1.5;
       }
 
@@ -1321,16 +1374,16 @@
         justify-content: space-between;
         align-items: center;
         gap: 1.5rem;
-        padding: 2.6rem 0;
+        padding: 3.15rem 0;
       }
 
       .contact-cta-title {
         margin: 0;
         color: #ffffff;
         font-family: "DM Sans", sans-serif;
-        font-size: clamp(1.85rem, 3vw, 2.85rem);
+        font-size: clamp(1.72rem, 2.7vw, 2.6rem);
         line-height: 1.2;
-        font-weight: 500;
+        font-weight: 400;
         max-width: 30ch;
       }
 
@@ -1930,6 +1983,10 @@
       }
 
       @media (max-width: 930px) {
+        :root {
+          --nav-height: 88px;
+        }
+
         .nav {
           min-height: auto;
           gap: 0.8rem;
@@ -1953,13 +2010,12 @@
         }
 
         .hero-card {
-          inset: calc(88px + 12px) 16px 16px;
-          border-radius: 24px;
+          inset: 0;
+          border-radius: 0;
         }
 
         .hero-overlay {
-          padding: 0 1.6rem 0.75rem;
-          height: 20%;
+          inset: 0;
         }
 
         .hero-copy {
@@ -2007,14 +2063,16 @@
 
         .about-head-row {
           flex-wrap: wrap;
+          align-items: flex-start;
         }
 
         .about-header {
           flex: 1 1 640px;
         }
 
-        .about-counter {
-          margin-left: auto;
+        .about-actions {
+          width: 100%;
+          justify-content: flex-start;
         }
 
         .team-showcase .container {
@@ -2080,7 +2138,7 @@
         .contact-cta-inner {
           flex-direction: column;
           align-items: flex-start;
-          padding: 2rem 0;
+          padding: 2.4rem 0;
           gap: 1.2rem;
         }
 
@@ -2113,18 +2171,21 @@
       }
 
       @media (max-width: 640px) {
+        :root {
+          --nav-height: 82px;
+        }
+
         section {
           padding: 3.2rem 0;
         }
 
         .hero-card {
-          inset: calc(82px + 10px) 14px 14px;
-          border-radius: 22px;
+          inset: 0;
+          border-radius: 0;
         }
 
         .hero-overlay {
-          padding: 0 1rem 0.6rem;
-          height: 20%;
+          inset: 0;
         }
 
         .firm-name {
@@ -2511,7 +2572,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="home-page">
     <header id="site-nav"></header>
 
     <main id="home">
@@ -2733,12 +2794,10 @@
                 From a focused litigation practice to a full-service firm &mdash; eighteen years of principled advocacy
                 for every Filipino.
               </p>
-              <div class="about-actions">
-                <a class="btn btn-primary" href="about-us.html">Read Our Firm History</a>
-                <a class="about-link" href="#team">Meet Our Lawyers</a>
-              </div>
             </div>
-            <p class="about-counter" data-about-count>01 / 06</p>
+            <div class="about-actions">
+              <a class="btn btn-primary" href="about-us.html">Learn More</a>
+            </div>
           </div>
 
           <div class="about-timeline-wrap">
@@ -3096,7 +3155,6 @@
         const timeline = document.querySelector("[data-about-timeline]");
         const prevButton = document.querySelector("[data-about-prev]");
         const nextButton = document.querySelector("[data-about-next]");
-        const countLabel = document.querySelector("[data-about-count]");
         if (!timeline || !prevButton || !nextButton) return;
 
         const milestones = Array.from(timeline.querySelectorAll(".about-milestone"));
@@ -3111,8 +3169,6 @@
         const scrollByStep = (direction) => {
           timeline.scrollBy({ left: direction * getStep(), behavior: "smooth" });
         };
-
-        const formatCount = (value) => String(value).padStart(2, "0");
 
         const updateActiveMilestone = () => {
           const centerX = timeline.scrollLeft + timeline.clientWidth / 2;
@@ -3131,10 +3187,6 @@
           dots.forEach((dot, index) => {
             dot.classList.toggle("active", index === activeIndex);
           });
-
-          if (countLabel) {
-            countLabel.textContent = `${formatCount(activeIndex + 1)} / ${formatCount(milestones.length)}`;
-          }
         };
 
         let scrollRaf = null;
@@ -3154,14 +3206,26 @@
     </script>
     <script>
       (() => {
-        const nav = document.querySelector("header");
+        const nav = document.getElementById("site-nav");
         const hero = document.querySelector(".hero");
-        if (!nav || !hero || typeof IntersectionObserver === "undefined") return;
+        if (!nav || !hero) return;
+
+        const setScrolled = (value) => {
+          nav.classList.toggle("scrolled", value);
+        };
+
+        if (typeof IntersectionObserver === "undefined") {
+          const onScroll = () => {
+            setScrolled(window.scrollY > hero.offsetHeight - 72);
+          };
+          onScroll();
+          window.addEventListener("scroll", onScroll, { passive: true });
+          return;
+        }
 
         const observer = new IntersectionObserver(
           (entries) => {
-            const entry = entries[0];
-            nav.classList.toggle("nav-hidden", !entry.isIntersecting);
+            setScrolled(!entries[0].isIntersecting);
           },
           { threshold: 0.01 }
         );
