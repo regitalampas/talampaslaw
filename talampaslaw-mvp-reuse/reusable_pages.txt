@@ -1,0 +1,15 @@
+1	https://talampaslaw.com/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/index.html
+2	https://talampaslaw.com/uncategorized/the-evelyn-chua-and-bobby-qua-love-affair/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/uncategorized/the-evelyn-chua-and-bobby-qua-love-affair/index.html
+3	https://talampaslaw.com/uncategorized/jus-soli-and-jus-sanguinis/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/uncategorized/jus-soli-and-jus-sanguinis/index.html
+4	https://talampaslaw.com/a-grain-of-law/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/a-grain-of-law/index.html
+5	https://talampaslaw.com/uncategorized/article-247-rpc-is-killing-a-spouse-and-lover-while-committing-sexual-infidelity-exempts-one-from-criminal-liability/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/uncategorized/article-247-rpc-is-killing-a-spouse-and-lover-while-committing-sexual-infidelity-exempts-one-from-criminal-liability/index.html
+6	https://talampaslaw.com/uncategorized/house-approves-bill-extending-estate-tax-amnesty-deadline-to-june-2025/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/uncategorized/house-approves-bill-extending-estate-tax-amnesty-deadline-to-june-2025/index.html
+7	https://talampaslaw.com/articles/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/articles/index.html
+8	https://talampaslaw.com/area-of-practice/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/area-of-practice/index.html
+9	https://talampaslaw.com/managing-partner/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/managing-partner/index.html
+10	https://talampaslaw.com/contact-us/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/contact-us/index.html
+11	https://talampaslaw.com/testimonials/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/testimonials/index.html
+12	https://talampaslaw.com/bar-matters/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/bar-matters/index.html
+13	https://talampaslaw.com/gallery/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/gallery/index.html
+14	https://talampaslaw.com/about-us/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/about-us/index.html
+15	https://talampaslaw.com/legal-forms/	/Users/reginaldtalampas/Downloads/Projects/Law Firm Website/talampaslaw-mvp-reuse/pages/talampaslaw.com/legal-forms/index.html
