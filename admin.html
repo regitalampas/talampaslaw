@@ -347,31 +347,11 @@
               </table>
             </div>
           </section>
-
-          <section class="subpanel">
-            <h3>Tags (CRUD)</h3>
-            <form id="add-tag-form" class="btn-row" style="margin-bottom: 0.6rem">
-              <input id="new-tag" type="text" placeholder="Add tag" required />
-              <button class="btn-primary" type="submit">Add</button>
-            </form>
-            <div class="table-wrap">
-              <table class="list-table" aria-label="Tag list">
-                <thead>
-                  <tr>
-                    <th>Tag</th>
-                    <th>Posts</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="tag-rows"></tbody>
-              </table>
-            </div>
-          </section>
         </div>
 
         <section class="subpanel blog-editor">
           <h3>Edit Blog Post Metadata</h3>
-          <p>Customize title, category, tags, and detail-page text for each post.</p>
+          <p>Customize title, category, searchable metadata keywords, and detail-page text for each post.</p>
           <div class="btn-row" style="margin-bottom: 0.65rem">
             <button id="set-featured-btn" class="btn-muted" type="button">Set Selected as Featured</button>
           </div>
@@ -404,8 +384,8 @@
             </div>
 
             <label class="field">
-              Tags (comma separated)
-              <input id="post-tags" type="text" placeholder="Client Rights, Compliance, Documentation" required />
+              Search metadata keywords (comma separated)
+              <input id="post-metadata" type="text" placeholder="annulment, custody, legal process, philippines" />
             </label>
 
             <label class="field">
@@ -452,11 +432,8 @@
         const logoutBtn = document.getElementById("logout-btn");
 
         const categoryRows = document.getElementById("category-rows");
-        const tagRows = document.getElementById("tag-rows");
         const addCategoryForm = document.getElementById("add-category-form");
-        const addTagForm = document.getElementById("add-tag-form");
         const newCategoryInput = document.getElementById("new-category");
-        const newTagInput = document.getElementById("new-tag");
 
         const postEditorForm = document.getElementById("post-editor-form");
         const postSelect = document.getElementById("post-select");
@@ -464,7 +441,7 @@
         const postExcerpt = document.getElementById("post-excerpt");
         const postCategory = document.getElementById("post-category");
         const postDate = document.getElementById("post-date");
-        const postTags = document.getElementById("post-tags");
+        const postMetadata = document.getElementById("post-metadata");
         const postLead = document.getElementById("post-lead");
         const postBody = document.getElementById("post-body");
         const postNote = document.getElementById("post-note");
@@ -573,36 +550,6 @@
             .join("");
         };
 
-        const renderTagRows = () => {
-          const counts = window.TLFTA_BLOG.getTagCounts(getPosts());
-
-          if (!counts.length) {
-            tagRows.innerHTML = `<tr><td class="empty" colspan="3">No tags available.</td></tr>`;
-            return;
-          }
-
-          tagRows.innerHTML = counts
-            .map(
-              (entry) => `
-                <tr>
-                  <td>${escapeHtml(entry.name)}</td>
-                  <td>${entry.count}</td>
-                  <td>
-                    <div class="list-actions">
-                      <button class="btn-muted" type="button" data-tag-action="rename" data-name="${escapeHtml(
-                        entry.name
-                      )}">Rename</button>
-                      <button class="btn-danger" type="button" data-tag-action="delete" data-name="${escapeHtml(
-                        entry.name
-                      )}">Delete</button>
-                    </div>
-                  </td>
-                </tr>
-              `
-            )
-            .join("");
-        };
-
         const renderCategorySelect = (selectedValue = "") => {
           const categories = window.TLFTA_BLOG.getCategories();
           postCategory.innerHTML = categories
@@ -641,7 +588,7 @@
           postExcerpt.value = post.excerpt;
           renderCategorySelect(post.category);
           postDate.value = dateInputValue(post.dateIso);
-          postTags.value = post.tags.join(", ");
+          postMetadata.value = (post.metadataKeywords || []).join(", ");
           postLead.value = post.lead;
           postBody.value = post.body;
           postNote.value = post.note;
@@ -659,7 +606,6 @@
         const rerenderBlogAdmin = () => {
           const selectedId = postSelect.value;
           renderCategoryRows();
-          renderTagRows();
           renderPostSelect();
           if (selectedId) postSelect.value = selectedId;
           loadSelectedPost();
@@ -722,21 +668,6 @@
           setEditorStatus("Category added.", "success");
         });
 
-        addTagForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const name = newTagInput.value.trim();
-          if (!name) return;
-
-          if (!window.TLFTA_BLOG.addTag(name)) {
-            setEditorStatus("Tag already exists or invalid.", "error");
-            return;
-          }
-
-          newTagInput.value = "";
-          rerenderBlogAdmin();
-          setEditorStatus("Tag added.", "success");
-        });
-
         categoryRows.addEventListener("click", (event) => {
           const button = event.target.closest("[data-cat-action]");
           if (!button) return;
@@ -768,37 +699,6 @@
           }
         });
 
-        tagRows.addEventListener("click", (event) => {
-          const button = event.target.closest("[data-tag-action]");
-          if (!button) return;
-
-          const action = button.dataset.tagAction;
-          const name = button.dataset.name || "";
-
-          if (action === "rename") {
-            const next = window.prompt("Rename tag:", name);
-            if (!next) return;
-            if (!window.TLFTA_BLOG.renameTag(name, next)) {
-              setEditorStatus("Unable to rename tag.", "error");
-              return;
-            }
-            rerenderBlogAdmin();
-            setEditorStatus("Tag renamed.", "success");
-            return;
-          }
-
-          if (action === "delete") {
-            const confirmed = window.confirm(`Delete tag \"${name}\" from all posts?`);
-            if (!confirmed) return;
-            if (!window.TLFTA_BLOG.deleteTag(name)) {
-              setEditorStatus("Unable to delete tag.", "error");
-              return;
-            }
-            rerenderBlogAdmin();
-            setEditorStatus("Tag deleted.", "success");
-          }
-        });
-
         postSelect.addEventListener("change", loadSelectedPost);
 
         postEditorForm.addEventListener("submit", (event) => {
@@ -820,7 +720,7 @@
             excerpt: postExcerpt.value,
             category: postCategory.value,
             dateIso,
-            tags: window.TLFTA_BLOG.parseTagsInput(postTags.value),
+            metadataKeywords: window.TLFTA_BLOG.parseMetadataInput(postMetadata.value),
             lead: postLead.value,
             body: postBody.value,
             note: postNote.value,

@@ -234,21 +234,6 @@
         padding: 1.4rem;
       }
 
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.45rem;
-        margin-bottom: 1rem;
-      }
-
-      .tag {
-        border-radius: 999px;
-        border: 1px solid #d9c2cf;
-        padding: 0.25rem 0.65rem;
-        font-size: 0.77rem;
-        color: #563f55;
-      }
-
       .article-wrap p {
         margin: 0 0 1rem;
         color: #3e3340;
@@ -505,7 +490,6 @@
         </section>
 
         <section class="article-wrap">
-          <div class="tags" id="tag-list"></div>
           <p id="lead"></p>
           <p id="body"></p>
 
@@ -553,7 +537,6 @@
         const featureTitle = document.getElementById("feature-title");
         const featureMeta = document.getElementById("feature-meta");
         const crumbTitle = document.getElementById("crumb-title");
-        const tagList = document.getElementById("tag-list");
         const lead = document.getElementById("lead");
         const body = document.getElementById("body");
         const note = document.getElementById("note");
@@ -568,8 +551,6 @@
         featureTitle.textContent = post.title;
         featureMeta.textContent = `${post.category} • ${window.TLFTA_BLOG.formatDisplayDate(post.dateIso)}`;
         crumbTitle.textContent = post.title;
-
-        tagList.innerHTML = post.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
         lead.textContent = post.lead;
         body.textContent = post.body;
         note.textContent = post.note;
@@ -591,15 +572,25 @@
         });
 
         const allPosts = window.TLFTA_BLOG.getPosts();
-        const preferredTag = post.tags[0] || "";
+        const baseMetadata = new Set((post.metadataKeywords || []).map((keyword) => keyword.toLowerCase()));
         const chosenIds = new Set();
 
         const recommendations = [];
 
-        allPosts.forEach((candidate) => {
+        const scoredByMetadata = allPosts
+          .filter((candidate) => candidate.id !== post.id)
+          .map((candidate) => {
+            const overlap = (candidate.metadataKeywords || []).reduce((count, keyword) => {
+              return baseMetadata.has(String(keyword).toLowerCase()) ? count + 1 : count;
+            }, 0);
+            return { candidate, overlap };
+          })
+          .filter((entry) => entry.overlap > 0)
+          .sort((a, b) => b.overlap - a.overlap);
+
+        scoredByMetadata.forEach(({ candidate }) => {
           if (recommendations.length >= 3) return;
-          if (candidate.id === post.id) return;
-          if (!preferredTag || !candidate.tags.includes(preferredTag)) return;
+          if (chosenIds.has(candidate.id)) return;
           recommendations.push(candidate);
           chosenIds.add(candidate.id);
         });
@@ -627,9 +618,7 @@
                   <img src="${item.imagePath}" alt="${item.title}" loading="lazy" />
                   <div class="recommended-card-body">
                     <div class="recommended-title">${item.title}</div>
-                    <div class="recommended-meta">${window.TLFTA_BLOG.formatDisplayDate(item.dateIso)} • ${item.tags
-                      .slice(0, 2)
-                      .join(" • ")}</div>
+                    <div class="recommended-meta">${window.TLFTA_BLOG.formatDisplayDate(item.dateIso)} • ${item.category}</div>
                   </div>
                 </a>
               `

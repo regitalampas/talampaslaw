@@ -1,7 +1,6 @@
 (() => {
   const STORAGE_KEYS = {
     categories: "tlfta_blog_categories",
-    tags: "tlfta_blog_tags",
     overrides: "tlfta_blog_post_overrides",
     featuredPostId: "tlfta_blog_featured_post_id",
   };
@@ -22,27 +21,19 @@
     "General Legal Updates",
   ];
 
-  const DEFAULT_TAGS = [
-    "Client Rights",
-    "Case Preparation",
-    "Compliance",
-    "Due Process",
-    "Documentation",
-    "Legal Strategy",
-    "Consultation Tips",
-    "Metro Manila",
-    "Quezon City",
-    "Court Procedure",
-    "Mediation",
-    "Contracts",
-    "Risk Management",
-    "Data Privacy",
-    "Evidence",
-    "Philippine Law",
-    "Family Welfare",
-    "Workplace Concerns",
-    "Business Protection",
-    "Regulatory Updates",
+  const DEFAULT_METADATA_KEYWORDS = [
+    "Philippine law",
+    "legal consultation",
+    "client rights",
+    "case preparation",
+    "compliance",
+    "documentation",
+    "court procedure",
+    "contracts",
+    "risk management",
+    "legal strategy",
+    "dispute resolution",
+    "regulatory updates",
   ];
 
   const TITLE_PATTERNS = [
@@ -122,22 +113,19 @@
 
   const pickCategory = (seed) => DEFAULT_CATEGORIES[seed % DEFAULT_CATEGORIES.length] || DEFAULT_CATEGORIES[0];
 
-  const pickTags = (seed) => {
-    const first = DEFAULT_TAGS[seed % DEFAULT_TAGS.length];
-    const second = DEFAULT_TAGS[(seed + 5) % DEFAULT_TAGS.length];
-    const third = DEFAULT_TAGS[(seed + 11) % DEFAULT_TAGS.length];
-    return uniqueStrings([first, second, third]).slice(0, 3);
+  const pickMetadataKeywords = (seed, category) => {
+    const topicA = SUBTOPICS[seed % SUBTOPICS.length];
+    const topicB = SUBTOPICS[(seed + 3) % SUBTOPICS.length];
+    const seedKeyword = DEFAULT_METADATA_KEYWORDS[seed % DEFAULT_METADATA_KEYWORDS.length];
+    return uniqueStrings([category, topicA, topicB, seedKeyword, "Philippines"]).slice(0, 8);
   };
+
+  const parseMetadataInput = (value) =>
+    uniqueStrings(String(value || "").split(",").map((item) => item.trim())).slice(0, 12);
 
   const getCategories = () => {
     const stored = uniqueStrings(readJson(STORAGE_KEYS.categories, DEFAULT_CATEGORIES));
     if (!stored.length) return [...DEFAULT_CATEGORIES];
-    return stored;
-  };
-
-  const getTags = () => {
-    const stored = uniqueStrings(readJson(STORAGE_KEYS.tags, DEFAULT_TAGS));
-    if (!stored.length) return [...DEFAULT_TAGS];
     return stored;
   };
 
@@ -159,32 +147,19 @@
     writeJson(STORAGE_KEYS.categories, categories);
   };
 
-  const ensureTagsExist = (tagList) => {
-    const tags = getTags();
-    let changed = false;
-    uniqueStrings(tagList).forEach((tag) => {
-      if (tags.some((item) => item.toLowerCase() === tag.toLowerCase())) return;
-      tags.push(tag);
-      changed = true;
-    });
-    if (changed) {
-      writeJson(STORAGE_KEYS.tags, tags);
-    }
-  };
-
   const buildDefaultPost = (imagePath, index) => {
     const id = toIdFromPath(imagePath);
     const seed = hash(id);
     const category = pickCategory(seed);
-    const chosenTags = pickTags(seed);
+    const metadataKeywords = pickMetadataKeywords(seed, category);
     const daysBack = index * 3;
     const fallbackDate = new Date();
     fallbackDate.setDate(fallbackDate.getDate() - daysBack);
 
     const title = formatTitle(category, seed, index);
-    const excerpt = `A practical ${category.toLowerCase()} note focused on ${chosenTags
-      .map((tag) => tag.toLowerCase())
-      .slice(0, 2)
+    const excerpt = `A practical ${category.toLowerCase()} note focused on ${metadataKeywords
+      .map((keyword) => keyword.toLowerCase())
+      .slice(1, 3)
       .join(" and ")} for clients in the Philippines.`;
 
     return {
@@ -196,7 +171,7 @@
       body: `When legal concerns arise, early preparation can reduce risk and delay. Keep records organized, confirm timelines, and seek guidance specific to your facts and jurisdiction.`,
       note: `For case-specific advice, consult counsel before taking action.`,
       category,
-      tags: chosenTags,
+      metadataKeywords,
       dateIso: normalizeDate(fallbackDate.toISOString(), new Date().toISOString()),
     };
   };
@@ -210,8 +185,12 @@
       const override = overrides[fallback.id] || {};
 
       const category = cleanString(override.category) || fallback.category;
-      const mergedTags = uniqueStrings(override.tags || fallback.tags);
-      const finalTags = mergedTags.length ? mergedTags.slice(0, 8) : fallback.tags;
+      const rawMetadata =
+        override.metadataKeywords !== undefined ? override.metadataKeywords : override.tags;
+      const mergedMetadata = Array.isArray(rawMetadata)
+        ? uniqueStrings(rawMetadata)
+        : parseMetadataInput(rawMetadata);
+      const metadataKeywords = mergedMetadata.length ? mergedMetadata : fallback.metadataKeywords;
 
       return {
         ...fallback,
@@ -221,7 +200,7 @@
         body: cleanString(override.body) || fallback.body,
         note: cleanString(override.note) || fallback.note,
         category,
-        tags: finalTags,
+        metadataKeywords,
         dateIso: normalizeDate(override.dateIso || fallback.dateIso, fallback.dateIso),
       };
     });
@@ -275,28 +254,9 @@
     ];
   };
 
-  const getTagCounts = (posts = getPosts()) => {
-    const counts = posts.reduce((accumulator, post) => {
-      ensureArray(post.tags).forEach((tag) => {
-        const key = cleanString(tag);
-        if (!key) return;
-        accumulator[key] = (accumulator[key] || 0) + 1;
-      });
-      return accumulator;
-    }, {});
-
-    const ordered = uniqueStrings([...getTags(), ...Object.keys(counts)]);
-    return ordered.map((name) => ({ name, count: counts[name] || 0 }));
-  };
-
   const setCategories = (categories) => {
     const cleaned = uniqueStrings(categories);
     writeJson(STORAGE_KEYS.categories, cleaned.length ? cleaned : DEFAULT_CATEGORIES);
-  };
-
-  const setTags = (tags) => {
-    const cleaned = uniqueStrings(tags);
-    writeJson(STORAGE_KEYS.tags, cleaned.length ? cleaned : DEFAULT_TAGS);
   };
 
   const addCategory = (name) => {
@@ -306,16 +266,6 @@
     if (categories.some((item) => item.toLowerCase() === clean.toLowerCase())) return false;
     categories.push(clean);
     setCategories(categories);
-    return true;
-  };
-
-  const addTag = (name) => {
-    const clean = cleanString(name);
-    if (!clean) return false;
-    const tags = getTags();
-    if (tags.some((item) => item.toLowerCase() === clean.toLowerCase())) return false;
-    tags.push(clean);
-    setTags(tags);
     return true;
   };
 
@@ -346,35 +296,6 @@
     return true;
   };
 
-  const renameTag = (oldName, nextName) => {
-    const oldClean = cleanString(oldName);
-    const nextClean = cleanString(nextName);
-    if (!oldClean || !nextClean) return false;
-
-    const tags = getTags();
-    const index = tags.findIndex((item) => item.toLowerCase() === oldClean.toLowerCase());
-    if (index < 0) return false;
-
-    if (tags.some((item, itemIndex) => itemIndex !== index && item.toLowerCase() === nextClean.toLowerCase())) {
-      return false;
-    }
-
-    tags[index] = nextClean;
-    setTags(tags);
-
-    const overrides = getOverrideMap();
-    Object.keys(overrides).forEach((postId) => {
-      const entry = overrides[postId];
-      const entryTags = uniqueStrings(entry.tags || []);
-      if (!entryTags.length) return;
-      entry.tags = entryTags.map((tag) =>
-        tag.toLowerCase() === oldClean.toLowerCase() ? nextClean : tag
-      );
-    });
-    setOverrideMap(overrides);
-    return true;
-  };
-
   const deleteCategory = (name) => {
     const clean = cleanString(name);
     if (!clean) return false;
@@ -400,34 +321,6 @@
     return true;
   };
 
-  const deleteTag = (name) => {
-    const clean = cleanString(name);
-    if (!clean) return false;
-
-    const tags = getTags();
-    const nextTags = tags.filter((item) => item.toLowerCase() !== clean.toLowerCase());
-    if (nextTags.length === tags.length) return false;
-    if (!nextTags.length) nextTags.push(DEFAULT_TAGS[0]);
-    setTags(nextTags);
-
-    const posts = getPosts();
-    const overrides = getOverrideMap();
-
-    posts.forEach((post) => {
-      const nextPostTags = uniqueStrings(post.tags).filter((tag) => tag.toLowerCase() !== clean.toLowerCase());
-      const replacementTags = nextPostTags.length ? nextPostTags : [nextTags[0]];
-      const current = overrides[post.id] || {};
-      current.tags = replacementTags;
-      overrides[post.id] = current;
-    });
-
-    setOverrideMap(overrides);
-    return true;
-  };
-
-  const parseTagsInput = (value) =>
-    uniqueStrings(String(value || "").split(",").map((tag) => tag.trim())).slice(0, 8);
-
   const updatePost = (postId, patch) => {
     const id = cleanString(postId);
     if (!id || !patch || typeof patch !== "object") return false;
@@ -447,12 +340,14 @@
       ensureCategoryExists(next.category);
     }
 
-    if (patch.tags !== undefined) {
-      const tags = Array.isArray(patch.tags) ? uniqueStrings(patch.tags) : parseTagsInput(patch.tags);
-      next.tags = tags;
-      ensureTagsExist(tags);
+    if (patch.metadataKeywords !== undefined) {
+      const metadataKeywords = Array.isArray(patch.metadataKeywords)
+        ? uniqueStrings(patch.metadataKeywords)
+        : parseMetadataInput(patch.metadataKeywords);
+      next.metadataKeywords = metadataKeywords;
     }
 
+    delete next.tags;
     overrides[id] = next;
     setOverrideMap(overrides);
     return true;
@@ -474,17 +369,12 @@
     getFeaturedPost,
     setFeaturedPostId,
     getCategories,
-    getTags,
     getCategoryCounts,
-    getTagCounts,
     formatDisplayDate,
-    parseTagsInput,
+    parseMetadataInput,
     addCategory,
-    addTag,
     renameCategory,
-    renameTag,
     deleteCategory,
-    deleteTag,
     updatePost,
     resetPostOverride,
   };

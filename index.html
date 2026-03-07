@@ -2617,7 +2617,7 @@
           </div>
 
           <div class="practice-snap-grid">
-            <a class="practice-snap-card" href="blog.html?tag=Family%20Law#posts" aria-label="View Family Law posts">
+            <a class="practice-snap-card" href="blog.html?category=Family%20Law#posts" aria-label="View Family Law posts">
               <span class="practice-badge">Family Law</span>
               <div class="practice-snap-meta">
                 <h3>Protecting Families</h3>
@@ -2626,7 +2626,7 @@
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
             </a>
 
-            <a class="practice-snap-card" href="blog.html?tag=Corporate%20Law#posts" aria-label="View Corporate Law posts">
+            <a class="practice-snap-card" href="blog.html?category=Corporate%20Law#posts" aria-label="View Corporate Law posts">
               <span class="practice-badge">Corporate Law</span>
               <div class="practice-snap-meta">
                 <h3>Building Strong Businesses</h3>
@@ -2635,7 +2635,7 @@
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
             </a>
 
-            <a class="practice-snap-card" href="blog.html?tag=Labor%20Law#posts" aria-label="View Labor Law posts">
+            <a class="practice-snap-card" href="blog.html?category=Labor%20Law#posts" aria-label="View Labor Law posts">
               <span class="practice-badge">Labor Law</span>
               <div class="practice-snap-meta">
                 <h3>Defending Workers' Rights</h3>
@@ -2644,7 +2644,7 @@
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
             </a>
 
-            <a class="practice-snap-card" href="blog.html?tag=Cybercrime%20Law#posts" aria-label="View Cybercrime Law posts">
+            <a class="practice-snap-card" href="blog.html?category=Cybercrime%20Law#posts" aria-label="View Cybercrime Law posts">
               <span class="practice-badge">Cybercrime Law</span>
               <div class="practice-snap-meta">
                 <h3>Justice in the Digital Age</h3>
@@ -2653,7 +2653,7 @@
               <span class="practice-snap-arrow" aria-hidden="true">&rarr;</span>
             </a>
 
-            <a class="practice-snap-card" href="blog.html?tag=Environmental%20Law#posts" aria-label="View Environmental Law posts">
+            <a class="practice-snap-card" href="blog.html?category=Environmental%20Law#posts" aria-label="View Environmental Law posts">
               <span class="practice-badge">Environmental Law</span>
               <div class="practice-snap-meta">
                 <h3>Protecting the Planet</h3>
@@ -3022,10 +3022,7 @@
                 <div class="grain-home-body">
                   <h3 class="grain-home-title">${post.title}</h3>
                   <time class="grain-home-date" datetime="${post.dateIso}">${window.TLFTA_BLOG.formatDisplayDate(post.dateIso)}</time>
-                  <div class="grain-home-meta">${post.tags
-                    .slice(0, 2)
-                    .map((tag) => `<span class="grain-home-tag">${tag}</span>`)
-                    .join("")}</div>
+                  <div class="grain-home-meta"><span class="grain-home-tag">${post.category}</span></div>
                 </div>
               </a>
             `

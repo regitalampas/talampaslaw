@@ -377,20 +377,6 @@
         font-size: 0.93rem;
       }
 
-      .post-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
-
-      .post-tag {
-        font-size: 0.7rem;
-        padding: 0.18rem 0.5rem;
-        border-radius: 999px;
-        border: 1px solid #d6bfcb;
-        color: #553e55;
-      }
-
       .read-link {
         margin-top: 0.25rem;
         font-weight: 700;
@@ -657,17 +643,15 @@
           ? allPosts.filter((post) => post.id !== featuredPost.id)
           : allPosts.slice();
         const query = new URLSearchParams(window.location.search);
-        const requestedTag = (query.get("tag") || "").trim();
+        const requestedCategoryFromLegacyTag = (query.get("tag") || "").trim();
         const requestedCategory = (query.get("category") || "").trim();
         const requestedSearch = (query.get("search") || "").trim();
         const categoryNames = new Set(
           window.TLFTA_BLOG.getCategoryCounts(allPosts).map((entry) => entry.name)
         );
 
-        if (requestedTag) {
-          if (categoryNames.has(requestedTag)) {
-            state.activeCategory = requestedTag;
-          }
+        if (requestedCategoryFromLegacyTag && categoryNames.has(requestedCategoryFromLegacyTag)) {
+          state.activeCategory = requestedCategoryFromLegacyTag;
         }
 
         if (requestedCategory && categoryNames.has(requestedCategory)) {
@@ -707,7 +691,7 @@
             const categoryMatch =
               state.activeCategory === "All Posts" || post.category === state.activeCategory;
             const searchBlob =
-              `${post.title} ${post.excerpt} ${post.category} ${post.tags.join(" ")}`.toLowerCase();
+              `${post.title} ${post.excerpt} ${post.category} ${(post.metadataKeywords || []).join(" ")}`.toLowerCase();
             const searchMatch = !state.searchTerm || searchBlob.includes(state.searchTerm);
             return categoryMatch && searchMatch;
           });
@@ -748,10 +732,6 @@
                       )}</p>
                       <h3 class="post-title">${post.title}</h3>
                       <p class="post-excerpt">${post.excerpt}</p>
-                      <div class="post-tags">${post.tags
-                        .slice(0, 3)
-                        .map((tag) => `<span class="post-tag">${tag}</span>`)
-                        .join("")}</div>
                       <a class="read-link" href="blog-detail.html?id=${encodeURIComponent(
                         post.id
                       )}">Read Full Post</a>
