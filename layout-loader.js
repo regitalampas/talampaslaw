@@ -157,6 +157,42 @@
     messageEl.className = type ? `form-message ${type}` : "form-message";
   };
 
+  const normalizeInquiryValue = (value) => String(value || "").trim().toLowerCase();
+  const buildInquirySignature = (inquiry) =>
+    [
+      normalizeInquiryValue(inquiry.name),
+      normalizeInquiryValue(inquiry.email),
+      normalizeInquiryValue(inquiry.phone),
+      normalizeInquiryValue(inquiry.location),
+      normalizeInquiryValue(inquiry.workplace),
+      normalizeInquiryValue(inquiry.partyType),
+      normalizeInquiryValue(inquiry.message),
+    ].join("|");
+
+  const appendInquiryIfNew = (inquiry) => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const inquiries = raw ? JSON.parse(raw) : [];
+    const list = Array.isArray(inquiries) ? inquiries : [];
+    const latest = list[0];
+
+    if (latest) {
+      const samePayload = buildInquirySignature(latest) === buildInquirySignature(inquiry);
+      const latestTime = Date.parse(String(latest.createdAt || ""));
+      const currentTime = Date.parse(String(inquiry.createdAt || ""));
+      const withinDuplicateWindow =
+        Number.isFinite(latestTime) &&
+        Number.isFinite(currentTime) &&
+        Math.abs(currentTime - latestTime) <= 10000;
+
+      if (samePayload && withinDuplicateWindow) {
+        return false;
+      }
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([inquiry, ...list]));
+    return true;
+  };
+
   const bindConsultModal = () => {
     if (document.body.dataset.consultModalBound === "1") {
       return;
@@ -242,13 +278,9 @@
       };
 
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        const inquiries = raw ? JSON.parse(raw) : [];
-        const nextInquiries = Array.isArray(inquiries) ? [inquiry, ...inquiries] : [inquiry];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextInquiries));
+        appendInquiryIfNew(inquiry);
         form.reset();
-        setMessage(messageEl, "Inquiry submitted successfully. Our team will contact you soon.", "success");
-        window.setTimeout(closeModal, 700);
+        setMessage(messageEl, "Sent successfully. Your consultation request has been received.", "success");
       } catch (error) {
         setMessage(messageEl, "Unable to submit right now. Please try again.", "error");
       }
