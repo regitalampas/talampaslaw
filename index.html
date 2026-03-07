@@ -414,7 +414,7 @@
       }
 
       .statement-section {
-        background: #ffffff;
+        background: #f5f5f5;
         padding: 170px 0;
       }
 
@@ -1007,32 +1007,18 @@
       .about-timeline-shell {
         position: relative;
         height: 680px;
-        border-radius: 24px;
-        background: #ffffff;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
         overflow-x: scroll;
-        overflow-y: hidden;
+        overflow-y: visible;
         scrollbar-width: none;
         -ms-overflow-style: none;
         scroll-behavior: smooth;
-        mask-image: linear-gradient(to right, transparent 0%, #ffffff 4%, #ffffff 96%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #ffffff 4%, #ffffff 96%, transparent 100%);
       }
 
       .about-timeline-shell::-webkit-scrollbar {
         display: none;
-      }
-
-      .about-timeline-shell::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
-        height: 2px;
-        background: #c9a84c;
-        transform: translateY(-50%);
-        z-index: 0;
       }
 
       .about-track {
@@ -1042,6 +1028,18 @@
         width: max-content;
         min-width: 1920px;
         height: 100%;
+      }
+
+      .about-track::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        background: #c9a84c;
+        transform: translateY(-50%);
+        z-index: 0;
       }
 
       .about-milestone {
@@ -1154,10 +1152,10 @@
       }
 
       #team {
-        background: #f0ece6;
+        background: #f5f5f5;
         border-top: 1px solid rgba(0, 0, 0, 0.06);
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        padding: 2.6rem 0;
+        padding: 2.2rem 0 0;
       }
 
       #team .container {
@@ -1202,7 +1200,7 @@
         margin: 0 auto;
         gap: 34px;
         height: auto;
-        min-height: 420px;
+        min-height: 0;
       }
 
       .featured-photo-wrap {
@@ -1210,17 +1208,19 @@
         flex: 0 0 220px;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        align-self: flex-end;
         overflow: hidden;
         height: auto;
       }
 
       .featured-photo {
         display: block;
-        width: min(100%, 220px);
-        height: 350px;
+        width: auto;
+        max-width: 220px;
+        height: 320px;
         object-fit: contain;
-        object-position: bottom center;
+        object-position: top center;
         background: transparent;
         mix-blend-mode: normal;
         filter: none;
@@ -1234,18 +1234,18 @@
       .featured-content {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         height: auto;
-        min-height: 430px;
-        padding: 0.2rem 0;
-        align-self: center;
+        min-height: 0;
+        padding: 0;
+        align-self: flex-start;
         max-width: 560px;
       }
 
       .featured-label {
         margin: 0;
         color: #c9a84c;
-        font-size: 0.88rem;
+        font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.13em;
         text-transform: uppercase;
@@ -1254,16 +1254,16 @@
       .featured-label::after {
         content: "";
         display: block;
-        width: 96px;
+        width: 77px;
         border-bottom: 2px solid #c9a84c;
-        margin-top: 0.62rem;
+        margin-top: 0.5rem;
       }
 
       .featured-name {
-        margin: 0.72rem 0 0.7rem;
+        margin: 0.58rem 0 0.56rem;
         color: #390d2f;
-        font-size: clamp(2.4rem, 3.8vw, 3.4rem);
-        line-height: 1.06;
+        font-size: clamp(1.92rem, 3.04vw, 2.72rem);
+        line-height: 1.05;
         font-weight: 700;
       }
 
@@ -1271,15 +1271,15 @@
         margin: 0;
         max-width: 100%;
         color: #4a4a4a;
-        font-size: clamp(1.22rem, 1.55vw, 1.62rem);
-        line-height: 1.52;
+        font-size: clamp(0.98rem, 1.24vw, 1.3rem);
+        line-height: 1.35;
       }
 
       .featured-focus {
-        margin: 1.12rem 0 0;
+        margin: 0.58rem 0 0;
         color: #c9a84c;
-        font-size: clamp(1.02rem, 1.2vw, 1.2rem);
-        line-height: 1.4;
+        font-size: clamp(0.82rem, 0.96vw, 0.96rem);
+        line-height: 1.28;
         font-weight: 500;
         font-style: italic;
       }
@@ -2084,7 +2084,7 @@
         }
 
         #team {
-          padding: 2.3rem 0;
+          padding: 1.9rem 0 0;
         }
 
         #team .container {
@@ -2298,7 +2298,7 @@
         }
 
         #team {
-          padding: 1.9rem 0;
+          padding: 1.5rem 0 0;
         }
 
         #team .container {
@@ -2310,7 +2310,7 @@
         }
 
         .featured-name {
-          font-size: clamp(1.95rem, 8vw, 2.6rem);
+          font-size: clamp(1.56rem, 6.4vw, 2.08rem);
         }
 
         .featured-content {
@@ -3235,6 +3235,10 @@
     </script>
     <script>
       (() => {
+        if (document.body.dataset.consultModalBound === "1") {
+          return;
+        }
+
         const STORAGE_KEY = "tlfta_inquiries";
         const modalBackdrop = document.getElementById("consultation-modal");
         const modalCloseButton = document.getElementById("consultation-modal-close");
@@ -3277,10 +3281,53 @@
           }
         });
 
-        const bindInquiryForm = (formId, messageId, onSuccess) => {
+        const normalizeInquiryValue = (value) => String(value || "").trim().toLowerCase();
+        const buildInquirySignature = (inquiry) =>
+          [
+            normalizeInquiryValue(inquiry.name),
+            normalizeInquiryValue(inquiry.email),
+            normalizeInquiryValue(inquiry.phone),
+            normalizeInquiryValue(inquiry.location),
+            normalizeInquiryValue(inquiry.workplace),
+            normalizeInquiryValue(inquiry.partyType),
+            normalizeInquiryValue(inquiry.message)
+          ].join("|");
+
+        const appendInquiryIfNew = (inquiry) => {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          const inquiries = raw ? JSON.parse(raw) : [];
+          const list = Array.isArray(inquiries) ? inquiries : [];
+          const latest = list[0];
+
+          if (latest) {
+            const samePayload = buildInquirySignature(latest) === buildInquirySignature(inquiry);
+            const latestTime = Date.parse(String(latest.createdAt || ""));
+            const currentTime = Date.parse(String(inquiry.createdAt || ""));
+            const withinDuplicateWindow =
+              Number.isFinite(latestTime) &&
+              Number.isFinite(currentTime) &&
+              Math.abs(currentTime - latestTime) <= 10000;
+
+            if (samePayload && withinDuplicateWindow) {
+              return false;
+            }
+          }
+
+          localStorage.setItem(STORAGE_KEY, JSON.stringify([inquiry, ...list]));
+          return true;
+        };
+
+        const bindInquiryForm = (formId, messageId, options = {}) => {
           const form = document.getElementById(formId);
           const messageEl = document.getElementById(messageId);
           if (!form || !messageEl) return;
+          const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+          const resetOnSuccess = options.resetOnSuccess !== false;
+
+          const setSubmitting = (isSubmitting) => {
+            form.dataset.submitting = isSubmitting ? "1" : "0";
+            if (submitButton) submitButton.disabled = isSubmitting;
+          };
 
           const setMessage = (message, type) => {
             messageEl.textContent = message;
@@ -3289,16 +3336,26 @@
 
           form.addEventListener("submit", (event) => {
             event.preventDefault();
+            if (form.dataset.submitting === "1") return;
+            setSubmitting(true);
             setMessage("", "");
 
             const formData = new FormData(form);
-            const name = String(formData.get("name") || "").trim();
-            const email = String(formData.get("email") || "").trim();
-            const phone = String(formData.get("phone") || "").trim();
-            const message = String(formData.get("message") || "").trim();
+            const readValue = (...names) =>
+              names.map((name) => String(formData.get(name) || "").trim()).find((value) => value.length > 0) || "";
 
-            if (!name || !email || !phone || !message) {
+            const name = readValue("name", "fullName");
+            const email = readValue("email");
+            const phone = readValue("phone", "contactNumber", "mobile");
+            const message = readValue("message", "concern", "details", "inquiry");
+
+            const hasMissingRequiredField = Array.from(form.querySelectorAll("[name][required]")).some(
+              (field) => !String(formData.get(field.name) || "").trim()
+            );
+
+            if (hasMissingRequiredField || !name || !email || !phone || !message) {
               setMessage("Please complete all fields before submitting.", "error");
+              setSubmitting(false);
               return;
             }
 
@@ -3315,24 +3372,20 @@
             };
 
             try {
-              const raw = localStorage.getItem(STORAGE_KEY);
-              const inquiries = raw ? JSON.parse(raw) : [];
-              const nextInquiries = Array.isArray(inquiries) ? [inquiry, ...inquiries] : [inquiry];
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(nextInquiries));
+              appendInquiryIfNew(inquiry);
 
-              form.reset();
-              setMessage("Inquiry submitted successfully. Our team will contact you soon.", "success");
-              if (typeof onSuccess === "function") onSuccess();
+              if (resetOnSuccess) form.reset();
+              setMessage("Sent successfully. Your consultation request has been received.", "success");
             } catch (error) {
               setMessage("Unable to submit right now. Please try again.", "error");
+            } finally {
+              setSubmitting(false);
             }
           });
         };
 
         bindInquiryForm("inquiry-form", "inquiry-form-message");
-        bindInquiryForm("consultation-modal-form", "consultation-modal-message", () => {
-          window.setTimeout(closeModal, 700);
-        });
+        bindInquiryForm("consultation-modal-form", "consultation-modal-message", { resetOnSuccess: false });
 
         const url = new URL(window.location.href);
         if (url.searchParams.get("consult") === "1") {
