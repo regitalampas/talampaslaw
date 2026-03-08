@@ -174,12 +174,24 @@
         background: linear-gradient(180deg, rgba(15, 11, 15, 0.28), rgba(15, 11, 15, 0.74));
         display: grid;
         align-content: end;
+        z-index: 1;
       }
 
       .feature-inner {
+        position: relative;
         width: 100%;
         margin: 0;
         padding: 1.1rem 1.35rem 1.45rem;
+      }
+
+      .feature-post-id {
+        position: absolute;
+        top: 0.95rem;
+        right: 1.3rem;
+        color: rgba(220, 220, 220, 0.78);
+        font-size: 0.74rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
 
       .meta-line {
@@ -240,35 +252,44 @@
       }
 
       .cta-box {
-        margin-top: 1.4rem;
-        padding: 1.1rem;
-        border-radius: 12px;
-        border: 1px solid #f0c6a5;
-        background: #fff8f2;
+        margin-top: 1.5rem;
+        padding: 1.25rem 1.3rem;
+        border-radius: 14px;
+        border: 1px solid #edc8aa;
+        background: linear-gradient(140deg, #fff9f4 0%, #fff3e8 100%);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1rem 1.1rem;
+        align-items: end;
+      }
+
+      .cta-copy {
+        max-width: 58ch;
       }
 
       .cta-title {
+        margin: 0;
         font-family: "Domine", serif;
         color: var(--bg-primary);
-        font-size: 1.1rem;
+        font-size: clamp(1.18rem, 2.2vw, 1.55rem);
+        line-height: 1.25;
+      }
+
+      .cta-description {
+        margin: 0.55rem 0 0;
+        color: #4d414f;
       }
 
       .cta-btn {
-        margin-top: 0.75rem;
         display: inline-block;
-        border-radius: 8px;
-        padding: 0.66rem 1.2rem;
+        border-radius: 999px;
+        padding: 0.74rem 1.35rem;
         background: var(--cta);
         color: #fff;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-      }
-
-      .cta-note {
-        margin-top: 0.55rem;
-        font-size: 0.9rem;
-        color: #6a5d66;
+        white-space: nowrap;
       }
 
       .not-found {
@@ -316,11 +337,26 @@
         padding: 0.8rem;
       }
 
+      .recommended-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+
       .recommended-title {
         font-family: "Domine", serif;
         color: var(--bg-primary);
         font-size: 1.15rem;
         line-height: 1.3;
+      }
+
+      .recommended-post-id {
+        color: #a09aa0;
+        font-size: 0.71rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        white-space: nowrap;
       }
 
       .recommended-meta {
@@ -435,6 +471,11 @@
         .footer-inner {
           grid-template-columns: 1fr;
         }
+
+        .cta-box {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
       }
 
       @media (max-width: 900px) {
@@ -478,12 +519,12 @@
         >
           <img id="feature-image" src="" alt="" />
           <div class="feature-overlay">
+            <p id="feature-post-id" class="feature-post-id"></p>
             <div class="feature-inner">
               <p class="meta-line" id="feature-meta"></p>
               <h1 id="feature-title"></h1>
               <div class="feature-actions">
                 <button id="share-btn" class="btn btn-share" type="button">Share This</button>
-                <a class="btn btn-outline" href="index.html?consult=1#contact">Book a Consultation</a>
               </div>
             </div>
           </div>
@@ -494,10 +535,11 @@
           <p id="body"></p>
 
           <div class="cta-box">
-            <p class="cta-title">Need legal guidance for your specific concern?</p>
-            <p id="note"></p>
+            <div class="cta-copy">
+              <p class="cta-title">Need legal guidance for your specific concern?</p>
+              <p id="note" class="cta-description"></p>
+            </div>
             <a class="cta-btn" href="index.html?consult=1#contact">Contact Our Team Now</a>
-            <p class="cta-note">Enjoy a complimentary 10-minute phone call as a first-time offer.</p>
           </div>
         </section>
 
@@ -536,6 +578,7 @@
         const featureImage = document.getElementById("feature-image");
         const featureTitle = document.getElementById("feature-title");
         const featureMeta = document.getElementById("feature-meta");
+        const featurePostId = document.getElementById("feature-post-id");
         const crumbTitle = document.getElementById("crumb-title");
         const lead = document.getElementById("lead");
         const body = document.getElementById("body");
@@ -544,19 +587,21 @@
         const featureCard = document.getElementById("feature-card");
         const moreReading = document.getElementById("more-reading");
         const recommendedGrid = document.getElementById("recommended-grid");
+        const headerImagePath = post.headerImagePath || post.imagePath;
 
         document.title = `${post.title} | The Law Firm of Talampas & Associates`;
-        featureImage.src = post.imagePath;
+        featureImage.src = headerImagePath;
         featureImage.alt = post.title;
         featureTitle.textContent = post.title;
         featureMeta.textContent = `${post.category} • ${window.TLFTA_BLOG.formatDisplayDate(post.dateIso)}`;
+        featurePostId.textContent = post.publicPostId ? `ID ${post.publicPostId}` : "";
         crumbTitle.textContent = post.title;
         lead.textContent = post.lead;
         body.textContent = post.body;
         note.textContent = post.note;
 
         const openFullImage = () => {
-          window.open(post.imagePath, "_blank", "noopener,noreferrer");
+          window.open(headerImagePath, "_blank", "noopener,noreferrer");
         };
 
         featureCard.addEventListener("click", (event) => {
@@ -617,7 +662,10 @@
                 <a class="recommended-card" href="blog-detail.html?id=${encodeURIComponent(item.id)}">
                   <img src="${item.imagePath}" alt="${item.title}" loading="lazy" />
                   <div class="recommended-card-body">
-                    <div class="recommended-title">${item.title}</div>
+                    <div class="recommended-head">
+                      <div class="recommended-title">${item.title}</div>
+                      <span class="recommended-post-id">${item.publicPostId ? `ID ${item.publicPostId}` : ""}</span>
+                    </div>
                     <div class="recommended-meta">${window.TLFTA_BLOG.formatDisplayDate(item.dateIso)} • ${item.category}</div>
                   </div>
                 </a>

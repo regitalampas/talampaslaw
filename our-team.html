@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Team | The Law Firm of Talampas &amp; Associates</title>
+    <meta
+      name="description"
+      content="Meet the lawyers of The Law Firm of Talampas & Associates and view their core practice areas."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #390d2f;
+        --bg-primary-deep: #2a0822;
+        --accent: #c9a84c;
+        --text: #262626;
+        --surface: #faf8f5;
+        --card: #ffffff;
+        --border: #eadfe7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 12% 12%, rgba(201, 168, 76, 0.14) 0%, rgba(201, 168, 76, 0) 30%),
+          radial-gradient(circle at 88% 0%, rgba(57, 13, 47, 0.08) 0%, rgba(57, 13, 47, 0) 26%),
+          var(--surface);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: min(1220px, 94vw);
+        margin: 0 auto;
+      }
+
+      .team-hero {
+        padding: clamp(3.8rem, 10vw, 5.3rem) 0 clamp(1.6rem, 3vw, 2.1rem);
+        text-align: center;
+      }
+
+      .team-hero h1 {
+        margin: 0;
+        font-family: "Domine", serif;
+        color: var(--bg-primary);
+        font-size: clamp(2rem, 4vw, 3rem);
+      }
+
+      .team-hero p {
+        margin: 0.8rem auto 0;
+        max-width: 72ch;
+        color: #4f3d4b;
+      }
+
+      .team-section {
+        padding: 0 0 clamp(3rem, 7vw, 5rem);
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+      }
+
+      .team-card {
+        position: relative;
+        padding-bottom: 1.4rem;
+      }
+
+      .team-media {
+        margin: 0;
+        border: 1px solid var(--border);
+        background: #221f2b;
+        box-shadow: 0 18px 38px rgba(31, 10, 26, 0.2);
+      }
+
+      .team-media img {
+        display: block;
+        width: 100%;
+        height: clamp(340px, 40vw, 470px);
+        object-fit: contain;
+        object-position: center top;
+      }
+
+      .team-content {
+        position: relative;
+        margin: -1.5rem 1rem 0;
+        padding: 1.1rem 1.1rem 1.2rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        box-shadow: 0 14px 30px rgba(20, 8, 18, 0.11);
+      }
+
+      .team-content h2 {
+        margin: 0;
+        color: var(--accent);
+        font-family: "Domine", serif;
+        font-size: clamp(1.15rem, 1.4vw, 1.34rem);
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .team-content p {
+        margin: 0.6rem 0 0;
+        font-size: 1.02rem;
+        color: #2f2a2e;
+      }
+
+      .team-content p span {
+        font-weight: 700;
+      }
+
+      @media (max-width: 1080px) {
+        .team-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.45rem;
+        }
+
+        .team-content {
+          margin: -1.1rem 0.75rem 0;
+          padding: 1rem;
+        }
+
+        .team-content p {
+          font-size: 0.98rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="site-nav"></header>
+
+    <main>
+      <section class="team-hero">
+        <div class="container">
+          <h1>Our Team</h1>
+          <p>
+            Meet the lawyers of The Law Firm of Talampas &amp; Associates.
+          </p>
+        </div>
+      </section>
+
+      <section class="team-section">
+        <div class="container">
+          <div class="team-grid">
+            <article class="team-card">
+              <figure class="team-media">
+                <img src="atty-ruben.png" alt="Atty. Ruben C. Talampas Jr." loading="lazy" />
+              </figure>
+              <div class="team-content">
+                <h2>Atty. Ruben C. Talampas Jr.</h2>
+                <p><span>Practice Areas:</span> Civil Litigation, Labor Law, and Compliance Advisory.</p>
+              </div>
+            </article>
+
+            <article class="team-card">
+              <figure class="team-media">
+                <img src="atty-jane.png" alt="Atty. Clarolyn Jane A. Capellan" loading="lazy" />
+              </figure>
+              <div class="team-content">
+                <h2>Atty. Clarolyn Jane A. Capellan</h2>
+                <p><span>Practice Areas:</span> Family Law, Civil Law, and Contract Advisory.</p>
+              </div>
+            </article>
+
+            <article class="team-card">
+              <figure class="team-media">
+                <img src="atty-aldrin.png" alt="Atty. Jan Aldrin E. Afos" loading="lazy" />
+              </figure>
+              <div class="team-content">
+                <h2>Atty. Jan Aldrin E. Afos</h2>
+                <p><span>Practice Areas:</span> Labor Law, Regulatory Compliance, and Litigation Support.</p>
+              </div>
+            </article>
+
+            <article class="team-card">
+              <figure class="team-media">
+                <img src="atty-louella.png" alt="Atty. Louella O. Janda" loading="lazy" />
+              </figure>
+              <div class="team-content">
+                <h2>Atty. Louella O. Janda</h2>
+                <p><span>Practice Areas:</span> Civil Disputes, Environmental Law, and Legal Documentation.</p>
+              </div>
+            </article>
+
+            <article class="team-card">
+              <figure class="team-media">
+                <img src="atty-gee.png" alt="Atty. Geelleanne L. Ubalde" loading="lazy" />
+              </figure>
+              <div class="team-content">
+                <h2>Atty. Geelleanne L. Ubalde</h2>
+                <p><span>Practice Areas:</span> Cybercrime Law, Civil Litigation, and Legal Advisory.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <script src="layout-loader.js"></script>
+    <script src="ai-chatbot.js"></script>
+  </body>
+</html>

@@ -141,88 +141,242 @@
       }
 
       .hero {
-        padding: 4.5rem 0 3rem;
+        position: relative;
+        min-height: clamp(500px, 72vh, 760px);
+        padding: clamp(5.4rem, 12vh, 7.2rem) 0 clamp(3rem, 7vh, 4.2rem);
         color: #fff;
         background:
-          linear-gradient(120deg, rgba(40, 9, 33, 0.9) 0%, rgba(74, 16, 64, 0.84) 48%, rgba(139, 30, 99, 0.8) 100%),
-          url("tlfta-group-photo.jpg") center 26% / cover no-repeat;
+          linear-gradient(108deg, rgba(24, 6, 20, 0.22) 0%, rgba(57, 13, 47, 0.12) 40%, rgba(57, 13, 47, 0.5) 74%, rgba(57, 13, 47, 0.72) 100%),
+          radial-gradient(circle at 22% 70%, rgba(250, 248, 245, 0.22) 0%, rgba(250, 248, 245, 0) 54%),
+          url("tlfta-group-photo.jpg") center 24% / cover no-repeat;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(57, 13, 47, 0.02) 0%, rgba(57, 13, 47, 0.28) 100%);
+      }
+
+      .hero .container {
+        position: relative;
+        z-index: 1;
+        min-height: clamp(420px, 58vh, 620px);
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .hero-panel {
+        max-width: min(680px, 100%);
+        padding: 1.2rem 1.3rem 1.35rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: linear-gradient(140deg, rgba(42, 8, 34, 0.72) 0%, rgba(57, 13, 47, 0.62) 100%);
+        backdrop-filter: blur(2px);
+        box-shadow: 0 16px 36px rgba(25, 6, 21, 0.34);
       }
 
       .pill {
         display: inline-block;
-        padding: .28rem .75rem;
+        padding: 0.3rem 0.75rem;
         border-radius: 999px;
-        border: 1px solid rgba(255,255,255,.52);
-        font-size: .75rem;
+        border: 1px solid rgba(255, 255, 255, 0.52);
+        background: rgba(201, 168, 76, 0.14);
+        font-size: 0.75rem;
         text-transform: uppercase;
-        letter-spacing: .12em;
+        letter-spacing: 0.12em;
       }
 
       .hero h1 {
-        margin: .9rem 0 .75rem;
+        margin: 0.9rem 0 0.75rem;
         font-family: "Domine", serif;
         font-size: clamp(2.1rem, 4.1vw, 3.3rem);
+        line-height: 1.08;
       }
 
       .hero .lead {
         margin: 0;
-        max-width: 72ch;
-        color: rgba(255,255,255,.94);
+        max-width: 64ch;
+        color: rgba(255, 255, 255, 0.94);
       }
 
-      .content { padding: 2.4rem 0 3rem; }
+      .content {
+        position: relative;
+        padding: 3.1rem 0 4rem;
+        background:
+          radial-gradient(circle at 15% 12%, rgba(201, 168, 76, 0.16) 0%, rgba(201, 168, 76, 0) 32%),
+          linear-gradient(180deg, #faf8f5 0%, #f7f2ee 100%);
+      }
+
+      .content .container {
+        display: grid;
+        gap: 1.25rem;
+      }
+
       .card {
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.1rem 1.2rem;
+        border-radius: 16px;
+        padding: 1.2rem 1.3rem;
+        box-shadow: 0 10px 24px rgba(53, 11, 45, 0.06);
       }
 
       .content h2 {
-        margin: 0 0 .4rem;
+        margin: 0 0 0.45rem;
         color: var(--bg-primary);
         font-family: "Domine", serif;
       }
 
       .content p { margin: 0; color: #4a4a4a; }
 
-      .intro { margin-bottom: 1rem; }
+      .intro {
+        margin: 0;
+        border-left: 4px solid var(--accent);
+      }
+      .mission-vision {
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.85rem;
+        padding: 1.25rem;
+        background: linear-gradient(135deg, rgba(57, 13, 47, 0.06) 0%, rgba(201, 168, 76, 0.1) 100%);
+      }
+
+      .mission-vision > h2 {
+        grid-column: 1 / -1;
+      }
+
+      .statement {
+        margin-top: 0;
+        padding: 1rem 1rem 0.95rem;
+        border: 1px solid rgba(74, 16, 64, 0.14);
+        border-left: 4px solid var(--accent);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .mission-vision h3 {
+        margin: 0 0 0.4rem;
+        color: #2f0d28;
+        font-family: "Domine", serif;
+        font-size: 1.08rem;
+        letter-spacing: 0.01em;
+      }
+
+      .mission-vision .statement:nth-of-type(3) {
+        border-left-color: #ef6c11;
+      }
 
       .story-grid {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(0, .95fr);
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 1.15rem;
+        margin: 0;
+        align-items: start;
+      }
+
+      .milestones-card {
+        background: linear-gradient(160deg, #2f0d28 0%, #47113c 56%, #7a1a58 100%);
+        border-color: rgba(201, 168, 76, 0.26);
+      }
+
+      .milestones-card h2 {
+        color: #ffffff;
       }
 
       .timeline {
-        border-left: 2px solid rgba(74, 16, 64, .16);
-        margin-top: .95rem;
-        padding-left: 1rem;
+        position: relative;
+        border-left: none;
+        margin-top: 1rem;
+        padding-left: 0;
         display: grid;
-        gap: .85rem;
+        gap: 0.95rem;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 13px;
+        top: 14px;
+        bottom: 14px;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(201, 168, 76, 0.9) 0%, rgba(239, 108, 17, 0.75) 100%);
+      }
+
+      .milestone {
+        position: relative;
+        margin-left: 1.3rem;
+        padding: 0.85rem 0.95rem 0.85rem 1.05rem;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.09);
+      }
+
+      .milestone::before {
+        content: "";
+        position: absolute;
+        left: -1.27rem;
+        top: 1.1rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #c9a84c;
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.25);
       }
 
       .milestone h3 {
         margin: 0;
-        color: #2f0d28;
+        color: #fff2ca;
         font-size: 1rem;
-        letter-spacing: .02em;
+        letter-spacing: 0.02em;
       }
 
       .milestone p {
-        margin-top: .25rem;
-        font-size: .95rem;
+        margin-top: 0.25rem;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .principles-card {
+        background: linear-gradient(180deg, #ffffff 0%, #fcf6ed 100%);
+        border-color: #e7dbcf;
       }
 
       .principles {
-        margin: .75rem 0 0;
-        padding-left: 1.1rem;
+        list-style: none;
+        margin: 0.85rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: 0.55rem;
       }
 
       .principles li {
-        margin-bottom: .5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        margin: 0;
+        padding: 0.62rem 0.72rem;
+        border: 1px solid rgba(74, 16, 64, 0.12);
+        border-radius: 10px;
+        background: #ffffff;
         color: #4a4a4a;
+      }
+
+      .principles li::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        margin-top: 0.42rem;
+        border-radius: 999px;
+        background: linear-gradient(145deg, #c9a84c 0%, #ef6c11 100%);
+        flex-shrink: 0;
+      }
+
+      .story-cta {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.05rem;
       }
 
       .btn {
@@ -231,20 +385,53 @@
         color: #fff;
         text-decoration: none;
         border-radius: 999px;
-        padding: .7rem 1.4rem;
-        margin-top: .7rem;
+        padding: 0.78rem 1.65rem;
+        margin-top: 0;
         font-weight: 700;
-        letter-spacing: .06em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
+        box-shadow: 0 10px 22px rgba(239, 108, 17, 0.25);
+        transition: transform 0.24s ease, filter 0.24s ease;
       }
 
-      .legacy p + p { margin-top: .7rem; }
+      .btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
+
+      .legacy {
+        margin-top: 0.15rem;
+        display: grid;
+        gap: 0.75rem;
+        padding: 1.3rem;
+        border-color: rgba(74, 16, 64, 0.17);
+        background: linear-gradient(130deg, #ffffff 0%, #f9f4ee 100%);
+      }
+
+      .legacy p {
+        padding: 0.82rem 0.9rem;
+        border: 1px solid rgba(74, 16, 64, 0.1);
+        border-left: 4px solid #c9a84c;
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .legacy p + p { margin-top: 0; }
 
       .text-link {
-        display: inline-block;
-        margin-top: .65rem;
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        margin-top: 0.1rem;
+        padding: 0.56rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(57, 13, 47, 0.08);
         color: var(--bg-primary);
         font-weight: 700;
+      }
+
+      .text-link:hover {
+        background: rgba(57, 13, 47, 0.14);
       }
 
       footer {
@@ -330,6 +517,25 @@
       }
 
       @media (max-width: 930px) {
+        .hero {
+          min-height: 460px;
+          background:
+            linear-gradient(180deg, rgba(57, 13, 47, 0.14) 0%, rgba(57, 13, 47, 0.54) 100%),
+            url("tlfta-group-photo.jpg") center 22% / cover no-repeat;
+        }
+
+        .hero .container {
+          min-height: 390px;
+        }
+
+        .hero-panel {
+          padding: 1rem 1rem 1.05rem;
+        }
+
+        .mission-vision {
+          grid-template-columns: 1fr;
+        }
+
         .story-grid { grid-template-columns: 1fr; }
         .footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .footer-bottom { flex-direction: column; align-items: flex-start; }
@@ -368,13 +574,15 @@
     <main>
       <section class="hero">
         <div class="container">
-          <p class="pill">Our Firm</p>
-          <h1>About Us</h1>
-          <p class="lead">
-            The Law Firm of Talampas &amp; Associates started as a small litigation practice built on trial discipline,
-            client trust, and principled legal service. Over the years, we expanded into a multi-practice team while
-            preserving the same founding commitment: practical legal strategy delivered with integrity.
-          </p>
+          <div class="hero-panel">
+            <p class="pill">Our Firm</p>
+            <h1>About Us</h1>
+            <p class="lead">
+              The Law Firm of Talampas &amp; Associates started as a small litigation practice built on trial discipline,
+              client trust, and principled legal service. Over the years, we expanded into a multi-practice team while
+              preserving the same founding commitment: practical legal strategy delivered with integrity.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -389,8 +597,30 @@
             </p>
           </article>
 
+          <article class="card mission-vision">
+            <h2>Our Mission and Vision</h2>
+            <div class="statement">
+              <h3>Mission</h3>
+              <p>
+                Guided by our Christian faith and 18 years of experience, The Law Firm of Talampas &amp; Associates provides
+                steadfast legal service with unwavering professionalism, integrity, and excellence. We champion justice and
+                fairness for all, advocating tirelessly for our clients&apos; rights and interests while upholding the highest
+                ethical standards.
+              </p>
+            </div>
+            <div class="statement">
+              <h3>Vision</h3>
+              <p>
+                To be a beacon of hope and legal excellence in our community, recognized for our unwavering commitment to our
+                clients&apos; success and our dedication to serving with compassion and integrity. Rooted in our Christian values,
+                we strive to make a positive impact on society by promoting access to justice and advocating for equitable
+                legal solutions for all.
+              </p>
+            </div>
+          </article>
+
           <div class="story-grid">
-            <article class="card">
+            <article class="card milestones-card">
               <h2>Firm Milestones</h2>
               <div class="timeline" aria-label="Firm history timeline">
                 <article class="milestone">
@@ -412,7 +642,7 @@
               </div>
             </article>
 
-            <aside class="card">
+            <aside class="card principles-card">
               <h2>Enduring Principles</h2>
               <p>
                 Our history is grounded in values that have remained constant through every stage of growth.
@@ -423,8 +653,11 @@
                 <li>Transparent communication with realistic legal options.</li>
                 <li>Long-term protection of each client&apos;s rights and interests.</li>
               </ul>
-              <a class="btn" href="index.html?consult=1#contact">Book a Consultation</a>
             </aside>
+          </div>
+
+          <div class="story-cta">
+            <a class="btn" href="index.html?consult=1#contact">Book a Consultation</a>
           </div>
 
           <article class="card legacy">
@@ -438,7 +671,7 @@
               We continue to build on this history by mentoring younger lawyers, refining our legal process, and staying
               responsive to the legal realities our clients face.
             </p>
-            <a class="text-link" href="index.html#team">Meet Our Lawyers</a>
+            <a class="text-link" href="our-team.html">Meet Our Lawyers</a>
           </article>
         </div>
       </section>

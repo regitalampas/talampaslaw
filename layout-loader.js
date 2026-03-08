@@ -38,6 +38,10 @@
       return "firm";
     }
 
+    if (fileName === "our-team.html") {
+      return "team";
+    }
+
     if (fileName === "careers.html") {
       return "careers";
     }

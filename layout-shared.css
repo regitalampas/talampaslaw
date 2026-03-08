@@ -419,24 +419,24 @@ body.modal-open {
 @media (max-width: 930px) {
   #site-nav .container.nav {
     min-height: auto;
-    gap: 0.8rem;
+    gap: 0.6rem;
     padding: 0.8rem 16px;
   }
 
   #site-nav .nav-links {
-    gap: 0.45rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
+    gap: 0.32rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
   }
 
   #site-nav .nav-links a:not(:last-child)::after {
-    margin-left: 0.45rem;
+    margin-left: 0.3rem;
   }
 
   #site-nav .nav-consult-btn {
-    padding: 0.34rem 0.58rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
+    padding: 0.32rem 0.52rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
   }
 
   #site-footer .footer-inner {
@@ -452,7 +452,7 @@ body.modal-open {
 @media (max-width: 640px) {
   #site-nav .container.nav {
     padding: 0.7rem 14px;
-    gap: 0.55rem;
+    gap: 0.4rem;
   }
 
   #site-nav .logo-image {
@@ -465,18 +465,18 @@ body.modal-open {
   }
 
   #site-nav .nav-links {
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    gap: 0.32rem;
+    font-size: 0.45rem;
+    letter-spacing: 0.08em;
+    gap: 0.2rem;
   }
 
   #site-nav .nav-links a:not(:last-child)::after {
-    margin-left: 0.32rem;
+    margin-left: 0.2rem;
   }
 
   #site-nav .nav-consult-btn {
-    font-size: 0.5rem;
-    padding: 0.3rem 0.48rem;
+    font-size: 0.44rem;
+    padding: 0.28rem 0.42rem;
   }
 
   #site-footer .footer-inner {

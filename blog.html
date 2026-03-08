@@ -282,6 +282,7 @@
       }
 
       .featured-content {
+        position: relative;
         padding: 1rem;
         display: grid;
         align-content: center;
@@ -304,6 +305,16 @@
       .featured-title {
         color: var(--bg-primary);
         font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+      }
+
+      .featured-post-id {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.9rem;
+        color: #9a939a;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
 
       .featured-excerpt {
@@ -364,6 +375,21 @@
         color: #5d495d;
         letter-spacing: 0.04em;
         text-transform: uppercase;
+      }
+
+      .post-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+
+      .post-meta-id {
+        color: #a09aa0;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
       }
 
       .post-title {
@@ -588,6 +614,7 @@
                 <img id="featured-image" src="" alt="" loading="lazy" />
               </div>
               <div class="featured-content">
+                <span id="featured-post-id" class="featured-post-id"></span>
                 <span class="featured-kicker">Featured Post</span>
                 <p id="featured-meta" class="post-meta"></p>
                 <h3 id="featured-title" class="featured-title"></h3>
@@ -633,6 +660,7 @@
         const featuredSection = document.getElementById("featured-post");
         const featuredImage = document.getElementById("featured-image");
         const featuredMeta = document.getElementById("featured-meta");
+        const featuredPostId = document.getElementById("featured-post-id");
         const featuredTitle = document.getElementById("featured-title");
         const featuredExcerpt = document.getElementById("featured-excerpt");
         const featuredLink = document.getElementById("featured-link");
@@ -679,6 +707,7 @@
           featuredMeta.textContent = `${featuredPost.category} • ${window.TLFTA_BLOG.formatDisplayDate(
             featuredPost.dateIso
           )}`;
+          featuredPostId.textContent = featuredPost.publicPostId ? `ID ${featuredPost.publicPostId}` : "";
           featuredTitle.textContent = featuredPost.title;
           featuredExcerpt.textContent = featuredPost.excerpt;
           featuredLink.href = `blog-detail.html?id=${encodeURIComponent(featuredPost.id)}`;
@@ -727,9 +756,12 @@
                       <img src="${post.imagePath}" alt="${post.title}" loading="lazy" />
                     </div>
                     <div class="post-content">
-                      <p class="post-meta">${post.category} <span>&bull;</span> ${window.TLFTA_BLOG.formatDisplayDate(
-                        post.dateIso
-                      )}</p>
+                      <div class="post-head">
+                        <p class="post-meta">${post.category} <span>&bull;</span> ${window.TLFTA_BLOG.formatDisplayDate(
+                          post.dateIso
+                        )}</p>
+                        <span class="post-meta-id">${post.publicPostId ? `ID ${post.publicPostId}` : ""}</span>
+                      </div>
                       <h3 class="post-title">${post.title}</h3>
                       <p class="post-excerpt">${post.excerpt}</p>
                       <a class="read-link" href="blog-detail.html?id=${encodeURIComponent(

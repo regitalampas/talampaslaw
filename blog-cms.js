@@ -3,6 +3,7 @@
     categories: "tlfta_blog_categories",
     overrides: "tlfta_blog_post_overrides",
     featuredPostId: "tlfta_blog_featured_post_id",
+    publicPostIds: "tlfta_blog_post_ids",
   };
 
   const DEFAULT_CATEGORIES = [
@@ -92,6 +93,77 @@
 
   const writeJson = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const getPublicPostIdMap = () => {
+    const value = readJson(STORAGE_KEYS.publicPostIds, {});
+    if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+    return value;
+  };
+
+  const setPublicPostIdMap = (map) => {
+    writeJson(STORAGE_KEYS.publicPostIds, map);
+  };
+
+  const toDateToken = (isoValue) => {
+    const source = String(isoValue || "");
+    const match = source.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (match) return `${match[1].slice(-2)}${match[2]}${match[3]}`;
+    const fallback = new Date(isoValue || Date.now());
+    const year = String(fallback.getFullYear()).slice(-2);
+    const month = String(fallback.getMonth() + 1).padStart(2, "0");
+    const day = String(fallback.getDate()).padStart(2, "0");
+    return `${year}${month}${day}`;
+  };
+
+  const ensurePublicPostIds = (posts) => {
+    const map = { ...getPublicPostIdMap() };
+    const usedIds = new Set();
+    const usedByDate = {};
+    let hasChanges = false;
+
+    const register = (publicId) => {
+      const dateToken = publicId.slice(0, 6);
+      const sequence = Number(publicId.slice(6));
+      if (!usedByDate[dateToken]) usedByDate[dateToken] = new Set();
+      usedByDate[dateToken].add(sequence);
+    };
+
+    posts.forEach((post) => {
+      const current = cleanString(map[post.id]);
+      const valid = /^\d{8}$/.test(current) && !usedIds.has(current);
+      if (valid) {
+        usedIds.add(current);
+        register(current);
+        return;
+      }
+      if (current) {
+        delete map[post.id];
+        hasChanges = true;
+      }
+    });
+
+    const ordered = [...posts].sort(
+      (left, right) => String(left.dateIso || "").localeCompare(String(right.dateIso || "")) || left.id.localeCompare(right.id)
+    );
+
+    ordered.forEach((post) => {
+      if (map[post.id]) return;
+      const dateToken = toDateToken(post.dateIso);
+      if (!usedByDate[dateToken]) usedByDate[dateToken] = new Set();
+      let sequence = 1;
+      while (usedByDate[dateToken].has(sequence) && sequence < 100) {
+        sequence += 1;
+      }
+      const publicId = `${dateToken}${String(sequence).padStart(2, "0")}`;
+      map[post.id] = publicId;
+      usedByDate[dateToken].add(sequence);
+      usedIds.add(publicId);
+      hasChanges = true;
+    });
+
+    if (hasChanges) setPublicPostIdMap(map);
+    return map;
   };
 
   const toIdFromPath = (imagePath) => {
@@ -191,6 +263,7 @@
         ? uniqueStrings(rawMetadata)
         : parseMetadataInput(rawMetadata);
       const metadataKeywords = mergedMetadata.length ? mergedMetadata : fallback.metadataKeywords;
+      const headerImagePath = cleanString(override.headerImagePath);
 
       return {
         ...fallback,
@@ -202,10 +275,16 @@
         category,
         metadataKeywords,
         dateIso: normalizeDate(override.dateIso || fallback.dateIso, fallback.dateIso),
+        ...(headerImagePath ? { headerImagePath } : {}),
       };
     });
 
-    return posts.sort((a, b) => b.dateIso.localeCompare(a.dateIso));
+    const sorted = posts.sort((a, b) => b.dateIso.localeCompare(a.dateIso));
+    const publicIdMap = ensurePublicPostIds(sorted);
+    return sorted.map((post) => ({
+      ...post,
+      publicPostId: cleanString(publicIdMap[post.id]),
+    }));
   };
 
   const getPostById = (id) => getPosts().find((post) => post.id === cleanString(id));
@@ -334,6 +413,7 @@
     if (patch.body !== undefined) next.body = cleanString(patch.body);
     if (patch.note !== undefined) next.note = cleanString(patch.note);
     if (patch.dateIso !== undefined) next.dateIso = normalizeDate(cleanString(patch.dateIso), new Date().toISOString());
+    if (patch.headerImagePath !== undefined) next.headerImagePath = cleanString(patch.headerImagePath);
 
     if (patch.category !== undefined) {
       next.category = cleanString(patch.category);
@@ -345,6 +425,10 @@
         ? uniqueStrings(patch.metadataKeywords)
         : parseMetadataInput(patch.metadataKeywords);
       next.metadataKeywords = metadataKeywords;
+    }
+
+    if (!cleanString(next.headerImagePath)) {
+      delete next.headerImagePath;
     }
 
     delete next.tags;
